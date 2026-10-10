@@ -984,8 +984,240 @@
   </div>
 </div>
 
-<!-- ══ SLIDE 13 — MERCI ══ -->
-<div class="slide slide-dark" id="slide-13">
+<!-- ══ SLIDE 13 — DASHBOARD KPI ══ -->
+<div class="slide" id="slide-13">
+  <div class="slide-header">
+    <h2>📊 Dashboard KPI — ADEIZ · Analyse tickets réelle</h2>
+    <span class="sh-badge">808 TICKETS · 4 MOIS · DONNÉES API</span>
+  </div>
+  <div class="slide-body" style="padding:12px 18px 72px;">
+
+    <!-- ROW 1 : KPI cards -->
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:12px;">
+
+      <div class="card stat" style="padding:11px 8px;">
+        <div style="font-size:9px;font-weight:700;color:#8B5CF6;text-transform:uppercase;letter-spacing:.08em;margin-bottom:2px;">Total Tickets</div>
+        <div style="font-size:28px;font-weight:800;color:#1E1B4B;line-height:1.1;">808</div>
+        <div style="font-size:10px;color:#9CA3AF;margin-top:2px;">en 4 mois · ~6,7/j</div>
+      </div>
+
+      <div class="card stat" style="padding:11px 8px;border-top:3px solid #8B5CF6;">
+        <div style="font-size:9px;font-weight:700;color:#8B5CF6;text-transform:uppercase;letter-spacing:.08em;margin-bottom:2px;">Canal Voix</div>
+        <div style="font-size:28px;font-weight:800;color:#8B5CF6;line-height:1.1;">91,9%</div>
+        <div style="font-size:10px;color:#9CA3AF;margin-top:2px;">743 tickets Aircall</div>
+      </div>
+
+      <div class="card stat" style="padding:11px 8px;border-top:3px solid #22C55E;">
+        <div style="font-size:9px;font-weight:700;color:#166534;text-transform:uppercase;letter-spacing:.08em;margin-bottom:2px;">Résolus / Fermés</div>
+        <div style="font-size:28px;font-weight:800;color:#22C55E;line-height:1.1;">731</div>
+        <div style="font-size:10px;color:#9CA3AF;margin-top:2px;">90,5% du volume total</div>
+      </div>
+
+      <div class="card stat" style="padding:11px 8px;border-top:3px solid #F97316;">
+        <div style="font-size:9px;font-weight:700;color:#9A3412;text-transform:uppercase;letter-spacing:.08em;margin-bottom:2px;">Copilot Activé</div>
+        <div style="font-size:28px;font-weight:800;color:#F97316;line-height:1.1;">90,4%</div>
+        <div style="font-size:10px;color:#9CA3AF;margin-top:2px;">730 tickets avec IA</div>
+      </div>
+
+      <div class="card stat" style="padding:11px 8px;border-top:3px solid #EAB308;">
+        <div style="font-size:9px;font-weight:700;color:#92400E;text-transform:uppercase;letter-spacing:.08em;margin-bottom:2px;">Priorité Normale</div>
+        <div style="font-size:28px;font-weight:800;color:#EAB308;line-height:1.1;">93,8%</div>
+        <div style="font-size:10px;color:#9CA3AF;margin-top:2px;">762 / 812 tickets</div>
+      </div>
+
+    </div>
+
+    <!-- ROW 2 : Canal donut + Top catégories -->
+    <div style="display:grid;grid-template-columns:200px 1fr;gap:12px;margin-bottom:12px;">
+
+      <!-- Canal donut -->
+      <div class="card" style="padding:14px;display:flex;flex-direction:column;align-items:center;">
+        <div style="font-size:9px;font-weight:700;color:#8B5CF6;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;align-self:flex-start;">Canal · 808 tickets</div>
+        <svg viewBox="0 0 120 120" width="130" height="130" style="flex-shrink:0;">
+          <!-- Gray base -->
+          <circle cx="60" cy="60" r="46" fill="none" stroke="#E5E7EB" stroke-width="16"/>
+          <!-- Web (6.8%) petite tranche verte - part de la fin de voix -->
+          <circle cx="60" cy="60" r="46" fill="none" stroke="#22C55E" stroke-width="16"
+            stroke-dasharray="19.65 269.38" stroke-dashoffset="-265.67"
+            transform="rotate(-90 60 60)"/>
+          <!-- Voice (91.9%) gros arc purple -->
+          <circle cx="60" cy="60" r="46" fill="none" stroke="#8B5CF6" stroke-width="16"
+            stroke-dasharray="265.67 23.36"
+            transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="30" fill="#fff"/>
+          <text x="60" y="56" text-anchor="middle" font-size="15" font-weight="800" fill="#8B5CF6">91,9%</text>
+          <text x="60" y="69" text-anchor="middle" font-size="8" fill="#9CA3AF">voix</text>
+        </svg>
+        <div style="display:flex;flex-direction:column;gap:5px;margin-top:8px;width:100%;">
+          <div style="display:flex;align-items:center;gap:6px;font-size:10px;">
+            <div style="width:8px;height:8px;border-radius:50%;background:#8B5CF6;flex-shrink:0;"></div>
+            <span style="color:#374151;flex:1;">Voix (Aircall)</span>
+            <span style="font-weight:700;">743</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:6px;font-size:10px;">
+            <div style="width:8px;height:8px;border-radius:50%;background:#22C55E;flex-shrink:0;"></div>
+            <span style="color:#374151;flex:1;">Web / Email</span>
+            <span style="font-weight:700;">55</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:6px;font-size:10px;">
+            <div style="width:8px;height:8px;border-radius:50%;background:#E5E7EB;flex-shrink:0;"></div>
+            <span style="color:#9CA3AF;flex:1;">Chat</span>
+            <span style="font-weight:700;color:#9CA3AF;">0</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Top catégories bar chart -->
+      <div class="card" style="padding:14px;">
+        <div style="font-size:9px;font-weight:700;color:#8B5CF6;text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px;">Top catégories tickets — tags cat_n1_* (historique)</div>
+        <div style="display:flex;flex-direction:column;gap:9px;">
+
+          <div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:3px;">
+              <span style="font-size:11px;font-weight:600;color:#374151;">💰 Encaissement (caisse)</span>
+              <span style="font-size:13px;font-weight:800;color:#8B5CF6;">231</span>
+            </div>
+            <div style="height:10px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:100%;background:linear-gradient(90deg,#8B5CF6,#A78BFA);border-radius:99px;"></div></div>
+          </div>
+
+          <div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:3px;">
+              <span style="font-size:11px;font-weight:600;color:#374151;">☁️ PosCloud (logiciel caisse cloud)</span>
+              <span style="font-size:13px;font-weight:800;color:#3B82F6;">133</span>
+            </div>
+            <div style="height:10px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:57.6%;background:linear-gradient(90deg,#3B82F6,#60A5FA);border-radius:99px;"></div></div>
+          </div>
+
+          <div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:3px;">
+              <span style="font-size:11px;font-weight:600;color:#374151;">🖥️ Logiciels métiers</span>
+              <span style="font-size:13px;font-weight:800;color:#14B8A6;">112</span>
+            </div>
+            <div style="height:10px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:48.5%;background:linear-gradient(90deg,#14B8A6,#2DD4BF);border-radius:99px;"></div></div>
+          </div>
+
+          <div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:3px;">
+              <span style="font-size:11px;font-weight:600;color:#374151;">🖨️ Matériel caisse (hardware)</span>
+              <span style="font-size:13px;font-weight:800;color:#F97316;">86</span>
+            </div>
+            <div style="height:10px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:37.2%;background:linear-gradient(90deg,#F97316,#FB923C);border-radius:99px;"></div></div>
+          </div>
+
+          <div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:3px;">
+              <span style="font-size:11px;font-weight:600;color:#374151;">📱 Mobilité (PDA, tablettes)</span>
+              <span style="font-size:13px;font-weight:800;color:#EAB308;">48</span>
+            </div>
+            <div style="height:10px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:20.8%;background:linear-gradient(90deg,#EAB308,#FDE047);border-radius:99px;"></div></div>
+          </div>
+
+          <div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:3px;">
+              <span style="font-size:11px;font-weight:600;color:#374151;">🌐 Réseau (routeurs, switch)</span>
+              <span style="font-size:13px;font-weight:800;color:#EF4444;">34</span>
+            </div>
+            <div style="height:10px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:14.7%;background:linear-gradient(90deg,#EF4444,#F87171);border-radius:99px;"></div></div>
+          </div>
+
+          <div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:3px;">
+              <span style="font-size:11px;font-weight:600;color:#374151;">💳 Monétique (TPE)</span>
+              <span style="font-size:13px;font-weight:800;color:#6B7280;">30</span>
+            </div>
+            <div style="height:10px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:13%;background:linear-gradient(90deg,#9CA3AF,#D1D5DB);border-radius:99px;"></div></div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ROW 3 : Priorités + Statuts + Insights -->
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;">
+
+      <!-- Priorités donut -->
+      <div class="card" style="padding:12px;display:flex;flex-direction:column;align-items:center;">
+        <div style="font-size:9px;font-weight:700;color:#8B5CF6;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;align-self:flex-start;">Priorités — 812 tickets</div>
+        <svg viewBox="0 0 120 120" width="110" height="110" style="flex-shrink:0;">
+          <circle cx="60" cy="60" r="46" fill="none" stroke="#E5E7EB" stroke-width="16"/>
+          <!-- Normal (93.8%) -->
+          <circle cx="60" cy="60" r="46" fill="none" stroke="#EAB308" stroke-width="16"
+            stroke-dasharray="271.3 17.73" transform="rotate(-90 60 60)"/>
+          <!-- High (3%) -->
+          <circle cx="60" cy="60" r="46" fill="none" stroke="#F97316" stroke-width="16"
+            stroke-dasharray="8.67 280.36" stroke-dashoffset="-271.3" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="30" fill="#fff"/>
+          <text x="60" y="56" text-anchor="middle" font-size="14" font-weight="800" fill="#EAB308">93,8%</text>
+          <text x="60" y="68" text-anchor="middle" font-size="7.5" fill="#9CA3AF">normale</text>
+        </svg>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:8px;width:100%;">
+          <div style="font-size:10px;display:flex;align-items:center;gap:4px;"><div style="width:8px;height:8px;border-radius:50%;background:#EF4444;flex-shrink:0;"></div> Urgent <strong style="margin-left:auto;">2</strong></div>
+          <div style="font-size:10px;display:flex;align-items:center;gap:4px;"><div style="width:8px;height:8px;border-radius:50%;background:#F97316;flex-shrink:0;"></div> Élevé <strong style="margin-left:auto;">24</strong></div>
+          <div style="font-size:10px;display:flex;align-items:center;gap:4px;"><div style="width:8px;height:8px;border-radius:50%;background:#EAB308;flex-shrink:0;"></div> Normal <strong style="margin-left:auto;">762</strong></div>
+          <div style="font-size:10px;display:flex;align-items:center;gap:4px;"><div style="width:8px;height:8px;border-radius:50%;background:#E5E7EB;flex-shrink:0;"></div> Faible <strong style="margin-left:auto;">24</strong></div>
+        </div>
+      </div>
+
+      <!-- Statuts actuels -->
+      <div class="card" style="padding:12px;">
+        <div style="font-size:9px;font-weight:700;color:#8B5CF6;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;">Statuts actuels (snapshot)</div>
+        <div style="display:flex;flex-direction:column;gap:7px;">
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:2px;"><span style="color:#374151;">Fermés</span><span style="font-weight:700;color:#6B7280;">526 (64,6%)</span></div>
+            <div style="height:8px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:64.6%;background:#9CA3AF;border-radius:99px;"></div></div>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:2px;"><span style="color:#374151;">Résolus</span><span style="font-weight:700;color:#166534;">205 (25,2%)</span></div>
+            <div style="height:8px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:25.2%;background:#22C55E;border-radius:99px;"></div></div>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:2px;"><span style="color:#374151;">En attente</span><span style="font-weight:700;color:#92400E;">75 (9,2%)</span></div>
+            <div style="height:8px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:9.2%;background:#F97316;border-radius:99px;"></div></div>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:2px;"><span style="color:#374151;">Ouverts</span><span style="font-weight:700;color:#1E40AF;">7 (0,9%)</span></div>
+            <div style="height:8px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:0.9%;background:#3B82F6;border-radius:99px;"></div></div>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:2px;"><span style="color:#374151;">Nouveaux</span><span style="font-weight:700;color:#5B21B6;">1 (0,1%)</span></div>
+            <div style="height:8px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:0.1%;background:#8B5CF6;border-radius:99px;"></div></div>
+          </div>
+        </div>
+        <div style="font-size:10px;color:#9CA3AF;margin-top:8px;border-top:1px solid #F3F4F6;padding-top:6px;">
+          🟢 Excellente résolution : 90,5% des tickets fermés/résolus
+        </div>
+      </div>
+
+      <!-- Insights clés -->
+      <div class="card" style="padding:12px;">
+        <div style="font-size:9px;font-weight:700;color:#22C55E;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;">Insights clés</div>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <div style="background:#EDE9FE;border-radius:8px;padding:8px 10px;">
+            <div style="font-size:10px;font-weight:700;color:#5B21B6;margin-bottom:2px;">📞 Support 100% téléphonique</div>
+            <div style="font-size:10px;color:#6B7280;">91,9% des tickets viennent d'Aircall. Le web et email sont marginaux (6,8%).</div>
+          </div>
+          <div style="background:#FEF3C7;border-radius:8px;padding:8px 10px;">
+            <div style="font-size:10px;font-weight:700;color:#92400E;margin-bottom:2px;">⚠ Priorité quasi-absente</div>
+            <div style="font-size:10px;color:#6B7280;">93,8% des tickets en priorité "normale". Les SLA urgents (10 min) ne sont quasiment jamais déclenchés (2 tickets).</div>
+          </div>
+          <div style="background:#DCFCE7;border-radius:8px;padding:8px 10px;">
+            <div style="font-size:10px;font-weight:700;color:#166534;margin-bottom:2px;">✅ Copilot très bien adopté</div>
+            <div style="font-size:10px;color:#6B7280;">90,4% des tickets ont Copilot activé. Bien au-dessus de la moyenne Zendesk (30%). Excellente implémentation.</div>
+          </div>
+          <div style="background:#FEF2F2;border-radius:8px;padding:8px 10px;">
+            <div style="font-size:10px;font-weight:700;color:#991B1B;margin-bottom:2px;">🔴 Encaissement = 1er problème</div>
+            <div style="font-size:10px;color:#6B7280;">34% des tickets catégorisés concernent l'encaissement/PosCloud. Levier HC prioritaire.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══ SLIDE 14 — MERCI ══ -->
+<div class="slide slide-dark" id="slide-14">
   <div class="cover-centered">
     <div style="font-size:48px;margin-bottom:16px;">🙏</div>
     <h1 style="font-size:clamp(26px,3.8vw,46px);font-weight:800;color:#fff;white-space:nowrap;margin-bottom:12px;">
@@ -1034,7 +1266,7 @@
 </nav>
 
 <script>
-  const total = 13;
+  const total = 14;
   let current = 1;
   const logo = document.querySelector('.logo-fixed');
 
@@ -1056,7 +1288,7 @@
     document.getElementById('slide-' + current).classList.add('active');
     document.getElementById('counter').textContent = current + ' / ' + total;
     buildDots();
-    if (logo) logo.style.display = (current === total) ? 'none' : '';
+    if (logo) logo.style.display = (current === 14) ? 'none' : '';
   }
 
   buildDots();
