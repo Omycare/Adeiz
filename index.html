@@ -218,7 +218,6 @@
         <div class="section-label">✓ Points forts</div>
         <ul class="check-list">
           <li>Structure de groupes exemplaire : N1, N2, 5 groupes mainteneurs (Diebold, Stackr, Nedap, Orange, TMA)</li>
-          <li>13 statuts personnalisés reflétant le workflow métier (Déclenchement Mainteneur, Relance, En cours Centrale…)</li>
           <li>Horaires Lun-Sam 09:00-20:30 (6 jours sur 7, adapté grande distribution)</li>
           <li>Vues organisées avec emojis et une vue dédiée par groupe d'escalade</li>
           <li>Apps utiles en place : JIRA, Aircall, Time Tracking, ATDESK</li>
@@ -240,6 +239,7 @@
           <li>Rapport Explore "Top 10 sous-catégories" cassé — aucun résultat</li>
           <li>Compte test "Lj test" + 7 comptes fonctionnels comme agents</li>
           <li>Champs de test dans la config organisations (à supprimer)</li>
+          <li><strong>13 statuts personnalisés</strong> — volume élevé, catégories Zendesk (En attente, En pause) à vérifier pour éviter des effets sur le SLA et le CSAT</li>
         </ul>
       </div>
     </div>
@@ -776,6 +776,10 @@
             <span class="tag" style="background:#F3F4F6;">En pause</span>
             <span class="tag" style="background:#DCFCE7;border-color:#BBF7D0;color:#166534;">Résolu</span>
           </div>
+          <div class="alert alert-yellow" style="margin-top:10px;">
+            <div class="alert-title">⚠ 13 statuts — volume à surveiller</div>
+            <div class="alert-body">13 statuts personnalisés, c'est élevé pour un compte de 4 mois. Il est recommandé de vérifier la catégorie Zendesk de chaque statut (Nouveau, Ouvert, <strong>En attente</strong>, En pause, Résolu) : les statuts mappés sur <strong>"En attente"</strong> mettent le SLA en pause et peuvent déclencher le CSAT prématurément. S'assurer que les statuts "Attente magasin", "Relance Mainteneur" etc. sont mappés sur la bonne catégorie.</div>
+          </div>
         </div>
       </div>
     </div>
@@ -1061,7 +1065,6 @@
           <div class="section-label">Points forts à conserver</div>
           <ul class="check-list">
             <li>Architecture de groupes N1 → N2 → AT → Mainteneurs bien structurée</li>
-            <li>13 statuts custom reflétant précisément le métier (Déclenchement, Relance, En cours Mainteneur...)</li>
             <li>Workflows mainteneurs automatisés : escalade + 2 relances par mainteneur (Diebold, Stackr, Nedap, Orange)</li>
             <li>Horaires Lun-Sam 09:00-20:30 adaptés à la grande distribution</li>
             <li>Écosystème d'apps complet (JIRA, Aircall, Time Tracking, ATDESK)</li>
@@ -1176,7 +1179,8 @@
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Compte test "Lj test" actif en production + 7 comptes fonctionnels en tant qu'agents</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Important</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">2 champs de test actifs dans les organisations (materials_test_multifield, test_material_in_org)</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-gray">Faible</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Formulaire de ticket unique pour 17 groupes et multiples types d'incidents</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Important</span></td></tr>
-            <tr><td style="padding:5px 6px;color:#374151;">HC favicon non configuré en PNG — à corriger</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-gray">Faible</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">HC favicon non configuré en PNG — à corriger</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-gray">Faible</span></td></tr>
+            <tr><td style="padding:5px 6px;color:#374151;">13 statuts personnalisés — volume élevé, catégories (En attente / En pause) à vérifier pour éviter impact sur SLA et CSAT</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Moyen</span></td></tr>
           </tbody>
         </table>
       </div>
