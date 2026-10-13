@@ -643,7 +643,7 @@
           </div>
         </div>
 
-        <div class="card">
+        <div class="card" style="margin-bottom:10px;">
           <div class="section-label">Champs désactivés <a href="https://adeizhelp.zendesk.com/admin/objects-rules/tickets/ticket-fields" target="_blank" class="zd-link">↗</a></div>
           <table>
             <thead><tr><th>Champ OFF</th><th>Note</th></tr></thead>
@@ -653,6 +653,15 @@
             </tbody>
           </table>
           <p style="margin-top:8px;font-size:11px;color:#6B7280;">49 champs actifs sur 51 total. Le champ "Mainteneur" OFF est surprenant vu la complexité des workflows mainteneurs.</p>
+        </div>
+
+        <div class="alert alert-orange">
+          <div class="alert-title">⚠ Macros (21) — Configuration incorrecte</div>
+          <div class="alert-body">
+            La macro <strong>« Résolution confirmée – Clôture du ticket »</strong> a un nom trompeur : il est impossible de fermer un ticket directement via une macro. La bonne approche est d'ajouter un tag spécifique via la macro, puis de déclencher la clôture via une automatisation.
+            <br><br>
+            Par ailleurs, les 21 macros ne sont pas organisées en dossiers et sont visibles par tous les agents. Recommandé : créer des dossiers par thème et restreindre la visibilité par groupe.
+          </div>
         </div>
       </div>
 
@@ -690,9 +699,18 @@
             </tbody>
           </table>
         </div>
-        <div class="alert alert-yellow">
+        <div class="alert alert-yellow" style="margin-bottom:10px;">
           <div class="alert-title">⚠ Faute de frappe agent</div>
           <div class="alert-body">Agent nommé "<strong>At - Sicles</strong>" — devrait être "<strong>At - Sycles</strong>" pour correspondre au groupe "AT – Sycles" et aux triggers associés. Risque de non-correspondance dans les rapports.</div>
+        </div>
+        <div class="alert alert-yellow">
+          <div class="alert-title">⚠ Champs de test dans les organisations</div>
+          <div class="alert-body">
+            2 champs de test encore actifs dans la configuration des organisations :
+            <br>• <strong>materials_test_multifield</strong> (choix multiples)
+            <br>• <strong>test_material_in_org</strong> (recherche)
+            <br><br>À supprimer si non utilisés pour garder une configuration propre.
+          </div>
         </div>
         <div class="card" style="margin-top:10px;">
           <div class="section-label">Statuts personnalisés (13)</div>
@@ -739,6 +757,18 @@
               </tbody>
             </table>
             <br>Le HC est utilisé comme base de connaissances interne uniquement. 124 sections sous 1 catégorie rendent la navigation quasi-impossible. Les agents perdent du temps à chercher des procédures.
+          </div>
+        </div>
+
+        <div class="alert alert-orange" style="margin-bottom:10px;">
+          <div class="alert-title">⚠ Problèmes techniques HC</div>
+          <div class="alert-body">
+            <ul style="padding-left:14px;display:flex;flex-direction:column;gap:4px;">
+              <li><strong>Commentaires actifs sur tous les articles</strong> — risque de réponses incorrectes de la part des magasins sur des procédures internes</li>
+              <li><strong>Ancien éditeur Zendesk encore utilisé</strong> — limite la compatibilité avec les nouvelles fonctionnalités et la lisibilité pour l'IA (Copilot, AI Agent)</li>
+              <li><strong>Favicon non configuré en PNG</strong> — à corriger pour un HC professionnel</li>
+              <li><strong>HC entièrement privé</strong> — aucune documentation publique, le widget ne peut pas proposer d'articles en self-service aux magasins</li>
+            </ul>
           </div>
         </div>
 
@@ -904,6 +934,15 @@
               <li>Statuts dédiés : Déclenchement, Relance, En cours Mainteneur</li>
             </ul>
             Ce flux est une référence. À documenter pour l'onboarding de nouveaux mainteneurs.
+          </div>
+        </div>
+
+        <div class="alert alert-blue" style="margin-bottom:10px;">
+          <div class="alert-title">💡 Apps recommandées</div>
+          <div class="alert-body">
+            <strong>Attachment Plus</strong> — gestion avancée des pièces jointes (prévisualisation, téléchargement groupé) utile pour les tickets avec schémas techniques et captures d'écran matériel.
+            <br><br>
+            <strong>Advanced Search</strong> — recherche multi-critères avancée dans les tickets. Très utile pour les N2 qui gèrent des escalades complexes avec filtres combinés (organisation + mainteneur + statut + tag).
           </div>
         </div>
 
