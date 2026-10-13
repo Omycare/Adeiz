@@ -367,6 +367,7 @@
       <div class="alert-body">
         Le rapport "Top 10 sous-catégories" utilise des <strong>attributs personnalisés mal configurés</strong> pour exclure les valeurs nulles — cette approche ne fonctionne pas dans Zendesk Explore et le rapport ne retourne aucun résultat. De plus, les rapports natifs Zendesk ne doivent pas être modifiés directement : il faut d'abord créer des <strong>clones (master clones)</strong> avant toute personnalisation.
         <br><strong>Action :</strong> Cloner les rapports natifs. Reconfigurer l'attribut personnalisé de sous-catégorie avec la bonne méthode d'exclusion des nuls.
+        <div style="margin-top:8px;"><img src="explore-sous-categories.png" alt="Explore configuration Top 10 sous-catégories" style="width:100%;max-width:420px;border-radius:6px;border:1px solid #FDE68A;"></div>
       </div>
     </div>
 
@@ -426,7 +427,10 @@
                 <tr class="tcat"><td colspan="2">MAINTENEURS (⚠ triggers cassés)</td></tr>
                 <tr><td><span class="badge badge-red">CASSÉ</span></td><td>Escalade Mainteneur – Diebold AT <small>(champs vides)</small> <a href="https://adeizhelp.zendesk.com/admin/objects-rules/rules/triggers/28113556671644" target="_blank" class="zd-link">↗</a></td></tr>
                 <tr><td><span class="badge badge-red">CASSÉ</span></td><td>Escalade Mainteneur – Stackr AT <small>(custom_fields vides)</small> <a href="https://adeizhelp.zendesk.com/admin/objects-rules/rules/triggers/30318143713308" target="_blank" class="zd-link">↗</a>
-                  <div style="margin-top:6px;"><img src="trigger-broken-stackr.png" alt="Trigger Stackr cassé" style="width:100%;border-radius:6px;border:1px solid #FECACA;"></div>
+                  <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:6px;">
+                    <img src="trigger-broken-stackr.png" alt="Trigger Stackr cassé" style="width:100%;border-radius:6px;border:1px solid #FECACA;">
+                    <img src="trigger-broken-2.png" alt="Trigger Stackr cassé détail" style="width:100%;border-radius:6px;border:1px solid #FECACA;">
+                  </div>
                 </td></tr>
                 <tr><td><span class="badge badge-red">CASSÉ</span></td><td>Relance Mainteneur – Orange/Stackr/Nedap <small>(actions cassées)</small> <a href="https://adeizhelp.zendesk.com/admin/objects-rules/rules/triggers/30318357727900" target="_blank" class="zd-link">↗</a></td></tr>
                 <tr><td><span class="badge badge-green">ON</span></td><td>Escalade Mainteneur – Nedap AT</td></tr>
@@ -613,9 +617,9 @@
               <tr><td>Tickets notés ces 7 derniers jours</td><td><span class="badge badge-green">CSAT</span></td><td></td></tr>
             </tbody>
           </table>
-          <div style="margin-top:10px;">
-            <img src="views-counts.png" alt="Vue des tickets en temps réel" style="width:100%;border-radius:8px;border:1px solid #E5E7EB;">
-            <p style="font-size:10px;color:#9CA3AF;margin-top:4px;text-align:center;">Snapshot vues en temps réel — Octobre 2026</p>
+          <div style="margin-top:10px;display:flex;align-items:flex-start;gap:8px;">
+            <img src="views-counts.png" alt="Vue des tickets en temps réel" style="height:130px;width:auto;border-radius:6px;border:1px solid #E5E7EB;flex-shrink:0;">
+            <p style="font-size:10px;color:#9CA3AF;line-height:1.5;">Snapshot vues en temps réel — Octobre 2026</p>
           </div>
         </div>
         <div class="alert alert-yellow" style="margin-top:10px;">
@@ -870,6 +874,14 @@
           <div class="section-label">AI Agent — Flux "Technical error reply" vide</div>
           <img src="ai-agent-empty.png" alt="AI Agent Technical error reply vide" style="width:100%;border-radius:8px;border:1px solid #FECACA;margin-top:6px;">
           <p style="font-size:10px;color:#9CA3AF;margin-top:4px;">Le flux de fallback est vide — aucun message configuré en cas d'erreur technique. L'utilisateur reçoit une réponse vide.</p>
+        </div>
+
+        <div class="alert alert-red" style="margin-bottom:10px;">
+          <div class="alert-title">🔴 Paramètre AI Agent déprécié au 31 oct. 2026</div>
+          <div class="alert-body">
+            Le paramètre <strong>"Waiting message"</strong> (Paramètres avancés) sera supprimé le 31 octobre 2026. Zendesk recommande de l'intégrer dans le flux "Knowledge reply" avant cette date, sinon le comportement actuel sera perdu.
+            <div style="margin-top:8px;"><img src="ai-agent-params.png" alt="AI Agent paramètres avancés - avertissement" style="width:100%;border-radius:6px;border:1px solid #FECACA;"></div>
+          </div>
         </div>
 
         <div class="alert alert-red" style="margin-bottom:10px;">
