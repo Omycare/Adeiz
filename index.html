@@ -1111,8 +1111,82 @@
   </div>
 </div>
 
-<!-- ══ SLIDE 13 — DASHBOARD KPI ══ -->
+<!-- ══ SLIDE 13 — SYNTHÈSE ══ -->
 <div class="slide" id="slide-13">
+  <div class="slide-header">
+    <h2>📋 Synthèse complète de l'audit</h2>
+    <span class="sh-badge">3 DOMAINES ANALYSÉS</span>
+  </div>
+  <div class="slide-body" style="padding:10px 16px 72px;">
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;">
+
+      <!-- COL 1 : Structure & Sécurité -->
+      <div>
+        <div style="background:linear-gradient(135deg,#7C3AED,#A855F7);border-radius:10px;padding:8px 12px;margin-bottom:8px;">
+          <span style="font-size:11px;font-weight:700;color:#fff;letter-spacing:.5px;">Structure &amp; Sécurité</span>
+        </div>
+        <table style="width:100%;border-collapse:collapse;font-size:10px;">
+          <thead><tr style="background:#F3F4F6;"><th style="text-align:left;padding:4px 6px;font-weight:600;color:#374151;">Observation</th><th style="padding:4px 6px;white-space:nowrap;">Priorité</th></tr></thead>
+          <tbody>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">SPF/DKIM non configuré pour le domaine Zendesk</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Urgent</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">AI Agent non prêt pour la production — erreurs de config, aucun message de fallback</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-red">Critique</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Paramètre "Waiting message" AI Agent déprécié le 31 oct. 2026</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-red">Critique</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Règles de connaissance configurées via labels mais aucun label généré dans les conversations</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Urgent</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Widget messagerie non personnalisé à l'identité visuelle ADEIZ</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-gray">Faible</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Même emoji ⭕️ sur la majorité des vues — navigation moins intuitive</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-gray">Faible</span></td></tr>
+            <tr><td style="padding:5px 6px;color:#374151;">Architecture de groupes N1→N2→AT→Mainteneurs en place</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-green">OK</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- COL 2 : Processus & Automation -->
+      <div>
+        <div style="background:linear-gradient(135deg,#DB2777,#F97316);border-radius:10px;padding:8px 12px;margin-bottom:8px;">
+          <span style="font-size:11px;font-weight:700;color:#fff;letter-spacing:.5px;">Processus &amp; Automation</span>
+        </div>
+        <table style="width:100%;border-collapse:collapse;font-size:10px;">
+          <thead><tr style="background:#F3F4F6;"><th style="text-align:left;padding:4px 6px;font-weight:600;color:#374151;">Observation</th><th style="padding:4px 6px;white-space:nowrap;">Priorité</th></tr></thead>
+          <tbody>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">4+ triggers cassés — actions avec valeurs de champs vides (Stackr AT, Diebold AT, relances mainteneurs)</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-red">Critique</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Trigger "Affectation rapide" en doublon (2 actifs simultanément)</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Moyen</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Trigger Ultimate.ai résidu encore actif en production</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Moyen</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Automations SLA : logique incorrecte (temps calendaire vs conditions SLA natives)</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Urgent</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">2 politiques SLA identiques pour AT + Printemps — une seule suffit</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Important</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Macro "Résolution confirmée – Clôture du ticket" ne peut pas fermer un ticket directement via macro</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Moyen</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Macros sans organisation en dossiers ni restriction par groupe</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-gray">Faible</span></td></tr>
+            <tr><td style="padding:5px 6px;color:#374151;">Ordre des triggers et automations à vérifier — l'ordre impacte le comportement</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Moyen</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- COL 3 : Management & Qualité opérationnelle -->
+      <div>
+        <div style="background:linear-gradient(135deg,#D97706,#F59E0B);border-radius:10px;padding:8px 12px;margin-bottom:8px;">
+          <span style="font-size:11px;font-weight:700;color:#fff;letter-spacing:.5px;">Management &amp; Qualité opérationnelle</span>
+        </div>
+        <table style="width:100%;border-collapse:collapse;font-size:10px;">
+          <thead><tr style="background:#F3F4F6;"><th style="text-align:left;padding:4px 6px;font-weight:600;color:#374151;">Observation</th><th style="padding:4px 6px;white-space:nowrap;">Priorité</th></tr></thead>
+          <tbody>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">HC : 1 seule catégorie "Général" pour 917 articles et 124 sections — navigation impossible</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-red">Critique</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">HC : 0 label sur 917 articles — Copilot et AI Agent ne peuvent suggérer aucun article</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-red">Critique</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">HC : nombreux articles contiennent uniquement des images, sans texte exploitable par l'IA</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Urgent</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Rapport Explore "Top 10 sous-catégories" cassé — attributs personnalisés mal configurés, nuls non exclus</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Urgent</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">HC : commentaires actifs sur tous les articles — risque de réponses incorrectes</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Moyen</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">HC : ancien éditeur Zendesk encore utilisé — limite les fonctionnalités IA et la lisibilité</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Moyen</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Compte test "Lj test" actif en production + 7 comptes fonctionnels en tant qu'agents</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Important</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">2 champs de test actifs dans les organisations (materials_test_multifield, test_material_in_org)</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-gray">Faible</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Formulaire de ticket unique pour 17 groupes et multiples types d'incidents</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Important</span></td></tr>
+            <tr><td style="padding:5px 6px;color:#374151;">HC favicon non configuré en PNG — à corriger</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-gray">Faible</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══ SLIDE 14 — DASHBOARD KPI ══ -->
+<div class="slide" id="slide-14">
   <div class="slide-header">
     <h2>📊 Dashboard KPI — ADEIZ · Analyse tickets réelle</h2>
     <span class="sh-badge">1 100 TICKETS · 4 MOIS · DONNÉES API + VUES</span>
@@ -1477,8 +1551,8 @@
   </div>
 </div>
 
-<!-- ══ SLIDE 14 — MERCI ══ -->
-<div class="slide slide-dark" id="slide-14">
+<!-- ══ SLIDE 15 — MERCI ══ -->
+<div class="slide slide-dark" id="slide-15">
   <div class="cover-centered">
     <div style="font-size:48px;margin-bottom:16px;">🙏</div>
     <h1 style="font-size:clamp(26px,3.8vw,46px);font-weight:800;color:#fff;white-space:nowrap;margin-bottom:12px;">
@@ -1519,11 +1593,11 @@
   <button onclick="goTo(current-1)">←</button>
   <div class="dots" id="dots"></div>
   <button onclick="goTo(current+1)">→</button>
-  <span class="slide-counter" id="counter">1 / 13</span>
+  <span class="slide-counter" id="counter">1 / 15</span>
 </nav>
 
 <script>
-  const total = 14;
+  const total = 15;
   let current = 1;
   const logo = document.querySelector('.logo-fixed');
 
@@ -1545,7 +1619,7 @@
     document.getElementById('slide-' + current).classList.add('active');
     document.getElementById('counter').textContent = current + ' / ' + total;
     buildDots();
-    if (logo) logo.style.display = (current === 14) ? 'none' : '';
+    if (logo) logo.style.display = (current === 15) ? 'none' : '';
   }
 
   buildDots();
