@@ -188,29 +188,29 @@
 <div class="slide" id="slide-2">
   <div class="slide-header">
     <h2>📊 Diagnostic du compte ADEIZ</h2>
-    <span class="sh-badge">808 TICKETS · 4 MOIS D'ACTIVITÉ</span>
+    <span class="sh-badge">1 100 TICKETS · 4 MOIS · 15 SLA EN DANGER</span>
   </div>
   <div class="slide-body">
     <div class="grid grid-4" style="margin-bottom:16px;">
       <div class="card stat">
-        <div class="stat-num">808</div>
+        <div class="stat-num">1 100</div>
         <div class="stat-label">Tickets total</div>
-        <div class="stat-sub">Compte ouvert juin 2026</div>
+        <div class="stat-sub">105 en cours actuellement</div>
       </div>
       <div class="card stat">
-        <div class="stat-num">17</div>
-        <div class="stat-label">Groupes métier</div>
-        <div class="stat-sub">N1 → N2 → Mainteneurs</div>
+        <div class="stat-num" style="color:#EF4444;">15</div>
+        <div class="stat-label">SLA en danger</div>
+        <div class="stat-sub">47 tickets bloqués centrale</div>
+      </div>
+      <div class="card stat">
+        <div class="stat-num" style="color:#EF4444;">4+</div>
+        <div class="stat-label">Triggers cassés</div>
+        <div class="stat-sub">Actions avec champs vides</div>
       </div>
       <div class="card stat">
         <div class="stat-num" style="color:#EF4444;">917</div>
         <div class="stat-label">Articles HC</div>
-        <div class="stat-sub">1 seule catégorie ⚠</div>
-      </div>
-      <div class="card stat">
-        <div class="stat-num">2</div>
-        <div class="stat-label">Politiques SLA</div>
-        <div class="stat-sub">Armand Thiery + Printemps</div>
+        <div class="stat-sub">0 label · IA inutilisable</div>
       </div>
     </div>
     <div class="grid grid-2">
@@ -218,28 +218,28 @@
         <div class="section-label">✓ Points forts</div>
         <ul class="check-list">
           <li>Structure de groupes exemplaire : N1, N2, 5 groupes mainteneurs (Diebold, Stackr, Nedap, Orange, TMA)</li>
-          <li>13 statuts personnalisés reflétant précisément le workflow métier (Déclenchement Mainteneur, Relance, En cours Centrale…)</li>
-          <li>SLA bien configuré pour les clients principaux (4 métriques × 4 priorités)</li>
-          <li>10 automations actives : alertes SLA par priorité, backlog 48h, relances mainteneurs Orange</li>
-          <li>39 triggers couvrant tout le cycle de vie (notifications, escalades, workflows mainteneurs)</li>
-          <li>Horaires Lun-Sam 09:00-20:30 (6 jours sur 7)</li>
-          <li>Vues organisées avec emojis et groupes dédiés par escalade</li>
+          <li>13 statuts personnalisés reflétant le workflow métier (Déclenchement Mainteneur, Relance, En cours Centrale…)</li>
+          <li>Horaires Lun-Sam 09:00-20:30 (6 jours sur 7, adapté grande distribution)</li>
+          <li>Vues organisées avec emojis et une vue dédiée par groupe d'escalade</li>
           <li>Apps utiles en place : JIRA, Aircall, Time Tracking, ATDESK</li>
-          <li>AI Agent installé (Zendesk Copilot)</li>
+          <li>Copilot activé sur 90,4% des tickets (excellente adoption)</li>
+          <li>Automations de relance clients actives (24h, 5 jours)</li>
         </ul>
       </div>
       <div class="card">
         <div class="section-label">✗ Problèmes détectés</div>
         <ul class="check-list cross-list">
-          <li><strong>917 articles HC dans 1 seule catégorie</strong> "Général" — structure inexistante</li>
-          <li>Sections HC obsolètes : "Old", "old_Fimware", "fimware" (faute de frappe), "PAS A JOUR"</li>
-          <li>Compte test "<strong>Lj test</strong>" actif en production</li>
-          <li>7 comptes fonctionnels utilisés comme agents (Pole Rfid, AT Pole Commerce…)</li>
-          <li>Faute de frappe : agent "At - Sicles" (devrait être Sycles)</li>
-          <li>1 seul formulaire de ticket pour 17 groupes et plusieurs types de clients</li>
-          <li>Statut custom "<strong>Relance Centrale</strong>" désactivé — rupture dans le workflow</li>
-          <li>Trigger "<strong>Ultimate.ai</strong>" : résidu d'une ancienne solution IA externe</li>
-          <li>SLA limité à 2 organisations seulement (Armand Thiery, Printemps)</li>
+          <li><strong>4+ triggers cassés</strong> : actions avec champs personnalisés vides (Stackr, Diebold, Orange…)</li>
+          <li><strong>AI Agent non prêt pour la production</strong> : messages vides, pas de fallback</li>
+          <li><strong>Automations SLA mal configurées</strong> : workaround au lieu des conditions natives Zendesk</li>
+          <li><strong>2 politiques SLA identiques</strong> pour Armand Thiery et Printemps — 1 seule suffit</li>
+          <li><strong>917 articles HC sans aucun label</strong> — Copilot et AI Agent aveugles</li>
+          <li>Artícles HC contenant uniquement des images, sans texte exploitable par l'IA</li>
+          <li>Trigger "<strong>Affectation rapide</strong>" en doublon</li>
+          <li>SPF warning sur le connecteur Gmail</li>
+          <li>Rapport Explore "Top 10 sous-catégories" cassé — aucun résultat</li>
+          <li>Compte test "Lj test" + 7 comptes fonctionnels comme agents</li>
+          <li>Champs de test dans la config organisations (à supprimer)</li>
         </ul>
       </div>
     </div>
@@ -250,45 +250,62 @@
 <div class="slide" id="slide-3">
   <div class="slide-header">
     <h2>🔴 Urgences critiques : À corriger immédiatement</h2>
-    <span class="sh-badge">2 URGENCES · PRIORITÉ MAX</span>
+    <span class="sh-badge">3 URGENCES · PRIORITÉ MAX</span>
   </div>
   <div class="slide-body">
     <div class="alert alert-red">
-      <div class="alert-title"><span class="badge badge-red">C1</span> Help Center : 917 articles dans 1 seule catégorie — structure inexistante</div>
+      <div class="alert-title"><span class="badge badge-red">C1</span> Triggers cassés : actions avec champs personnalisés vides</div>
       <div class="alert-body">
-        L'ensemble des 917 articles est regroupé dans une unique catégorie "<strong>Général</strong>" qui contient <strong>124 sections</strong> sans hiérarchie réelle. Il est impossible pour un agent de retrouver rapidement une procédure. La base de connaissances est inutilisable efficacement à cette échelle.
+        Au moins 4 triggers d'escalade mainteneur contiennent des <strong>actions qui référencent des champs personnalisés supprimés ou mal configurés</strong> (valeur vide). Ces triggers s'exécutent mais n'effectuent rien — les escalades mainteneurs peuvent être silencieusement perdues.
         <br><br>
         <table>
-          <thead><tr><th>Indicateur</th><th>Valeur</th><th>Évaluation</th></tr></thead>
+          <thead><tr><th>Trigger cassé</th><th>Problème</th><th>URL</th></tr></thead>
           <tbody>
-            <tr><td>Catégories</td><td>1 ("Général")</td><td><span class="badge badge-red">Critique</span></td></tr>
-            <tr><td>Sections</td><td>124</td><td><span class="badge badge-red">Non structuré</span></td></tr>
-            <tr><td>Articles total</td><td>917</td><td><span class="badge badge-orange">Volume important</span></td></tr>
-            <tr><td>HC client public</td><td>Non configuré</td><td><span class="badge badge-gray">Interne uniquement</span></td></tr>
+            <tr><td>Escalade Mainteneur – Stackr AT</td><td><span class="badge badge-red">2 champs vides : custom_fields_30321397535516, custom_fields_30321375371932</span></td><td><a href="https://adeizhelp.zendesk.com/admin/objects-rules/rules/triggers/30318143713308" target="_blank" class="zd-link">↗</a></td></tr>
+            <tr><td>Escalade Mainteneur – Diebold AT</td><td><span class="badge badge-red">Actions cassées (champs manquants)</span></td><td><a href="https://adeizhelp.zendesk.com/admin/objects-rules/rules/triggers/28113556671644" target="_blank" class="zd-link">↗</a></td></tr>
+            <tr><td>Relance Mainteneur – Orange / Stackr / Nedap</td><td><span class="badge badge-red">Actions avec champs non résolus</span></td><td><a href="https://adeizhelp.zendesk.com/admin/objects-rules/rules/triggers/30318357727900" target="_blank" class="zd-link">↗</a></td></tr>
           </tbody>
         </table>
-        <br><strong>Action :</strong> Créer 5-8 catégories thématiques (Magasin, Matériel, Réseau, Logiciels, Utilisateurs, SAV, Bureautique, Sécurité) et redistribuer les 124 sections. Archiver ou supprimer les sections obsolètes.
-        <a href="https://adeizhelp.zendesk.com/admin/knowledge-base" target="_blank" class="zd-link">↗ Help Center Admin</a>
+        <br><strong>Action immédiate :</strong> Auditer tous les triggers mainteneurs, identifier les champs personnalisés manquants (IDs 30321397535516 et 30321375371932), les recréer ou supprimer les actions orphelines.
       </div>
     </div>
 
     <div class="alert alert-red">
-      <div class="alert-title"><span class="badge badge-red">C2</span> Sections HC avec noms invalides et contenu obsolète visible</div>
+      <div class="alert-title"><span class="badge badge-red">C2</span> AI Agent non prêt pour la production — messages vides, pas de fallback</div>
       <div class="alert-body">
-        Plusieurs sections de la base de connaissances portent des noms qui révèlent un contenu obsolète ou mal organisé, visible par les agents :
+        Le bot IA est <strong>actif sur le widget du centre d'aide</strong> mais présente des erreurs graves de configuration :
         <br><br>
         <table>
-          <thead><tr><th>Section problématique</th><th>Problème</th></tr></thead>
+          <thead><tr><th>Problème</th><th>Impact</th></tr></thead>
           <tbody>
-            <tr><td>"Old"</td><td><span class="badge badge-red">Nom générique — contenu obsolète probable</span></td></tr>
-            <tr><td>"old_Fimware"</td><td><span class="badge badge-red">Faute de frappe + préfixe "old"</span></td></tr>
-            <tr><td>"fimware"</td><td><span class="badge badge-red">Faute de frappe de "firmware"</span></td></tr>
-            <tr><td>"Specificités par Service (PAS A JOUR)"</td><td><span class="badge badge-red">Contenu explicitement non à jour</span></td></tr>
-            <tr><td>"Procédures historiques"</td><td><span class="badge badge-orange">Archiver ou supprimer</span></td></tr>
+            <tr><td>Flux "Technical error reply" vide — message non configuré</td><td><span class="badge badge-red">Erreur silencieuse visible par les utilisateurs</span></td></tr>
+            <tr><td>Aucun message de fallback configuré</td><td><span class="badge badge-red">Si le bot échoue, pas de réponse</span></td></tr>
+            <tr><td>Règles de connaissance basées sur des étiquettes non générées</td><td><span class="badge badge-red">Articles jamais suggérés</span></td></tr>
+            <tr><td>Paramètres obsolètes dans la configuration</td><td><span class="badge badge-orange">Comportement imprévisible</span></td></tr>
+            <tr><td>Widget non personnalisé aux couleurs ADEIZ</td><td><span class="badge badge-yellow">Identité visuelle absente</span></td></tr>
           </tbody>
         </table>
-        <br><strong>Action :</strong> Supprimer ou archiver ces sections. Corriger les fautes de frappe dans les noms de sections existantes. Établir une convention de nommage claire.
-        <a href="https://adeizhelp.zendesk.com/admin/knowledge-base" target="_blank" class="zd-link">↗ Gérer sections HC</a>
+        <br><strong>Action :</strong> Désactiver le bot du widget en production jusqu'à sa finalisation. Configurer tous les messages de fallback, tester le flux complet, puis réactiver. <a href="https://adeizhelp.zendesk.com/ai-agents/dashboard" target="_blank" class="zd-link">↗ AI Agent</a>
+      </div>
+    </div>
+
+    <div class="alert alert-red">
+      <div class="alert-title"><span class="badge badge-red">C3</span> Help Center : 917 articles sans aucun label — Copilot et AI Agent aveugles</div>
+      <div class="alert-body">
+        Aucun des 917 articles du Help Center ne possède de <strong>labels (étiquettes)</strong>. Les labels sont le mécanisme principal par lequel Zendesk Copilot et l'AI Agent retrouvent et suggèrent des articles. Sans labels, <strong>l'IA ne peut pas exploiter la base de connaissances</strong>, même si 90% des tickets ont Copilot activé.
+        <br>De plus, de nombreux articles contiennent <strong>uniquement des captures d'écran</strong>, sans texte — l'IA ne peut pas lire les images.
+        <br><br>
+        <table>
+          <thead><tr><th>Problème HC</th><th>Impact IA</th></tr></thead>
+          <tbody>
+            <tr><td>0 label sur 917 articles</td><td><span class="badge badge-red">Suggestions Copilot impossibles</span></td></tr>
+            <tr><td>Articles = images uniquement, sans texte</td><td><span class="badge badge-red">Contenu illisible par l'IA</span></td></tr>
+            <tr><td>Commentaires activés sur tous les articles</td><td><span class="badge badge-orange">Risque de spam / modération</span></td></tr>
+            <tr><td>Ancien éditeur Zendesk utilisé</td><td><span class="badge badge-yellow">Limites de mise en forme</span></td></tr>
+          </tbody>
+        </table>
+        <br><strong>Action :</strong> Ajouter des labels thématiques sur les articles les plus consultés en priorité. Compléter les articles image-only avec du texte descriptif. Désactiver les commentaires par défaut.
+        <a href="https://adeizhelp.zendesk.com/admin/knowledge-base" target="_blank" class="zd-link">↗ Help Center Admin</a>
       </div>
     </div>
   </div>
@@ -298,63 +315,71 @@
 <div class="slide" id="slide-4">
   <div class="slide-header">
     <h2>🟠 Points importants : Corrections prioritaires</h2>
-    <span class="sh-badge">5 POINTS · SEMAINE 1-2</span>
+    <span class="sh-badge">6 POINTS · SEMAINE 1-2</span>
   </div>
   <div class="slide-body">
     <div class="alert alert-orange">
-      <div class="alert-title"><span class="badge badge-orange">C3</span> Compte test "Lj test" actif en production
-        <a href="https://adeizhelp.zendesk.com/admin/people/team/members" target="_blank" class="zd-link">↗ Agents</a>
+      <div class="alert-title"><span class="badge badge-orange">C4</span> Automations SLA mal configurées — workaround au lieu des conditions natives
+        <a href="https://adeizhelp.zendesk.com/admin/objects-rules/rules/automations/30892688922780" target="_blank" class="zd-link">↗ Automations</a>
       </div>
       <div class="alert-body">
-        Un compte de test appartenant à l'administrateur (Ludovic Juillet) est toujours actif sur le compte de production. Il occupe une licence agent, peut recevoir des tickets assignés par erreur et pollue les rapports de performance.
-        <br><strong>Action :</strong> Désactiver ou supprimer le compte "Lj test" dès que possible.
+        Les 4 automations d'alerte SLA (urgent/high/normal/low) utilisent une condition <strong>"Heures écoulées depuis la création (calendaires) &gt; 0"</strong> au lieu des conditions SLA natives de Zendesk. Ce workaround est fragile, imprécis et peut déclencher des alertes en dehors des horaires business.
+        <br><br>Zendesk dispose de conditions natives <strong>"Tickets : Heures depuis la dernière violation SLA"</strong> et <strong>"Tickets : Heures jusqu'à la violation SLA suivante"</strong> qui sont conçues exactement pour cet usage. Ces automations devraient être reconfigurées pour utiliser ces métriques SLA natives.
+        <br><br><strong>Action :</strong> Revoir le groupe complet d'automations SLA. Utiliser les conditions SLA natives plutôt qu'un calcul de temps calendaire depuis la création.
       </div>
     </div>
 
     <div class="alert alert-orange">
-      <div class="alert-title"><span class="badge badge-orange">C4</span> 7 comptes fonctionnels utilisés comme agents + faute de frappe</div>
+      <div class="alert-title"><span class="badge badge-orange">C5</span> 2 politiques SLA identiques — une seule politique générale suffit
+        <a href="https://adeizhelp.zendesk.com/admin/objects-rules/rules/sla" target="_blank" class="zd-link">↗ SLA</a>
+      </div>
       <div class="alert-body">
-        7 entités (pôles ou équipes) sont inscrites comme agents individuels au lieu de groupes, ce qui fausse les métriques par agent et complique la gestion des licences :
-        <div class="tags" style="margin-top:8px;margin-bottom:8px;">
-          <span class="tag">Pole Rfid</span>
-          <span class="tag">AT Pole Commerce</span>
-          <span class="tag">At - Stock</span>
-          <span class="tag" style="background:#FEE2E2;border-color:#FECACA;color:#991B1B;">At - Sicles ⚠ (faute: Sycles)</span>
-          <span class="tag">Pole Bureautique</span>
-          <span class="tag">Pole Décisionnel</span>
-          <span class="tag">Admin Systèmes</span>
-        </div>
-        <strong>Action :</strong> Convertir ces comptes en Light Agents ou les rattacher aux groupes existants. Corriger "At - Sicles" en "At - Sycles".
+        Les politiques SLA "Armand Thiery" et "Printemps" ont des <strong>conditions et des niveaux cibles exactement identiques</strong>. Maintenir deux politiques séparées alourdit la maintenance : toute modification doit être appliquée deux fois, avec un risque de divergence.
+        <br><br><strong>Action :</strong> Créer une seule politique SLA générale couvrant toutes les organisations, avec les niveaux de cibles actuels. Prévoir des exceptions spécifiques uniquement si les SLA diffèrent par organisation.
       </div>
     </div>
 
     <div class="alert alert-orange">
-      <div class="alert-title"><span class="badge badge-orange">C5</span> 1 seul formulaire de ticket pour toute la complexité du compte
-        <a href="https://adeizhelp.zendesk.com/admin/objects-rules/tickets/ticket-forms" target="_blank" class="zd-link">↗ Formulaires</a>
-      </div>
+      <div class="alert-title"><span class="badge badge-orange">C6</span> SPF warning sur le connecteur Gmail + sécurité email</div>
       <div class="alert-body">
-        Avec 17 groupes, plusieurs types de clients (Armand Thiery, Printemps, autres magasins) et des workflows très différents (incident matériel, escalade mainteneur, TMA Adeiz, SAV…), un seul formulaire "par défaut" est insuffisant. Les agents saisissent les mêmes informations pour des cas radicalement différents.
-        <br><strong>Action :</strong> Créer au minimum 3 formulaires distincts : <em>Incident Matériel</em>, <em>Escalade Mainteneur</em>, <em>Support Bureautique</em>. Chaque formulaire affiche uniquement les champs pertinents.
+        Une <strong>alerte SPF</strong> est présente sur le connecteur Gmail d'ADEIZ. Sans SPF correctement configuré, les emails envoyés depuis Zendesk peuvent être marqués comme spam par les destinataires, impactant la délivrabilité des notifications et des relances.
+        <br><strong>Action :</strong> Configurer l'enregistrement SPF pour inclure les serveurs Zendesk (ajouter <code>include:mail.zendesk.com</code> au DNS). Vérifier également DKIM et DMARC.
       </div>
     </div>
 
     <div class="alert alert-yellow">
-      <div class="alert-title"><span class="badge badge-yellow">C6</span> Statut custom "Relance Centrale" désactivé
-        <a href="https://adeizhelp.zendesk.com/admin/objects-rules/tickets/ticket-statuses" target="_blank" class="zd-link">↗ Statuts</a>
-      </div>
-      <div class="alert-body">
-        Le statut "Relance Centrale" (catégorie <em>open</em>) est désactivé alors que le workflow d'escalade centrale dispose d'un statut "Escalade Centrale" et d'un statut "En cours Centrale". L'absence de "Relance Centrale" crée un angle mort dans le suivi des tickets escaladés vers la centrale.
-        <br><strong>Action :</strong> Réactiver ce statut ou confirmer qu'il a été remplacé intentionnellement par une autre étape du workflow.
-      </div>
-    </div>
-
-    <div class="alert alert-yellow">
-      <div class="alert-title"><span class="badge badge-yellow">C7</span> Trigger résidu "Ultimate.ai" actif en production
+      <div class="alert-title"><span class="badge badge-yellow">C7</span> Trigger "Affectation rapide" en doublon + résidu Ultimate.ai
         <a href="https://adeizhelp.zendesk.com/admin/objects-rules/rules/triggers" target="_blank" class="zd-link">↗ Triggers</a>
       </div>
       <div class="alert-body">
-        Le trigger "<strong>Ultimate.ai Email Channel Automation: 6a2bb4f5d0df6caea316cc2b</strong>" est actif. Ultimate.ai est une solution IA externe qui semble ne plus être utilisée (aucune app correspondante installée). Ce trigger peut interférer avec le routage email.
-        <br><strong>Action :</strong> Vérifier si Ultimate.ai est encore actif. Dans le cas contraire, supprimer ce trigger pour éviter tout conflit.
+        <ul style="padding-left:14px;display:flex;flex-direction:column;gap:4px;">
+          <li>Le trigger "<strong>Affectation rapide</strong>" existe en <strong>deux exemplaires actifs</strong> (IDs 28970987661340 et un autre) — conflit possible dans le routage automatique</li>
+          <li>Le trigger "<strong>Ultimate.ai Email Channel Automation</strong>" est actif mais aucune app Ultimate.ai n'est installée — résidu d'une ancienne intégration</li>
+        </ul>
+        <br><strong>Action :</strong> Identifier et supprimer le doublon. Supprimer le trigger Ultimate.ai.
+      </div>
+    </div>
+
+    <div class="alert alert-yellow">
+      <div class="alert-title"><span class="badge badge-yellow">C8</span> Rapport Explore "Top 10 sous-catégories" cassé
+        <a href="https://adeizhelp.zendesk.com/explore#/new-dashboard-builder/75639692" target="_blank" class="zd-link">↗ Explore</a>
+      </div>
+      <div class="alert-body">
+        Le rapport "Top 10 sous-catégories" utilise des <strong>attributs personnalisés mal configurés</strong> pour exclure les valeurs nulles — cette approche ne fonctionne pas dans Zendesk Explore et le rapport ne retourne aucun résultat. De plus, les rapports natifs Zendesk ne doivent pas être modifiés directement : il faut d'abord créer des <strong>clones (master clones)</strong> avant toute personnalisation.
+        <br><strong>Action :</strong> Cloner les rapports natifs. Reconfigurer l'attribut personnalisé de sous-catégorie avec la bonne méthode d'exclusion des nuls.
+      </div>
+    </div>
+
+    <div class="alert alert-yellow">
+      <div class="alert-title"><span class="badge badge-yellow">C9</span> Compte test + comptes fonctionnels + champs test organisations</div>
+      <div class="alert-body">
+        <ul style="padding-left:14px;display:flex;flex-direction:column;gap:4px;">
+          <li>Compte "<strong>Lj test</strong>" actif en production — occupe une licence, pollue les rapports</li>
+          <li>7 comptes fonctionnels (Pole Rfid, AT Pole Commerce, At - Stock, <strong>At - Sicles</strong> ⚠ typo Sycles, Pole Bureautique, Pole Décisionnel, Admin Systèmes) utilisés comme agents individuels</li>
+          <li>2 champs de test dans la config organisations : "<strong>Materials test multifield</strong>" et "<strong>test material in org</strong>" — à supprimer</li>
+        </ul>
+        <a href="https://adeizhelp.zendesk.com/admin/people/team/members" target="_blank" class="zd-link">↗ Agents</a>
+        <a href="https://adeizhelp.zendesk.com/admin/people/configuration/organization_fields" target="_blank" class="zd-link">↗ Champs org</a>
       </div>
     </div>
   </div>
@@ -398,9 +423,10 @@
                 <tr><td><span class="badge badge-green">ON</span></td><td>Escalade AT – Pôle Décisionnel</td></tr>
                 <tr><td><span class="badge badge-green">ON</span></td><td>Escalade AT – GDM</td></tr>
                 <tr><td><span class="badge badge-green">ON</span></td><td>Escalade AT – Rfid / Sycles / Stock</td></tr>
-                <tr class="tcat"><td colspan="2">MAINTENEURS</td></tr>
-                <tr><td><span class="badge badge-green">ON</span></td><td>Escalade Mainteneur – Diebold AT</td></tr>
-                <tr><td><span class="badge badge-green">ON</span></td><td>Escalade Mainteneur – Stackr AT</td></tr>
+                <tr class="tcat"><td colspan="2">MAINTENEURS (⚠ triggers cassés)</td></tr>
+                <tr><td><span class="badge badge-red">CASSÉ</span></td><td>Escalade Mainteneur – Diebold AT <small>(champs vides)</small> <a href="https://adeizhelp.zendesk.com/admin/objects-rules/rules/triggers/28113556671644" target="_blank" class="zd-link">↗</a></td></tr>
+                <tr><td><span class="badge badge-red">CASSÉ</span></td><td>Escalade Mainteneur – Stackr AT <small>(custom_fields vides)</small> <a href="https://adeizhelp.zendesk.com/admin/objects-rules/rules/triggers/30318143713308" target="_blank" class="zd-link">↗</a></td></tr>
+                <tr><td><span class="badge badge-red">CASSÉ</span></td><td>Relance Mainteneur – Orange/Stackr/Nedap <small>(actions cassées)</small> <a href="https://adeizhelp.zendesk.com/admin/objects-rules/rules/triggers/30318357727900" target="_blank" class="zd-link">↗</a></td></tr>
                 <tr><td><span class="badge badge-green">ON</span></td><td>Escalade Mainteneur – Nedap AT</td></tr>
                 <tr><td><span class="badge badge-green">ON</span></td><td>Escalade Mainteneur – Orange AT (Extranet)</td></tr>
                 <tr><td><span class="badge badge-green">ON</span></td><td>Orange AT – Alerte Réf. Externe manquante</td></tr>
@@ -409,9 +435,10 @@
                 <tr><td><span class="badge badge-green">ON</span></td><td>Relance Mainteneur – Alerte N2 / Orange</td></tr>
                 <tr class="tcat"><td colspan="2">IA & COPILOT</td></tr>
                 <tr><td><span class="badge badge-green">ON</span></td><td>Activer Auto Assist (Copilot) sur nouveaux tickets</td></tr>
-                <tr><td><span class="badge badge-orange">ON ⚠</span></td><td>Ultimate.ai Email Channel Automation <small>(résidu IA externe)</small></td></tr>
-                <tr class="tcat"><td colspan="2">BACKLOG</td></tr>
+                <tr><td><span class="badge badge-orange">ON ⚠</span></td><td>Ultimate.ai Email Channel Automation <small>(résidu IA externe à supprimer)</small></td></tr>
+                <tr class="tcat"><td colspan="2">BACKLOG & ROUTAGE</td></tr>
                 <tr><td><span class="badge badge-green">ON</span></td><td>Alerte backlog – retirer tag relance_48h</td></tr>
+                <tr><td><span class="badge badge-orange">DOUBLON</span></td><td>Affectation rapide <small>(2 triggers actifs en même temps)</small> <a href="https://adeizhelp.zendesk.com/admin/objects-rules/rules/triggers/28970987661340" target="_blank" class="zd-link">↗</a></td></tr>
                 <tr><td><span class="badge badge-green">ON</span></td><td>Notifier assigné + groupe de l'affectation</td></tr>
               </tbody>
             </table>
@@ -441,10 +468,10 @@
             </tbody>
           </table>
         </div>
-        <div class="alert alert-green" style="margin-top:8px;">
-          <div class="alert-title">✅ Automations : niveau excellent</div>
+        <div class="alert alert-orange" style="margin-top:8px;">
+          <div class="alert-title">⚠ Automations SLA : logique incorrecte</div>
           <div class="alert-body">
-            Les 10 automations couvrent tous les cas critiques : alertes SLA par priorité avant dépassement, surveillance backlog 48h, relance automatique Orange pour les références extranets manquantes, et relances clients en attente (24h et 5 jours). Taux d'activation de 100%.
+            Les 4 automations d'alerte SLA utilisent <strong>"Heures écoulées depuis la création (calendaires) &gt; 0"</strong> au lieu des conditions SLA natives. Ce workaround est imprécis et peut alerter hors horaires business. Zendesk propose des conditions dédiées : <strong>"Heures depuis la dernière violation SLA"</strong> et <strong>"Heures jusqu'à la violation SLA suivante"</strong> qui devraient être utilisées à la place.
           </div>
         </div>
       </div>
@@ -501,13 +528,13 @@
           </div>
         </div>
 
-        <div class="alert alert-orange">
-          <div class="alert-title">⚠ SLA manquant pour les autres organisations
+        <div class="alert alert-red">
+          <div class="alert-title">🔴 2 politiques SLA identiques — une seule suffit
             <a href="https://adeizhelp.zendesk.com/admin/objects-rules/rules/sla" target="_blank" class="zd-link">↗ SLA</a>
           </div>
           <div class="alert-body">
-            Seuls <strong>Armand Thiery</strong> et <strong>Printemps</strong> ont une politique SLA définie. Les tickets des autres magasins ou organisations n'ont aucun SLA applicable, ce qui rend le pilotage de la performance impossible pour une partie du portefeuille.
-            <br><br><strong>Action :</strong> Créer une politique SLA par défaut (filtre large) couvrant tous les autres tickets, ou étendre les politiques existantes.
+            Les politiques "Armand Thiery" et "Printemps" ont des <strong>conditions et cibles exactement identiques</strong>. Cette duplication alourdit la maintenance : chaque modification doit être appliquée deux fois, avec un risque de divergence.
+            <br><br><strong>Action :</strong> Fusionner en une seule politique générale. Ajouter des exceptions uniquement si les SLA diffèrent par organisation. Cela résout également l'absence de SLA pour les autres magasins.
           </div>
         </div>
       </div>
@@ -749,24 +776,34 @@
         </div>
 
         <div class="card" style="margin-bottom:10px;">
-          <div class="section-label">Intelligence Artificielle</div>
+          <div class="section-label">Intelligence Artificielle — état réel</div>
           <table>
             <thead><tr><th>Fonctionnalité</th><th>État</th></tr></thead>
             <tbody>
-              <tr><td>AI Agent (Copilot)</td><td><span class="badge badge-green">Actif ✓</span></td></tr>
-              <tr><td>Champ Intent (IA)</td><td><span class="badge badge-green">Actif ✓</span></td></tr>
-              <tr><td>Champ Sentiment (IA)</td><td><span class="badge badge-green">Actif ✓</span></td></tr>
-              <tr><td>Résumé automatique (IA)</td><td><span class="badge badge-green">Actif ✓</span></td></tr>
-              <tr><td>Auto Assist (Copilot)</td><td><span class="badge badge-green">Trigger actif ✓</span></td></tr>
-              <tr><td>Ultimate.ai</td><td><span class="badge badge-red">Résidu ⚠</span></td></tr>
+              <tr><td>Copilot (Auto Assist)</td><td><span class="badge badge-green">90% tickets ✓</span></td></tr>
+              <tr><td>Intent / Sentiment / Résumé</td><td><span class="badge badge-green">Actifs ✓</span></td></tr>
+              <tr><td>AI Agent (bot widget)</td><td><span class="badge badge-red">Non prêt ⚠</span></td></tr>
+              <tr><td>Flux "Technical error reply"</td><td><span class="badge badge-red">Vide ⚠</span></td></tr>
+              <tr><td>Messages de fallback</td><td><span class="badge badge-red">Absents ⚠</span></td></tr>
+              <tr><td>Labels sur articles HC</td><td><span class="badge badge-red">0 / 917 ⚠</span></td></tr>
+              <tr><td>Articles avec texte exploitable</td><td><span class="badge badge-orange">Beaucoup = images uniquement ⚠</span></td></tr>
+              <tr><td>Widget personnalisé ADEIZ</td><td><span class="badge badge-yellow">Non personnalisé</span></td></tr>
+              <tr><td>Ultimate.ai</td><td><span class="badge badge-orange">Trigger résidu ⚠</span></td></tr>
             </tbody>
           </table>
         </div>
 
-        <div class="alert alert-blue">
-          <div class="alert-title">💡 Opportunité : HC client public</div>
+        <div class="alert alert-red" style="margin-bottom:10px;">
+          <div class="alert-title">🔴 Copilot aveugle malgré 90% d'activation</div>
           <div class="alert-body">
-            La base interne est riche mais inaccessible aux clients/magasins. Créer une section publique avec les procédures les plus courantes (ouverture magasin, dépannage matériel fréquent, accès extranet mainteneurs) réduirait le volume de tickets Level 1.
+            Copilot est activé sur 730 tickets mais <strong>ne peut suggérer aucun article</strong> : 0 label sur 917 articles. L'IA retrouve les articles via les labels — sans eux, le HC est invisible pour Copilot et l'AI Agent.
+          </div>
+        </div>
+
+        <div class="alert alert-blue">
+          <div class="alert-title">💡 Opportunité : HC public pour les magasins</div>
+          <div class="alert-body">
+            Créer une section publique avec procédures courantes (ouverture magasin, dépannage courant, accès extranet mainteneurs) pour réduire le volume N1 de 15-25%.
           </div>
         </div>
       </div>
@@ -785,38 +822,38 @@
       <div>
         <div class="card" style="margin-bottom:10px;">
           <div class="section-label" style="color:#EF4444;">🔴 Semaine 1 — Urgences (C1-C2)</div>
-          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C1]</strong> Créer 6-8 catégories HC et redistribuer les 124 sections (Magasin, Matériel, Réseau, Logiciels, SAV, Bureautique, Sécurité, Formation)</span></div>
-          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C2]</strong> Supprimer ou archiver les sections "Old", "old_Fimware", "fimware", "PAS A JOUR"</span></div>
-          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C2]</strong> Corriger les fautes de frappe dans les noms de sections</span></div>
-          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C3]</strong> Désactiver le compte test "Lj test"</span></div>
-          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C4]</strong> Corriger "At - Sicles" → "At - Sycles"</span></div>
+          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C1]</strong> Identifier et corriger les 4+ triggers cassés (actions avec valeur de champ vide : Stackr AT, Diebold AT, relances Orange/Stackr/Nedap)</span></div>
+          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C1]</strong> Tester chaque trigger cassé après correction pour valider le comportement attendu</span></div>
+          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C2]</strong> Finaliser la configuration de l'AI Agent : entraînement sur le HC, tests en staging, déploiement contrôlé</span></div>
+          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C2]</strong> Définir le périmètre de l'AI Agent : quelles catégories de tickets, quel groupe de fallback</span></div>
         </div>
 
         <div class="card">
-          <div class="section-label" style="color:#F97316;">🟠 Semaine 2 — Corrections importantes (C4-C7)</div>
-          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C4]</strong> Convertir les 7 comptes fonctionnels en Light Agents ou les rattacher correctement aux groupes</span></div>
-          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C5]</strong> Créer 3-4 formulaires de ticket distincts (Incident Matériel, Escalade Mainteneur, Support Bureautique, Support Réseau)</span></div>
-          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C6]</strong> Vérifier et réactiver le statut "Relance Centrale" ou documenter sa suppression intentionnelle</span></div>
-          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C7]</strong> Vérifier si Ultimate.ai est encore actif. Si non, supprimer le trigger résidu</span></div>
+          <div class="section-label" style="color:#F97316;">🟠 Semaine 2 — Corrections importantes (C3-C5)</div>
+          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C3]</strong> Ajouter des labels au HC (par thème : Encaissement, PosCloud, Réseau, Matériel...) et enrichir les articles images-only en texte structuré</span></div>
+          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C3]</strong> Créer 6-8 catégories HC et redistribuer les 124 sections ; supprimer/archiver les sections "Old", "old_Fimware", "fimware", "PAS A JOUR"</span></div>
+          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C4]</strong> Corriger la logique SLA des automations : remplacer le calcul via champ custom par les conditions natives de temps calendaire Zendesk</span></div>
+          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C5]</strong> Fusionner les 2 politiques SLA identiques (Armand Thiery + Printemps) en une seule politique unifiée</span></div>
         </div>
       </div>
 
       <div>
         <div class="card" style="margin-bottom:10px;">
-          <div class="section-label" style="color:#EAB308;">🟡 Mois 1 — Améliorations (C8+)</div>
-          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text">Créer une politique SLA par défaut couvrant tous les tickets hors Armand Thiery et Printemps</span></div>
+          <div class="section-label" style="color:#EAB308;">🟡 Mois 1 — Améliorations (C6-C8)</div>
+          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C6]</strong> Configurer le SPF/DMARC pour le domaine d'envoi Zendesk (avertissement visible dans les paramètres email)</span></div>
+          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C7]</strong> Supprimer le trigger Ultimate.ai résidu et le trigger doublon "Affectation rapide"</span></div>
+          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C8]</strong> Corriger les permissions Explore ou recréer les rapports manquants (clones maîtres inaccessibles)</span></div>
+          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text">Créer une politique SLA par défaut pour les tickets hors Armand Thiery et Printemps</span></div>
           <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text">Vérifier les champs OFF "Mode de déclenchement" et "Mainteneur" — réactiver ou supprimer</span></div>
-          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text">Apps: décider de TeamViewer (réactiver ou désinstaller) et de "Gestion Catégories"</span></div>
-          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text">Audit complet du HC : identifier les 200-300 articles à archiver/supprimer (sections obsolètes)</span></div>
-          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text">Activer CSAT sur tous les tickets résolus et suivre le taux de réponse (actuellement 2 notes seulement)</span></div>
         </div>
 
         <div class="card">
-          <div class="section-label" style="color:#22C55E;">🟢 Trimestre 1 — Optimisations</div>
+          <div class="section-label" style="color:#22C55E;">🟢 Trimestre 1 — Optimisations (C9+)</div>
+          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C9]</strong> Désactiver le compte test "Lj test" + convertir les 7 comptes fonctionnels en Light Agents</span></div>
+          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C9]</strong> Corriger typo "At - Sicles" → "At - Sycles" ; revoir champs de test dans les organisations</span></div>
+          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text">Créer 3-4 formulaires distincts (Incident Matériel, Escalade Mainteneur, Support Réseau, SAV)</span></div>
           <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text">Créer un Help Center public pour les magasins (procédures d'urgence, extranet, matériel courant)</span></div>
-          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text">Mettre en place un tableau de bord Explore (tickets par mainteneur, SLA par client, backlog)</span></div>
-          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text">Configurer le Knowledge Capture pour que les agents enrichissent le HC depuis les tickets</span></div>
-          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text">Former les agents aux statuts personnalisés (distinction Attente magasin / En cours Mainteneur)</span></div>
+          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text">Activer CSAT et configurer Knowledge Capture pour enrichir le HC depuis les tickets résolus</span></div>
         </div>
       </div>
     </div>
@@ -897,7 +934,7 @@
 <div class="slide" id="slide-12">
   <div class="slide-header">
     <h2>✅ Résumé & Checklist de clôture</h2>
-    <span class="sh-badge">7 ACTIONS · AUDIT OCTOBRE 2026</span>
+    <span class="sh-badge">9 ACTIONS · AUDIT OCTOBRE 2026</span>
   </div>
   <div class="slide-body">
     <div class="grid grid-2" style="gap:14px;">
@@ -907,15 +944,15 @@
           <table>
             <thead><tr><th>Ref</th><th>Action</th><th>Priorité</th></tr></thead>
             <tbody>
-              <tr><td>C1</td><td>Restructurer le HC en 6-8 catégories</td><td><span class="badge badge-red">Critique</span></td></tr>
-              <tr><td>C2</td><td>Supprimer sections HC obsolètes</td><td><span class="badge badge-red">Critique</span></td></tr>
-              <tr><td>C3</td><td>Supprimer compte test "Lj test"</td><td><span class="badge badge-orange">Urgent</span></td></tr>
-              <tr><td>C4</td><td>Corriger comptes fonctionnels + typo "Sicles"</td><td><span class="badge badge-orange">Urgent</span></td></tr>
-              <tr><td>C5</td><td>Créer 3-4 formulaires distincts</td><td><span class="badge badge-orange">Important</span></td></tr>
-              <tr><td>C6</td><td>Réactiver statut "Relance Centrale"</td><td><span class="badge badge-yellow">Moyen</span></td></tr>
-              <tr><td>C7</td><td>Supprimer trigger Ultimate.ai résidu</td><td><span class="badge badge-yellow">Moyen</span></td></tr>
-              <tr><td>+</td><td>SLA par défaut pour autres organisations</td><td><span class="badge badge-yellow">Moyen</span></td></tr>
-              <tr><td>+</td><td>Vérifier champs OFF "Mainteneur"</td><td><span class="badge badge-gray">Faible</span></td></tr>
+              <tr><td>C1</td><td>Corriger 4+ triggers cassés (champs vides)</td><td><span class="badge badge-red">Critique</span></td></tr>
+              <tr><td>C2</td><td>Finaliser AI Agent (entraîner, tester, déployer)</td><td><span class="badge badge-red">Critique</span></td></tr>
+              <tr><td>C3</td><td>HC : labels + contenu texte + restructure 6-8 cat.</td><td><span class="badge badge-orange">Urgent</span></td></tr>
+              <tr><td>C4</td><td>Corriger logique SLA des automations</td><td><span class="badge badge-orange">Urgent</span></td></tr>
+              <tr><td>C5</td><td>Fusionner les 2 politiques SLA identiques</td><td><span class="badge badge-orange">Important</span></td></tr>
+              <tr><td>C6</td><td>Configurer SPF/DMARC domaine Zendesk</td><td><span class="badge badge-yellow">Moyen</span></td></tr>
+              <tr><td>C7</td><td>Supprimer trigger Ultimate.ai + doublon affectation</td><td><span class="badge badge-yellow">Moyen</span></td></tr>
+              <tr><td>C8</td><td>Corriger permissions Explore / recréer rapports</td><td><span class="badge badge-yellow">Moyen</span></td></tr>
+              <tr><td>C9</td><td>Hygiène : compte test, comptes fonctionnels, typo</td><td><span class="badge badge-gray">Faible</span></td></tr>
             </tbody>
           </table>
         </div>
@@ -923,13 +960,13 @@
         <div class="card">
           <div class="section-label">Points forts à conserver</div>
           <ul class="check-list">
-            <li>Architecture de groupes N1 → N2 → AT → Mainteneurs</li>
-            <li>13 statuts custom bien définis reflétant le métier</li>
-            <li>Workflows mainteneurs automatisés (Diebold, Stackr, Nedap, Orange)</li>
-            <li>Automations SLA proactives par niveau de priorité</li>
+            <li>Architecture de groupes N1 → N2 → AT → Mainteneurs bien structurée</li>
+            <li>13 statuts custom reflétant précisément le métier (Déclenchement, Relance, En cours Mainteneur...)</li>
+            <li>Workflows mainteneurs automatisés : escalade + 2 relances par mainteneur (Diebold, Stackr, Nedap, Orange)</li>
             <li>Horaires Lun-Sam 09:00-20:30 adaptés à la grande distribution</li>
-            <li>Écosystème d'apps complet (JIRA, Aircall, Time Tracking)</li>
-            <li>Trigger Copilot AI actif sur tous les nouveaux tickets</li>
+            <li>Écosystème d'apps complet (JIRA, Aircall, Time Tracking, ATDESK)</li>
+            <li>Copilot activé sur 90,4% des tickets via trigger (adoption très au-dessus de la moyenne)</li>
+            <li>HC riche : 917 articles couvrant le périmètre IT complet de la grande distribution</li>
           </ul>
         </div>
       </div>
@@ -943,12 +980,12 @@
               <div class="progress-bar"><div class="progress-fill" style="width:90%;background:#22C55E;"></div></div>
             </div>
             <div>
-              <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px;"><span>Triggers & Automations</span><span style="font-weight:700;color:#166534;">88%</span></div>
-              <div class="progress-bar"><div class="progress-fill" style="width:88%;background:#22C55E;"></div></div>
+              <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px;"><span>Triggers & Automations</span><span style="font-weight:700;color:#92400E;">58%</span></div>
+              <div class="progress-bar"><div class="progress-fill" style="width:58%;background:#EAB308;"></div></div>
             </div>
             <div>
-              <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px;"><span>SLA & Horaires</span><span style="font-weight:700;color:#92400E;">72%</span></div>
-              <div class="progress-bar"><div class="progress-fill" style="width:72%;background:#F97316;"></div></div>
+              <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px;"><span>SLA & Horaires</span><span style="font-weight:700;color:#92400E;">60%</span></div>
+              <div class="progress-bar"><div class="progress-fill" style="width:60%;background:#F97316;"></div></div>
             </div>
             <div>
               <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px;"><span>Formulaires & Champs</span><span style="font-weight:700;color:#92400E;">55%</span></div>
@@ -963,8 +1000,8 @@
               <div class="progress-bar"><div class="progress-fill" style="width:60%;background:#EAB308;"></div></div>
             </div>
             <div style="margin-top:4px;">
-              <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px;"><span style="font-weight:700;">Score global</span><span style="font-weight:800;color:#7C3AED;">66%</span></div>
-              <div class="progress-bar" style="height:10px;"><div class="progress-fill" style="width:66%;background:linear-gradient(90deg,#8B5CF6,#7C3AED);"></div></div>
+              <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px;"><span style="font-weight:700;">Score global</span><span style="font-weight:800;color:#7C3AED;">59%</span></div>
+              <div class="progress-bar" style="height:10px;"><div class="progress-fill" style="width:59%;background:linear-gradient(90deg,#8B5CF6,#7C3AED);"></div></div>
             </div>
           </div>
         </div>
@@ -988,7 +1025,7 @@
 <div class="slide" id="slide-13">
   <div class="slide-header">
     <h2>📊 Dashboard KPI — ADEIZ · Analyse tickets réelle</h2>
-    <span class="sh-badge">808 TICKETS · 4 MOIS · DONNÉES API</span>
+    <span class="sh-badge">1 100 TICKETS · 4 MOIS · DONNÉES API + VUES</span>
   </div>
   <div class="slide-body" style="padding:12px 18px 72px;">
 
@@ -997,8 +1034,8 @@
 
       <div class="card stat" style="padding:11px 8px;">
         <div style="font-size:9px;font-weight:700;color:#8B5CF6;text-transform:uppercase;letter-spacing:.08em;margin-bottom:2px;">Total Tickets</div>
-        <div style="font-size:28px;font-weight:800;color:#1E1B4B;line-height:1.1;">808</div>
-        <div style="font-size:10px;color:#9CA3AF;margin-top:2px;">en 4 mois · ~6,7/j</div>
+        <div style="font-size:28px;font-weight:800;color:#1E1B4B;line-height:1.1;">1 100</div>
+        <div style="font-size:10px;color:#9CA3AF;margin-top:2px;">en 4 mois · ~9,2/j</div>
       </div>
 
       <div class="card stat" style="padding:11px 8px;border-top:3px solid #8B5CF6;">
@@ -1032,7 +1069,7 @@
 
       <!-- Canal donut -->
       <div class="card" style="padding:14px;display:flex;flex-direction:column;align-items:center;">
-        <div style="font-size:9px;font-weight:700;color:#8B5CF6;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;align-self:flex-start;">Canal · 808 tickets</div>
+        <div style="font-size:9px;font-weight:700;color:#8B5CF6;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;align-self:flex-start;">Canal · 1 100 tickets</div>
         <svg viewBox="0 0 120 120" width="130" height="130" style="flex-shrink:0;">
           <!-- Gray base -->
           <circle cx="60" cy="60" r="46" fill="none" stroke="#E5E7EB" stroke-width="16"/>
@@ -1201,13 +1238,13 @@
             <div style="font-size:10px;font-weight:700;color:#92400E;margin-bottom:2px;">⚠ Priorité quasi-absente</div>
             <div style="font-size:10px;color:#6B7280;">93,8% des tickets en priorité "normale". Les SLA urgents (10 min) ne sont quasiment jamais déclenchés (2 tickets).</div>
           </div>
-          <div style="background:#DCFCE7;border-radius:8px;padding:8px 10px;">
-            <div style="font-size:10px;font-weight:700;color:#166534;margin-bottom:2px;">✅ Copilot très bien adopté</div>
-            <div style="font-size:10px;color:#6B7280;">90,4% des tickets ont Copilot activé. Bien au-dessus de la moyenne Zendesk (30%). Excellente implémentation.</div>
+          <div style="background:#FEF2F2;border-radius:8px;padding:8px 10px;">
+            <div style="font-size:10px;font-weight:700;color:#991B1B;margin-bottom:2px;">🚨 15 tickets SLA en danger</div>
+            <div style="font-size:10px;color:#6B7280;">Vue "SLA en danger" : 15 tickets actifs. 47 en cours chez AT/Printemps. 8 en backlog +48h. Priorités mal calibrées.</div>
           </div>
           <div style="background:#FEF2F2;border-radius:8px;padding:8px 10px;">
             <div style="font-size:10px;font-weight:700;color:#991B1B;margin-bottom:2px;">🔴 Encaissement = 1er problème</div>
-            <div style="font-size:10px;color:#6B7280;">34% des tickets catégorisés concernent l'encaissement/PosCloud. Levier HC prioritaire.</div>
+            <div style="font-size:10px;color:#6B7280;">34% des tickets catégorisés concernent l'encaissement/PosCloud. Levier HC prioritaire. AI Agent à compléter.</div>
           </div>
         </div>
       </div>
@@ -1231,8 +1268,8 @@
       <span style="font-size:20px;font-weight:800;color:#C4B5FD;letter-spacing:-0.5px;">ADEIZ</span>
     </div>
     <p style="max-width:700px;font-size:15px;line-height:2;color:rgba(255,255,255,.6);margin-bottom:0;">
-      Ce rapport identifie 7 axes d'amélioration prioritaires.<br>
-      La restructuration du Help Center et l'hygiène du compte sont les premières étapes.
+      Ce rapport identifie 9 axes d'amélioration prioritaires.<br>
+      La correction des triggers cassés et la finalisation de l'AI Agent sont les premières étapes.
     </p>
     <div class="merci-info">
       <div class="merci-info-col">
