@@ -651,9 +651,9 @@
             </tbody>
           </table>
         </div>
-        <div class="alert alert-green" style="margin-top:10px;">
-          <div class="alert-title">✅ Architecture de groupes exemplaire</div>
-          <div class="alert-body">La hiérarchie N1 → N2 → Pôles métier → Mainteneurs externes est claire et bien implémentée. Les vues par escalade par groupe (une vue dédiée par groupe AT) facilitent le pilotage.</div>
+        <div class="alert alert-blue" style="margin-top:10px;">
+          <div class="alert-title">Architecture de groupes</div>
+          <div class="alert-body">La hiérarchie N1 → N2 → Pôles métier → Mainteneurs est en place avec une vue dédiée par groupe. À affiner au fur et à mesure de l'usage.</div>
         </div>
       </div>
     </div>
@@ -1182,68 +1182,202 @@
         </div>
       </div>
 
-      <!-- Top catégories bar chart -->
+      <!-- Catégories & Sous-catégories -->
       <div class="card" style="padding:14px;">
-        <div style="font-size:9px;font-weight:700;color:#8B5CF6;text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px;">Top catégories tickets — tags cat_n1_* (historique)</div>
-        <div style="display:flex;flex-direction:column;gap:9px;">
+        <div style="font-size:9px;font-weight:700;color:#8B5CF6;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;">Catégories N1 & sous-catégories N2 — sans nuls (données API)</div>
+        <div style="display:flex;flex-direction:column;gap:1px;max-height:330px;overflow-y:auto;padding-right:2px;">
 
-          <div>
-            <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:3px;">
-              <span style="font-size:11px;font-weight:600;color:#374151;">💰 Encaissement (caisse)</span>
-              <span style="font-size:13px;font-weight:800;color:#8B5CF6;">231</span>
-            </div>
-            <div style="height:10px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:100%;background:linear-gradient(90deg,#8B5CF6,#A78BFA);border-radius:99px;"></div></div>
+          <!-- ROW macro: label | bar | count -->
+          <!-- N1 = Encaissement 318 -->
+          <div style="display:flex;align-items:center;gap:5px;padding:2px 0;">
+            <span style="font-size:10px;font-weight:700;color:#1E1B4B;min-width:148px;">💰 Encaissement</span>
+            <div style="flex:1;height:9px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:100%;background:linear-gradient(90deg,#7C3AED,#A78BFA);border-radius:99px;"></div></div>
+            <span style="font-size:10px;font-weight:800;color:#7C3AED;min-width:28px;text-align:right;">318</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:5px;padding:1px 0 1px 12px;">
+            <span style="font-size:9px;color:#6B7280;min-width:136px;">↳ Annulation / Retour</span>
+            <div style="flex:1;height:6px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:29.9%;background:#C4B5FD;border-radius:99px;"></div></div>
+            <span style="font-size:9px;color:#6B7280;min-width:28px;text-align:right;">95</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:5px;padding:1px 0 1px 12px;">
+            <span style="font-size:9px;color:#6B7280;min-width:136px;">↳ Ouverture / Clôture caisse</span>
+            <div style="flex:1;height:6px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:4.1%;background:#C4B5FD;border-radius:99px;"></div></div>
+            <span style="font-size:9px;color:#6B7280;min-width:28px;text-align:right;">13</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:5px;padding:1px 0 1px 12px;">
+            <span style="font-size:9px;color:#6B7280;min-width:136px;">↳ Promotions / Offres</span>
+            <div style="flex:1;height:6px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:3.8%;background:#C4B5FD;border-radius:99px;"></div></div>
+            <span style="font-size:9px;color:#6B7280;min-width:28px;text-align:right;">12</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:5px;padding:1px 0 4px 12px;">
+            <span style="font-size:9px;color:#6B7280;min-width:136px;">↳ Article / Référencement</span>
+            <div style="flex:1;height:6px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:3.5%;background:#C4B5FD;border-radius:99px;"></div></div>
+            <span style="font-size:9px;color:#6B7280;min-width:28px;text-align:right;">11</span>
           </div>
 
-          <div>
-            <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:3px;">
-              <span style="font-size:11px;font-weight:600;color:#374151;">☁️ PosCloud (logiciel caisse cloud)</span>
-              <span style="font-size:13px;font-weight:800;color:#3B82F6;">133</span>
-            </div>
-            <div style="height:10px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:57.6%;background:linear-gradient(90deg,#3B82F6,#60A5FA);border-radius:99px;"></div></div>
+          <!-- N1 = PosCloud 153 -->
+          <div style="display:flex;align-items:center;gap:5px;padding:2px 0;">
+            <span style="font-size:10px;font-weight:700;color:#1E1B4B;min-width:148px;">☁️ PosCloud</span>
+            <div style="flex:1;height:9px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:48.1%;background:linear-gradient(90deg,#2563EB,#60A5FA);border-radius:99px;"></div></div>
+            <span style="font-size:10px;font-weight:800;color:#2563EB;min-width:28px;text-align:right;">153</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:5px;padding:1px 0 1px 12px;">
+            <span style="font-size:9px;color:#6B7280;min-width:136px;">↳ Écran figé / Interface bloquée</span>
+            <div style="flex:1;height:6px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:10.4%;background:#93C5FD;border-radius:99px;"></div></div>
+            <span style="font-size:9px;color:#6B7280;min-width:28px;text-align:right;">33</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:5px;padding:1px 0 1px 12px;">
+            <span style="font-size:9px;color:#6B7280;min-width:136px;">↳ Synchronisation caisse↔back</span>
+            <div style="flex:1;height:6px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:10.1%;background:#93C5FD;border-radius:99px;"></div></div>
+            <span style="font-size:9px;color:#6B7280;min-width:28px;text-align:right;">32</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:5px;padding:1px 0 1px 12px;">
+            <span style="font-size:9px;color:#6B7280;min-width:136px;">↳ Mots de passe</span>
+            <div style="flex:1;height:6px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:6.9%;background:#93C5FD;border-radius:99px;"></div></div>
+            <span style="font-size:9px;color:#6B7280;min-width:28px;text-align:right;">22</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:5px;padding:1px 0 4px 12px;">
+            <span style="font-size:9px;color:#6B7280;min-width:136px;">↳ Lancement</span>
+            <div style="flex:1;height:6px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:3.8%;background:#93C5FD;border-radius:99px;"></div></div>
+            <span style="font-size:9px;color:#6B7280;min-width:28px;text-align:right;">12</span>
           </div>
 
-          <div>
-            <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:3px;">
-              <span style="font-size:11px;font-weight:600;color:#374151;">🖥️ Logiciels métiers</span>
-              <span style="font-size:13px;font-weight:800;color:#14B8A6;">112</span>
-            </div>
-            <div style="height:10px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:48.5%;background:linear-gradient(90deg,#14B8A6,#2DD4BF);border-radius:99px;"></div></div>
+          <!-- N1 = Logiciels Métiers 144 -->
+          <div style="display:flex;align-items:center;gap:5px;padding:2px 0;">
+            <span style="font-size:10px;font-weight:700;color:#1E1B4B;min-width:148px;">🖥️ Logiciels Métiers</span>
+            <div style="flex:1;height:9px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:45.3%;background:linear-gradient(90deg,#0D9488,#2DD4BF);border-radius:99px;"></div></div>
+            <span style="font-size:10px;font-weight:800;color:#0D9488;min-width:28px;text-align:right;">144</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:5px;padding:1px 0 1px 12px;">
+            <span style="font-size:9px;color:#6B7280;min-width:136px;">↳ Mercure</span>
+            <div style="flex:1;height:6px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:12.9%;background:#99F6E4;border-radius:99px;"></div></div>
+            <span style="font-size:9px;color:#6B7280;min-width:28px;text-align:right;">41</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:5px;padding:1px 0 1px 12px;">
+            <span style="font-size:9px;color:#6B7280;min-width:136px;">↳ Retail Web</span>
+            <div style="flex:1;height:6px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:4.7%;background:#99F6E4;border-radius:99px;"></div></div>
+            <span style="font-size:9px;color:#6B7280;min-width:28px;text-align:right;">15</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:5px;padding:1px 0 1px 12px;">
+            <span style="font-size:9px;color:#6B7280;min-width:136px;">↳ Sicles</span>
+            <div style="flex:1;height:6px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:3.8%;background:#99F6E4;border-radius:99px;"></div></div>
+            <span style="font-size:9px;color:#6B7280;min-width:28px;text-align:right;">12</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:5px;padding:1px 0 1px 12px;">
+            <span style="font-size:9px;color:#6B7280;min-width:136px;">↳ GDM</span>
+            <div style="flex:1;height:6px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:2.8%;background:#99F6E4;border-radius:99px;"></div></div>
+            <span style="font-size:9px;color:#6B7280;min-width:28px;text-align:right;">9</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:5px;padding:1px 0 4px 12px;">
+            <span style="font-size:9px;color:#6B7280;min-width:136px;">↳ Docuware</span>
+            <div style="flex:1;height:6px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:2.8%;background:#99F6E4;border-radius:99px;"></div></div>
+            <span style="font-size:9px;color:#6B7280;min-width:28px;text-align:right;">9</span>
           </div>
 
-          <div>
-            <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:3px;">
-              <span style="font-size:11px;font-weight:600;color:#374151;">🖨️ Matériel caisse (hardware)</span>
-              <span style="font-size:13px;font-weight:800;color:#F97316;">86</span>
-            </div>
-            <div style="height:10px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:37.2%;background:linear-gradient(90deg,#F97316,#FB923C);border-radius:99px;"></div></div>
+          <!-- N1 = Matériel Caisse 132 -->
+          <div style="display:flex;align-items:center;gap:5px;padding:2px 0;">
+            <span style="font-size:10px;font-weight:700;color:#1E1B4B;min-width:148px;">🖨️ Matériel Caisse</span>
+            <div style="flex:1;height:9px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:41.5%;background:linear-gradient(90deg,#EA580C,#FB923C);border-radius:99px;"></div></div>
+            <span style="font-size:10px;font-weight:800;color:#EA580C;min-width:28px;text-align:right;">132</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:5px;padding:1px 0 1px 12px;">
+            <span style="font-size:9px;color:#6B7280;min-width:136px;">↳ Unité centrale TPV</span>
+            <div style="flex:1;height:6px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:17.6%;background:#FED7AA;border-radius:99px;"></div></div>
+            <span style="font-size:9px;color:#6B7280;min-width:28px;text-align:right;">56</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:5px;padding:1px 0 1px 12px;">
+            <span style="font-size:9px;color:#6B7280;min-width:136px;">↳ Écran</span>
+            <div style="flex:1;height:6px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:4.7%;background:#FED7AA;border-radius:99px;"></div></div>
+            <span style="font-size:9px;color:#6B7280;min-width:28px;text-align:right;">15</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:5px;padding:1px 0 1px 12px;">
+            <span style="font-size:9px;color:#6B7280;min-width:136px;">↳ Poste Backoffice</span>
+            <div style="flex:1;height:6px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:3.1%;background:#FED7AA;border-radius:99px;"></div></div>
+            <span style="font-size:9px;color:#6B7280;min-width:28px;text-align:right;">10</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:5px;padding:1px 0 4px 12px;">
+            <span style="font-size:9px;color:#6B7280;min-width:136px;">↳ Tiroir-caisse</span>
+            <div style="flex:1;height:6px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:2.8%;background:#FED7AA;border-radius:99px;"></div></div>
+            <span style="font-size:9px;color:#6B7280;min-width:28px;text-align:right;">9</span>
           </div>
 
-          <div>
-            <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:3px;">
-              <span style="font-size:11px;font-weight:600;color:#374151;">📱 Mobilité (PDA, tablettes)</span>
-              <span style="font-size:13px;font-weight:800;color:#EAB308;">48</span>
-            </div>
-            <div style="height:10px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:20.8%;background:linear-gradient(90deg,#EAB308,#FDE047);border-radius:99px;"></div></div>
+          <!-- N1 = Matériel Mobilité 69 -->
+          <div style="display:flex;align-items:center;gap:5px;padding:2px 0;">
+            <span style="font-size:10px;font-weight:700;color:#1E1B4B;min-width:148px;">📱 Mobilité</span>
+            <div style="flex:1;height:9px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:21.7%;background:linear-gradient(90deg,#D97706,#FDE047);border-radius:99px;"></div></div>
+            <span style="font-size:10px;font-weight:800;color:#D97706;min-width:28px;text-align:right;">69</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:5px;padding:1px 0 1px 12px;">
+            <span style="font-size:9px;color:#6B7280;min-width:136px;">↳ PDA</span>
+            <div style="flex:1;height:6px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:15.7%;background:#FDE68A;border-radius:99px;"></div></div>
+            <span style="font-size:9px;color:#6B7280;min-width:28px;text-align:right;">50</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:5px;padding:1px 0 1px 12px;">
+            <span style="font-size:9px;color:#6B7280;min-width:136px;">↳ Lecteur RFID</span>
+            <div style="flex:1;height:6px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:6.3%;background:#FDE68A;border-radius:99px;"></div></div>
+            <span style="font-size:9px;color:#6B7280;min-width:28px;text-align:right;">20</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:5px;padding:1px 0 4px 12px;">
+            <span style="font-size:9px;color:#6B7280;min-width:136px;">↳ Borne antivol RFID</span>
+            <div style="flex:1;height:6px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:1.9%;background:#FDE68A;border-radius:99px;"></div></div>
+            <span style="font-size:9px;color:#6B7280;min-width:28px;text-align:right;">6</span>
           </div>
 
-          <div>
-            <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:3px;">
-              <span style="font-size:11px;font-weight:600;color:#374151;">🌐 Réseau (routeurs, switch)</span>
-              <span style="font-size:13px;font-weight:800;color:#EF4444;">34</span>
-            </div>
-            <div style="height:10px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:14.7%;background:linear-gradient(90deg,#EF4444,#F87171);border-radius:99px;"></div></div>
+          <!-- N1 = Matériel Réseau 36 -->
+          <div style="display:flex;align-items:center;gap:5px;padding:2px 0;">
+            <span style="font-size:10px;font-weight:700;color:#1E1B4B;min-width:148px;">🌐 Matériel Réseau</span>
+            <div style="flex:1;height:9px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:11.3%;background:linear-gradient(90deg,#DC2626,#F87171);border-radius:99px;"></div></div>
+            <span style="font-size:10px;font-weight:800;color:#DC2626;min-width:28px;text-align:right;">36</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:5px;padding:1px 0 1px 12px;">
+            <span style="font-size:9px;color:#6B7280;min-width:136px;">↳ Routeur</span>
+            <div style="flex:1;height:6px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:8.5%;background:#FECACA;border-radius:99px;"></div></div>
+            <span style="font-size:9px;color:#6B7280;min-width:28px;text-align:right;">27</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:5px;padding:1px 0 4px 12px;">
+            <span style="font-size:9px;color:#6B7280;min-width:136px;">↳ Switch</span>
+            <div style="flex:1;height:6px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:1.6%;background:#FECACA;border-radius:99px;"></div></div>
+            <span style="font-size:9px;color:#6B7280;min-width:28px;text-align:right;">5</span>
           </div>
 
-          <div>
-            <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:3px;">
-              <span style="font-size:11px;font-weight:600;color:#374151;">💳 Monétique (TPE)</span>
-              <span style="font-size:13px;font-weight:800;color:#6B7280;">30</span>
-            </div>
-            <div style="height:10px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:13%;background:linear-gradient(90deg,#9CA3AF,#D1D5DB);border-radius:99px;"></div></div>
+          <!-- N1 = Monétique 34 -->
+          <div style="display:flex;align-items:center;gap:5px;padding:2px 0;">
+            <span style="font-size:10px;font-weight:700;color:#1E1B4B;min-width:148px;">💳 Monétique</span>
+            <div style="flex:1;height:9px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:10.7%;background:linear-gradient(90deg,#7C3AED,#C4B5FD);border-radius:99px;"></div></div>
+            <span style="font-size:10px;font-weight:800;color:#7C3AED;min-width:28px;text-align:right;">34</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:5px;padding:1px 0 4px 12px;">
+            <span style="font-size:9px;color:#6B7280;min-width:136px;">↳ Blocage transaction</span>
+            <div style="flex:1;height:6px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:8.5%;background:#DDD6FE;border-radius:99px;"></div></div>
+            <span style="font-size:9px;color:#6B7280;min-width:28px;text-align:right;">27</span>
+          </div>
+
+          <!-- N1 = Système d'Exploitation 25 -->
+          <div style="display:flex;align-items:center;gap:5px;padding:2px 0;">
+            <span style="font-size:10px;font-weight:700;color:#1E1B4B;min-width:148px;">💻 Système d'Exploit.</span>
+            <div style="flex:1;height:9px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:7.9%;background:linear-gradient(90deg,#0891B2,#67E8F9);border-radius:99px;"></div></div>
+            <span style="font-size:10px;font-weight:800;color:#0891B2;min-width:28px;text-align:right;">25</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:5px;padding:1px 0 4px 12px;">
+            <span style="font-size:9px;color:#6B7280;min-width:136px;">↳ Ouverture session</span>
+            <div style="flex:1;height:6px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:1.9%;background:#A5F3FC;border-radius:99px;"></div></div>
+            <span style="font-size:9px;color:#6B7280;min-width:28px;text-align:right;">6</span>
+          </div>
+
+          <!-- N1 = Matériel Comptage 8 -->
+          <div style="display:flex;align-items:center;gap:5px;padding:2px 0;">
+            <span style="font-size:10px;font-weight:700;color:#1E1B4B;min-width:148px;">🔢 Matériel Comptage</span>
+            <div style="flex:1;height:9px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:2.5%;background:linear-gradient(90deg,#6B7280,#9CA3AF);border-radius:99px;"></div></div>
+            <span style="font-size:10px;font-weight:800;color:#6B7280;min-width:28px;text-align:right;">8</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:5px;padding:1px 0 4px 12px;">
+            <span style="font-size:9px;color:#6B7280;min-width:136px;">↳ Données de comptage</span>
+            <div style="flex:1;height:6px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:1.9%;background:#D1D5DB;border-radius:99px;"></div></div>
+            <span style="font-size:9px;color:#6B7280;min-width:28px;text-align:right;">6</span>
           </div>
 
         </div>
+        <p style="font-size:9px;color:#9CA3AF;margin-top:6px;border-top:1px solid #F3F4F6;padding-top:4px;">Basé sur les tags de champs personnalisés. Tickets sans catégorie exclus.</p>
       </div>
 
     </div>
@@ -1362,10 +1496,6 @@
         <div class="mi-label">Date</div>
         <div class="mi-val">Octobre 2026</div>
       </div>
-    </div>
-    <div style="margin-top:28px;border:1px solid rgba(139,92,246,.4);border-radius:12px;padding:16px 28px;max-width:500px;">
-      <div style="font-size:10px;font-weight:700;letter-spacing:2px;color:#C4B5FD;text-transform:uppercase;margin-bottom:8px;">Prochaine étape</div>
-      <p style="font-size:13px;color:rgba(255,255,255,.75);line-height:1.7;">Atelier de restructuration Help Center (S1) + création des formulaires de ticket (S2). Suivi à J+30.</p>
     </div>
   </div>
 </div>
