@@ -231,7 +231,7 @@
         <ul class="check-list cross-list">
           <li><strong>4+ triggers cassés</strong> : actions avec champs personnalisés vides (Stackr, Diebold, Orange…)</li>
           <li><strong>AI Agent non prêt pour la production</strong> : messages vides, pas de fallback</li>
-          <li><strong>Automations SLA mal configurées</strong> : workaround au lieu des conditions natives Zendesk</li>
+          <li><strong>Automations SLA à revoir</strong> : workaround au lieu des conditions natives Zendesk</li>
           <li><strong>2 politiques SLA identiques</strong> pour Armand Thiery et Printemps — 1 seule suffit</li>
           <li><strong>917 articles HC sans aucun label</strong> — Copilot et AI Agent aveugles</li>
           <li>Artícles HC contenant uniquement des images, sans texte exploitable par l'IA</li>
@@ -256,7 +256,7 @@
     <div class="alert alert-red">
       <div class="alert-title"><span class="badge badge-red">C1</span> Triggers cassés : actions avec champs personnalisés vides</div>
       <div class="alert-body">
-        Au moins 4 triggers d'escalade mainteneur contiennent des <strong>actions qui référencent des champs personnalisés supprimés ou mal configurés</strong> (valeur vide). Ces triggers s'exécutent mais n'effectuent rien — les escalades mainteneurs peuvent être silencieusement perdues.
+        Au moins 4 triggers d'escalade mainteneur contiennent des <strong>actions qui référencent des champs personnalisés supprimés ou non renseignés</strong> (valeur vide). Ces triggers s'exécutent mais n'effectuent rien — les escalades mainteneurs peuvent être silencieusement perdues.
         <br><br>
         <table>
           <thead><tr><th>Trigger cassé</th><th>Problème</th><th>URL</th></tr></thead>
@@ -319,7 +319,7 @@
   </div>
   <div class="slide-body">
     <div class="alert alert-orange">
-      <div class="alert-title"><span class="badge badge-orange">C4</span> Automations SLA mal configurées — workaround au lieu des conditions natives
+      <div class="alert-title"><span class="badge badge-orange">C4</span> Automations SLA — workaround à remplacer par les conditions natives
         <a href="https://adeizhelp.zendesk.com/admin/objects-rules/rules/automations/30892688922780" target="_blank" class="zd-link">↗ Automations</a>
       </div>
       <div class="alert-body">
@@ -365,7 +365,7 @@
         <a href="https://adeizhelp.zendesk.com/explore#/new-dashboard-builder/75639692" target="_blank" class="zd-link">↗ Explore</a>
       </div>
       <div class="alert-body">
-        Le rapport "Top 10 sous-catégories" utilise des <strong>attributs personnalisés mal configurés</strong> pour exclure les valeurs nulles — cette approche ne fonctionne pas dans Zendesk Explore et le rapport ne retourne aucun résultat. De plus, les rapports natifs Zendesk ne doivent pas être modifiés directement : il faut d'abord créer des <strong>clones (master clones)</strong> avant toute personnalisation.
+        Le rapport "Top 10 sous-catégories" utilise des <strong>attributs personnalisés à reconfigurer</strong> pour exclure les valeurs nulles — cette approche ne fonctionne pas dans Zendesk Explore et le rapport ne retourne aucun résultat. De plus, les rapports natifs Zendesk ne doivent pas être modifiés directement : il faut d'abord créer des <strong>clones (master clones)</strong> avant toute personnalisation.
         <br><strong>Action :</strong> Cloner les rapports natifs. Reconfigurer l'attribut personnalisé de sous-catégorie avec la bonne méthode d'exclusion des nuls.
         <div style="margin-top:8px;"><img src="explore-sous-categories.png" alt="Explore configuration Top 10 sous-catégories" style="width:100%;max-width:420px;border-radius:6px;border:1px solid #FDE68A;"></div>
       </div>
@@ -475,13 +475,13 @@
           </table>
         </div>
         <div class="alert alert-orange" style="margin-top:8px;">
-          <div class="alert-title">⚠ Automations SLA : logique incorrecte</div>
+          <div class="alert-title">⚠ Automations SLA : logique à optimiser</div>
           <div class="alert-body">
             Les 4 automations d'alerte SLA utilisent <strong>"Heures écoulées depuis la création (calendaires) &gt; 0"</strong> au lieu des conditions SLA natives. Ce workaround est imprécis et peut alerter hors horaires business. Zendesk propose des conditions dédiées : <strong>"Heures depuis la dernière violation SLA"</strong> et <strong>"Heures jusqu'à la violation SLA suivante"</strong> qui devraient être utilisées à la place.
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;">
               <div>
-                <p style="font-size:10px;color:#92400E;font-weight:700;margin-bottom:4px;">❌ Condition utilisée (incorrecte)</p>
-                <img src="automation-sla-wrong.png" alt="Automation SLA incorrecte" style="width:100%;border-radius:6px;border:1px solid #FED7AA;">
+                <p style="font-size:10px;color:#92400E;font-weight:700;margin-bottom:4px;">⚠ Condition actuelle (à remplacer)</p>
+                <img src="automation-sla-wrong.png" alt="Automation SLA à corriger" style="width:100%;border-radius:6px;border:1px solid #FED7AA;">
               </div>
               <div>
                 <p style="font-size:10px;color:#166534;font-weight:700;margin-bottom:4px;">✅ Conditions natives disponibles</p>
@@ -703,7 +703,7 @@
         </div>
 
         <div class="alert alert-orange">
-          <div class="alert-title">⚠ Macros (21) — Configuration incorrecte</div>
+          <div class="alert-title">⚠ Macros (21) — Points à améliorer</div>
           <div class="alert-body">
             La macro <strong>« Résolution confirmée – Clôture du ticket »</strong> a un nom trompeur : il est impossible de fermer un ticket directement via une macro. La bonne approche est d'ajouter un tag spécifique via la macro, puis de déclencher la clôture via une automatisation.
             <br><br>
@@ -811,7 +811,7 @@
           <div class="alert-title">⚠ Problèmes techniques HC</div>
           <div class="alert-body">
             <ul style="padding-left:14px;display:flex;flex-direction:column;gap:4px;">
-              <li><strong>Commentaires actifs sur tous les articles</strong> — risque de réponses incorrectes de la part des magasins sur des procédures internes</li>
+              <li><strong>Commentaires actifs sur tous les articles</strong> — risque de contenus non validés de la part des magasins sur des procédures internes</li>
               <li><strong>Ancien éditeur Zendesk encore utilisé</strong> — limite la compatibilité avec les nouvelles fonctionnalités et la lisibilité pour l'IA (Copilot, AI Agent)</li>
               <li><strong>Favicon non configuré en PNG</strong> — à corriger pour un HC professionnel</li>
               <li><strong>HC entièrement privé</strong> — aucune documentation publique, le widget ne peut pas proposer d'articles en self-service aux magasins</li>
@@ -1150,7 +1150,7 @@
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">4+ triggers cassés — actions avec valeurs de champs vides (Stackr AT, Diebold AT, relances mainteneurs)</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-red">Critique</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Trigger "Affectation rapide" en doublon (2 actifs simultanément)</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Moyen</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Trigger Ultimate.ai résidu encore actif en production</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Moyen</span></td></tr>
-            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Automations SLA : logique incorrecte (temps calendaire vs conditions SLA natives)</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Urgent</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Automations SLA : workaround à remplacer par les conditions natives (temps calendaire)</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Urgent</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">2 politiques SLA identiques pour AT + Printemps — une seule suffit</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Important</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Macro "Résolution confirmée – Clôture du ticket" ne peut pas fermer un ticket directement via macro</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Moyen</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Macros sans organisation en dossiers ni restriction par groupe</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-gray">Faible</span></td></tr>
@@ -1170,8 +1170,8 @@
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">HC : 1 seule catégorie "Général" pour 917 articles et 124 sections — navigation difficile</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-red">Critique</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">HC : 0 label sur 917 articles — Copilot et AI Agent ne peuvent suggérer aucun article</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-red">Critique</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">HC : nombreux articles contiennent uniquement des images, sans texte exploitable par l'IA</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Urgent</span></td></tr>
-            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Rapport Explore "Top 10 sous-catégories" cassé — attributs personnalisés mal configurés, nuls non exclus</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Urgent</span></td></tr>
-            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">HC : commentaires actifs sur tous les articles — risque de réponses incorrectes</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Moyen</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Rapport Explore "Top 10 sous-catégories" cassé — attributs personnalisés à reconfigurer, nuls non exclus</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Urgent</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">HC : commentaires actifs sur tous les articles — risque de contenus non validés</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Moyen</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">HC : ancien éditeur Zendesk encore utilisé — limite les fonctionnalités IA et la lisibilité</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Moyen</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Compte test "Lj test" actif en production + 7 comptes fonctionnels en tant qu'agents</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Important</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">2 champs de test actifs dans les organisations (materials_test_multifield, test_material_in_org)</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-gray">Faible</span></td></tr>
