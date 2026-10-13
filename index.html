@@ -425,7 +425,9 @@
                 <tr><td><span class="badge badge-green">ON</span></td><td>Escalade AT – Rfid / Sycles / Stock</td></tr>
                 <tr class="tcat"><td colspan="2">MAINTENEURS (⚠ triggers cassés)</td></tr>
                 <tr><td><span class="badge badge-red">CASSÉ</span></td><td>Escalade Mainteneur – Diebold AT <small>(champs vides)</small> <a href="https://adeizhelp.zendesk.com/admin/objects-rules/rules/triggers/28113556671644" target="_blank" class="zd-link">↗</a></td></tr>
-                <tr><td><span class="badge badge-red">CASSÉ</span></td><td>Escalade Mainteneur – Stackr AT <small>(custom_fields vides)</small> <a href="https://adeizhelp.zendesk.com/admin/objects-rules/rules/triggers/30318143713308" target="_blank" class="zd-link">↗</a></td></tr>
+                <tr><td><span class="badge badge-red">CASSÉ</span></td><td>Escalade Mainteneur – Stackr AT <small>(custom_fields vides)</small> <a href="https://adeizhelp.zendesk.com/admin/objects-rules/rules/triggers/30318143713308" target="_blank" class="zd-link">↗</a>
+                  <div style="margin-top:6px;"><img src="trigger-broken-stackr.png" alt="Trigger Stackr cassé" style="width:100%;border-radius:6px;border:1px solid #FECACA;"></div>
+                </td></tr>
                 <tr><td><span class="badge badge-red">CASSÉ</span></td><td>Relance Mainteneur – Orange/Stackr/Nedap <small>(actions cassées)</small> <a href="https://adeizhelp.zendesk.com/admin/objects-rules/rules/triggers/30318357727900" target="_blank" class="zd-link">↗</a></td></tr>
                 <tr><td><span class="badge badge-green">ON</span></td><td>Escalade Mainteneur – Nedap AT</td></tr>
                 <tr><td><span class="badge badge-green">ON</span></td><td>Escalade Mainteneur – Orange AT (Extranet)</td></tr>
@@ -472,6 +474,16 @@
           <div class="alert-title">⚠ Automations SLA : logique incorrecte</div>
           <div class="alert-body">
             Les 4 automations d'alerte SLA utilisent <strong>"Heures écoulées depuis la création (calendaires) &gt; 0"</strong> au lieu des conditions SLA natives. Ce workaround est imprécis et peut alerter hors horaires business. Zendesk propose des conditions dédiées : <strong>"Heures depuis la dernière violation SLA"</strong> et <strong>"Heures jusqu'à la violation SLA suivante"</strong> qui devraient être utilisées à la place.
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;">
+              <div>
+                <p style="font-size:10px;color:#92400E;font-weight:700;margin-bottom:4px;">❌ Condition utilisée (incorrecte)</p>
+                <img src="automation-sla-wrong.png" alt="Automation SLA incorrecte" style="width:100%;border-radius:6px;border:1px solid #FED7AA;">
+              </div>
+              <div>
+                <p style="font-size:10px;color:#166534;font-weight:700;margin-bottom:4px;">✅ Conditions natives disponibles</p>
+                <img src="sla-native-conditions.png" alt="Conditions SLA natives" style="width:100%;border-radius:6px;border:1px solid #BBF7D0;">
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -557,27 +569,58 @@
             <div style="display:flex;gap:5px;"><span class="badge badge-green">35 ON</span><span class="badge badge-gray">13 OFF</span></div>
           </div>
           <table>
-            <thead><tr><th>Vue active</th><th>Type</th></tr></thead>
+            <thead><tr><th>Vue active</th><th>Type</th><th>#</th></tr></thead>
             <tbody>
-              <tr class="tcat"><td colspan="2">SUPERVISION GLOBALE</td></tr>
-              <tr><td>🌎 Tous les tickets en cours</td><td><span class="badge badge-blue">Supervision</span></td></tr>
-              <tr><td>⭕️ N1 non assignés</td><td><span class="badge badge-red">Alerte</span></td></tr>
-              <tr><td>⭕️ Backlog >48h</td><td><span class="badge badge-orange">Backlog</span></td></tr>
-              <tr><td>⚡️ Priorité urgente</td><td><span class="badge badge-red">Urgence</span></td></tr>
-              <tr><td>🛑 SLA en danger</td><td><span class="badge badge-red">SLA</span></td></tr>
-              <tr class="tcat"><td colspan="2">AGENT PERSONNEL</td></tr>
-              <tr><td>📬 Mes tickets en cours</td><td><span class="badge badge-blue">Agent</span></td></tr>
-              <tr><td>✅ Tickets attribués</td><td><span class="badge badge-blue">Agent</span></td></tr>
-              <tr class="tcat"><td colspan="2">PAR CANAL</td></tr>
-              <tr><td>Canaux::💌 Email</td><td><span class="badge badge-purple">Canal</span></td></tr>
-              <tr><td>Canaux::💬 Messagerie</td><td><span class="badge badge-purple">Canal</span></td></tr>
-              <tr class="tcat"><td colspan="2">ESCALADES PAR GROUPE</td></tr>
-              <tr><td>Escaladé::🌐 Global AT</td><td><span class="badge badge-orange">Escalade</span></td></tr>
-              <tr><td>Escaladé::🔧 Diebold AT</td><td><span class="badge badge-orange">Mainteneur</span></td></tr>
-              <tr><td>Escaladé:: Admin / Bureautique / Commerce…</td><td><span class="badge badge-orange">AT</span></td></tr>
-              <tr><td>Tickets Armand Thiery</td><td><span class="badge badge-green">Client</span></td></tr>
+              <tr class="tcat"><td colspan="3">SUPERVISION GLOBALE</td></tr>
+              <tr><td>🌎 Tous les tickets (en cours et résolus)</td><td><span class="badge badge-blue">Supervision</span></td><td style="font-weight:700;color:#8B5CF6;">1,1k</td></tr>
+              <tr><td>🌎 Tous les tickets résolus</td><td><span class="badge badge-gray">Archive</span></td><td>978</td></tr>
+              <tr><td>🌎 Tous les tickets en cours</td><td><span class="badge badge-blue">Supervision</span></td><td style="font-weight:700;">105</td></tr>
+              <tr><td>⭕️ N1 non assignés</td><td><span class="badge badge-red">Alerte</span></td><td style="font-weight:700;color:#EF4444;">4</td></tr>
+              <tr><td>⭕️ Backlog >48h</td><td><span class="badge badge-orange">Backlog</span></td><td style="font-weight:700;color:#F97316;">8</td></tr>
+              <tr><td>⭕️ Attente magasin</td><td><span class="badge badge-orange">En attente</span></td><td style="font-weight:700;">36</td></tr>
+              <tr><td>⭕️ En cours TMA Adeiz</td><td><span class="badge badge-blue">TMA</span></td><td>0</td></tr>
+              <tr><td>⭕️ Tickets ouverts</td><td><span class="badge badge-blue">Open</span></td><td>13</td></tr>
+              <tr><td>⭕️ Tickets en cours centrale</td><td><span class="badge badge-orange">Centrale</span></td><td style="font-weight:700;color:#F97316;">47</td></tr>
+              <tr><td>⭕️ Tickets en cours mainteneur</td><td><span class="badge badge-red">Mainteneur</span></td><td>6</td></tr>
+              <tr><td>⚡️ Priorité urgente</td><td><span class="badge badge-red">Urgence</span></td><td>0</td></tr>
+              <tr><td>🛑 SLA en danger</td><td><span class="badge badge-red">SLA</span></td><td style="font-weight:700;color:#EF4444;">15</td></tr>
+              <tr class="tcat"><td colspan="3">AGENT PERSONNEL</td></tr>
+              <tr><td>📬 Mes tickets en cours</td><td><span class="badge badge-blue">Agent</span></td><td>10</td></tr>
+              <tr><td>Mes tickets résolus</td><td><span class="badge badge-gray">Agent</span></td><td>0</td></tr>
+              <tr><td>✅ Tickets attribués</td><td><span class="badge badge-blue">Agent</span></td><td></td></tr>
+              <tr><td>Mes tickets attribués</td><td><span class="badge badge-blue">Agent</span></td><td></td></tr>
+              <tr><td>Nouveaux tickets</td><td><span class="badge badge-blue">Agent</span></td><td></td></tr>
+              <tr class="tcat"><td colspan="3">PAR CANAL</td></tr>
+              <tr><td>Canaux::💌 Email</td><td><span class="badge badge-purple">Canal</span></td><td></td></tr>
+              <tr><td>Canaux::💬 Messagerie</td><td><span class="badge badge-purple">Canal</span></td><td></td></tr>
+              <tr class="tcat"><td colspan="3">ESCALADES PAR GROUPE</td></tr>
+              <tr><td>Escaladé::🌐 Global</td><td><span class="badge badge-orange">Escalade</span></td><td></td></tr>
+              <tr><td>Escaladé::🌐 Global AT</td><td><span class="badge badge-orange">Escalade</span></td><td></td></tr>
+              <tr><td>Escaladé:: 🔧 Diebold AT</td><td><span class="badge badge-orange">Mainteneur</span></td><td></td></tr>
+              <tr><td>Escaladé::🖥️ Admin systèmes</td><td><span class="badge badge-orange">AT</span></td><td></td></tr>
+              <tr><td>Escaladé::🧾 Pôle Bureautique</td><td><span class="badge badge-orange">AT</span></td><td></td></tr>
+              <tr><td>Escaladé::💰 Pôle Commerce</td><td><span class="badge badge-orange">AT</span></td><td></td></tr>
+              <tr><td>Escaladé::📈 Pôle Décisionnel</td><td><span class="badge badge-orange">AT</span></td><td></td></tr>
+              <tr><td>Escaladé::📊 GDM</td><td><span class="badge badge-orange">AT</span></td><td></td></tr>
+              <tr><td>Escaladé::📡 Rfid</td><td><span class="badge badge-orange">AT</span></td><td></td></tr>
+              <tr><td>Escaladé::📦 Stock</td><td><span class="badge badge-orange">AT</span></td><td></td></tr>
+              <tr><td>Escaladé::🔄 Sycles</td><td><span class="badge badge-orange">AT</span></td><td></td></tr>
+              <tr class="tcat"><td colspan="3">SUIVI & HISTORIQUE</td></tr>
+              <tr><td>👁️‍🗨️ En pause</td><td><span class="badge badge-gray">Pause</span></td><td></td></tr>
+              <tr><td>Tickets mis à jour récemment</td><td><span class="badge badge-gray">Suivi</span></td><td></td></tr>
+              <tr><td>Tickets résolus récemment</td><td><span class="badge badge-gray">Suivi</span></td><td></td></tr>
+              <tr><td>Tickets Armand Thiery</td><td><span class="badge badge-green">Client</span></td><td></td></tr>
+              <tr><td>Tickets notés ces 7 derniers jours</td><td><span class="badge badge-green">CSAT</span></td><td></td></tr>
             </tbody>
           </table>
+          <div style="margin-top:10px;">
+            <img src="views-counts.png" alt="Vue des tickets en temps réel" style="width:100%;border-radius:8px;border:1px solid #E5E7EB;">
+            <p style="font-size:10px;color:#9CA3AF;margin-top:4px;text-align:center;">Snapshot vues en temps réel — Octobre 2026</p>
+          </div>
+        </div>
+        <div class="alert alert-yellow" style="margin-top:10px;">
+          <div class="alert-title">⚠ Emojis identiques sur toutes les vues</div>
+          <div class="alert-body">La plupart des vues utilisent le même emoji (⭕️), ce qui rend la navigation moins intuitive au premier coup d'œil. Utiliser des emojis différents par catégorie améliorerait l'ergonomie pour les agents.</div>
         </div>
       </div>
 
@@ -821,6 +864,12 @@
               <tr><td>Ultimate.ai</td><td><span class="badge badge-orange">Trigger résidu ⚠</span></td></tr>
             </tbody>
           </table>
+        </div>
+
+        <div class="card" style="margin-bottom:10px;">
+          <div class="section-label">AI Agent — Flux "Technical error reply" vide</div>
+          <img src="ai-agent-empty.png" alt="AI Agent Technical error reply vide" style="width:100%;border-radius:8px;border:1px solid #FECACA;margin-top:6px;">
+          <p style="font-size:10px;color:#9CA3AF;margin-top:4px;">Le flux de fallback est vide — aucun message configuré en cas d'erreur technique. L'utilisateur reçoit une réponse vide.</p>
         </div>
 
         <div class="alert alert-red" style="margin-bottom:10px;">
