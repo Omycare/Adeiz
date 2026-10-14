@@ -247,6 +247,40 @@
         <ul class="check-list warn-list">
           <li>Compte test <strong>"Lj test"</strong> actif en production + 7 comptes fonctionnels configurés comme agents (Pole Rfid, AT Commerce, At-Stock, Bureautique, Décisionnel, Admin Systèmes...), à vérifier si ces emails génériques doivent rester en tant qu'agents</li>
         </ul>
+
+        <div class="card" style="margin-top:14px;">
+          <div class="section-label">Score global du compte</div>
+          <div style="display:flex;flex-direction:column;gap:10px;margin-top:6px;">
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px;"><span>Structure &amp; Groupes</span><span style="font-weight:700;color:#166534;">90%</span></div>
+              <div class="progress-bar"><div class="progress-fill" style="width:90%;background:#22C55E;"></div></div>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px;"><span>Triggers &amp; Automations</span><span style="font-weight:700;color:#92400E;">58%</span></div>
+              <div class="progress-bar"><div class="progress-fill" style="width:58%;background:#EAB308;"></div></div>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px;"><span>SLA &amp; Horaires</span><span style="font-weight:700;color:#92400E;">60%</span></div>
+              <div class="progress-bar"><div class="progress-fill" style="width:60%;background:#F97316;"></div></div>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px;"><span>Formulaires &amp; Champs</span><span style="font-weight:700;color:#92400E;">55%</span></div>
+              <div class="progress-bar"><div class="progress-fill" style="width:55%;background:#EAB308;"></div></div>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px;"><span>Help Center</span><span style="font-weight:700;color:#991B1B;">28%</span></div>
+              <div class="progress-bar"><div class="progress-fill" style="width:28%;background:#EF4444;"></div></div>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px;"><span>Hygiène du compte</span><span style="font-weight:700;color:#92400E;">60%</span></div>
+              <div class="progress-bar"><div class="progress-fill" style="width:60%;background:#EAB308;"></div></div>
+            </div>
+            <div style="margin-top:4px;">
+              <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px;"><span style="font-weight:700;">Score global</span><span style="font-weight:800;color:#7C3AED;">59%</span></div>
+              <div class="progress-bar" style="height:10px;"><div class="progress-fill" style="width:59%;background:linear-gradient(90deg,#8B5CF6,#7C3AED);"></div></div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -1037,88 +1071,9 @@
   </div>
 </div>
 
-<!-- ══ SLIDE 12 : RÉSUMÉ ══ -->
+
+<!-- ══ SLIDE 12 : SYNTHÈSE ══ -->
 <div class="slide" id="slide-12">
-  <div class="slide-header">
-    <h2>✅ Résumé & Checklist de clôture</h2>
-    <span class="sh-badge">9 ACTIONS · AUDIT OCTOBRE 2026</span>
-  </div>
-  <div class="slide-body">
-    <div class="grid grid-2" style="gap:14px;">
-      <div>
-        <div class="card" style="margin-bottom:10px;">
-          <div class="section-label">Checklist par sévérité</div>
-          <table>
-            <thead><tr><th>Ref</th><th>Action</th><th>Priorité</th></tr></thead>
-            <tbody>
-              <tr><td>C1</td><td>Corriger 4+ triggers cassés (champs vides)</td><td><span class="badge badge-red">Critique</span></td></tr>
-              <tr><td>C2</td><td>Finaliser AI Agent (entraîner, tester, déployer)</td><td><span class="badge badge-red">Critique</span></td></tr>
-              <tr><td>C3</td><td>HC : labels + contenu texte + restructure 6-8 cat.</td><td><span class="badge badge-orange">Urgent</span></td></tr>
-              <tr><td>C4</td><td>Corriger logique SLA des automations</td><td><span class="badge badge-orange">Urgent</span></td></tr>
-              <tr><td>C5</td><td>Fusionner les 2 politiques SLA identiques</td><td><span class="badge badge-orange">Important</span></td></tr>
-              <tr><td>C6</td><td>Configurer SPF/DMARC domaine Zendesk</td><td><span class="badge badge-yellow">Moyen</span></td></tr>
-              <tr><td>C7</td><td>Supprimer trigger Ultimate.ai + doublon affectation</td><td><span class="badge badge-yellow">Moyen</span></td></tr>
-              <tr><td>C8</td><td>Corriger permissions Explore / recréer rapports</td><td><span class="badge badge-yellow">Moyen</span></td></tr>
-              <tr><td>C9</td><td>Hygiène : compte test, comptes fonctionnels, typo</td><td><span class="badge badge-gray">Faible</span></td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="card">
-          <div class="section-label">Points forts à conserver</div>
-          <ul class="check-list">
-            <li>Architecture de groupes N1 → N2 → AT → Mainteneurs bien structurée</li>
-            <li>Workflows mainteneurs automatisés : escalade + 2 relances par mainteneur (Diebold, Stackr, Nedap, Orange)</li>
-            <li>Horaires Lun-Sam 09:00-20:30 adaptés à la grande distribution</li>
-            <li>Écosystème d'apps complet (JIRA, Aircall, Time Tracking, ATDESK)</li>
-            <li>Copilot activé sur 90,4% des tickets via trigger (adoption très au-dessus de la moyenne)</li>
-            <li>HC riche : 917 articles couvrant le périmètre IT complet de la grande distribution</li>
-          </ul>
-        </div>
-      </div>
-
-      <div>
-        <div class="card" style="margin-bottom:14px;">
-          <div class="section-label">Score global du compte</div>
-          <div style="display:flex;flex-direction:column;gap:10px;margin-top:6px;">
-            <div>
-              <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px;"><span>Structure & Groupes</span><span style="font-weight:700;color:#166534;">90%</span></div>
-              <div class="progress-bar"><div class="progress-fill" style="width:90%;background:#22C55E;"></div></div>
-            </div>
-            <div>
-              <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px;"><span>Triggers & Automations</span><span style="font-weight:700;color:#92400E;">58%</span></div>
-              <div class="progress-bar"><div class="progress-fill" style="width:58%;background:#EAB308;"></div></div>
-            </div>
-            <div>
-              <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px;"><span>SLA & Horaires</span><span style="font-weight:700;color:#92400E;">60%</span></div>
-              <div class="progress-bar"><div class="progress-fill" style="width:60%;background:#F97316;"></div></div>
-            </div>
-            <div>
-              <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px;"><span>Formulaires & Champs</span><span style="font-weight:700;color:#92400E;">55%</span></div>
-              <div class="progress-bar"><div class="progress-fill" style="width:55%;background:#EAB308;"></div></div>
-            </div>
-            <div>
-              <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px;"><span>Help Center</span><span style="font-weight:700;color:#991B1B;">28%</span></div>
-              <div class="progress-bar"><div class="progress-fill" style="width:28%;background:#EF4444;"></div></div>
-            </div>
-            <div>
-              <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px;"><span>Hygiène du compte</span><span style="font-weight:700;color:#92400E;">60%</span></div>
-              <div class="progress-bar"><div class="progress-fill" style="width:60%;background:#EAB308;"></div></div>
-            </div>
-            <div style="margin-top:4px;">
-              <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px;"><span style="font-weight:700;">Score global</span><span style="font-weight:800;color:#7C3AED;">59%</span></div>
-              <div class="progress-bar" style="height:10px;"><div class="progress-fill" style="width:59%;background:linear-gradient(90deg,#8B5CF6,#7C3AED);"></div></div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ══ SLIDE 13 : SYNTHÈSE ══ -->
-<div class="slide" id="slide-13">
   <div class="slide-header">
     <h2>📋 Synthèse complète de l'audit</h2>
     <span class="sh-badge">3 DOMAINES ANALYSÉS</span>
@@ -1192,8 +1147,8 @@
   </div>
 </div>
 
-<!-- ══ SLIDE 14 : DASHBOARD KPI ══ -->
-<div class="slide" id="slide-14">
+<!-- ══ SLIDE 13 : DASHBOARD KPI ══ -->
+<div class="slide" id="slide-13">
   <div class="slide-header">
     <h2>📊 Dashboard KPI · ADEIZ · Analyse tickets réelle</h2>
     <span class="sh-badge">1 100 TICKETS · 4 MOIS · DONNÉES API + VUES</span>
@@ -1558,8 +1513,8 @@
   </div>
 </div>
 
-<!-- ══ SLIDE 15 : MERCI ══ -->
-<div class="slide slide-dark" id="slide-15">
+<!-- ══ SLIDE 14 : MERCI ══ -->
+<div class="slide slide-dark" id="slide-14">
   <div class="cover-centered">
     <div style="font-size:48px;margin-bottom:16px;">🙏</div>
     <h1 style="font-size:clamp(26px,3.8vw,46px);font-weight:800;color:#fff;white-space:nowrap;margin-bottom:12px;">
@@ -1604,7 +1559,7 @@
 </nav>
 
 <script>
-  const total = 15;
+  const total = 14;
   let current = 1;
   const logo = document.querySelector('.logo-fixed');
 
@@ -1626,7 +1581,7 @@
     document.getElementById('slide-' + current).classList.add('active');
     document.getElementById('counter').textContent = current + ' / ' + total;
     buildDots();
-    if (logo) logo.style.display = (current === 15) ? 'none' : '';
+    if (logo) logo.style.display = (current === 14) ? 'none' : '';
   }
 
   buildDots();
