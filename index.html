@@ -814,6 +814,9 @@
             <span class="tag" style="background:#1F2937;border-color:#374151;color:#F9FAFB;">En pause</span>
             <span class="tag" style="background:#F3F4F6;border-color:#D1D5DB;color:#6B7280;">Résolu</span>
           </div>
+          <div style="margin-top:8px;">
+            <img src="statuts-dropdown.png" alt="Statuts Zendesk par catégorie" style="height:220px;border-radius:6px;border:1px solid #E5E7EB;">
+          </div>
           <div class="alert alert-yellow" style="margin-top:10px;">
             <div class="alert-title">⚠ 13 statuts : volume à surveiller</div>
             <div class="alert-body">13 statuts personnalisés, c'est élevé pour un compte de 4 mois. Il est recommandé de vérifier la catégorie Zendesk de chaque statut (Nouveau, Ouvert, <strong>En attente</strong>, En pause, Résolu) : les statuts mappés sur <strong>"En attente"</strong> mettent le SLA en pause. S'assurer que les statuts "Attente magasin", "Relance Mainteneur" etc. sont mappés sur la bonne catégorie.</div>
@@ -940,7 +943,7 @@
     <div class="grid grid-2" style="gap:14px;">
       <div>
         <div class="card" style="margin-bottom:10px;">
-          <div class="section-label" style="color:#EF4444;">🔴 Semaine 1 : Urgences (C1-C2)</div>
+          <div class="section-label" style="color:#EF4444;">🔴 Urgences (C1-C2)</div>
           <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C1]</strong> Identifier et corriger les 4+ triggers cassés (actions avec valeur de champ vide : Stackr AT, Diebold AT, relances Orange/Stackr/Nedap)</span></div>
           <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C1]</strong> Tester chaque trigger cassé après correction pour valider le comportement attendu</span></div>
           <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C2]</strong> Finaliser la configuration de l'AI Agent : entraînement sur le HC, tests en staging, déploiement contrôlé</span></div>
@@ -948,7 +951,7 @@
         </div>
 
         <div class="card">
-          <div class="section-label" style="color:#F97316;">🟠 Semaine 2 : Corrections importantes (C3-C5)</div>
+          <div class="section-label" style="color:#F97316;">🟠 Corrections importantes (C3-C5)</div>
           <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C3]</strong> Ajouter des labels au HC (par thème : Encaissement, PosCloud, Réseau, Matériel...) et enrichir les articles images-only en texte structuré</span></div>
           <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C3]</strong> Créer 6-8 catégories HC et redistribuer les 124 sections ; supprimer/archiver les sections "Old", "old_Fimware", "fimware", "PAS A JOUR"</span></div>
           <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C4]</strong> Corriger la logique SLA des automations : remplacer le calcul via champ custom par les conditions natives de temps calendaire Zendesk</span></div>
@@ -958,7 +961,7 @@
 
       <div>
         <div class="card" style="margin-bottom:10px;">
-          <div class="section-label" style="color:#EAB308;">🟡 Mois 1 : Améliorations (C6-C8)</div>
+          <div class="section-label" style="color:#EAB308;">🟡 Améliorations (C6-C8)</div>
           <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C6]</strong> Configurer le SPF/DMARC pour le domaine d'envoi Zendesk (avertissement visible dans les paramètres email)</span></div>
           <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C7]</strong> Supprimer le trigger doublon "Affectation rapide"</span></div>
           <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C8]</strong> Corriger les permissions Explore ou recréer les rapports manquants (clones maîtres inaccessibles)</span></div>
@@ -967,7 +970,7 @@
         </div>
 
         <div class="card">
-          <div class="section-label" style="color:#22C55E;">🟢 Trimestre 1 : Optimisations (C9+)</div>
+          <div class="section-label" style="color:#22C55E;">🟢 Optimisations (C9+)</div>
           <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C9]</strong> Désactiver le compte test "Lj test" + convertir les 7 comptes fonctionnels en Light Agents</span></div>
           <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C9]</strong> Corriger typo "At - Sicles" → "At - Sycles" ; revoir champs de test dans les organisations</span></div>
           <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text">Créer 3-4 formulaires distincts (Incident Matériel, Escalade Mainteneur, Support Réseau, SAV)</span></div>
