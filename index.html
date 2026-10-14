@@ -168,7 +168,7 @@
 <a href="https://omycare.fr/" target="_blank" rel="noopener"><img src="omycarelogo.png" alt="OmyCare" class="logo-fixed"></a>
 <div class="deck" id="deck">
 
-<!-- ══ SLIDE 1 — COVER ══ -->
+<!-- ══ SLIDE 1 : COVER ══ -->
 <div class="slide slide-dark active" id="slide-1">
   <div class="cover-centered">
     <div class="cover-pill-new">🔍 Audit Complet · Octobre 2026</div>
@@ -186,7 +186,7 @@
   </div>
 </div>
 
-<!-- ══ SLIDE 2 — VUE D'ENSEMBLE ══ -->
+<!-- ══ SLIDE 2 : VUE D'ENSEMBLE ══ -->
 <div class="slide" id="slide-2">
   <div class="slide-header">
     <h2>📊 Diagnostic du compte ADEIZ</h2>
@@ -236,23 +236,23 @@
           <li><strong>4+ triggers cassés</strong> : actions avec champs personnalisés vides (Stackr, Diebold, Orange…)</li>
           <li><strong>AI Agent non prêt pour la production</strong> : messages vides, pas de fallback</li>
           <li><strong>Automations SLA à revoir</strong> : workaround au lieu des conditions natives Zendesk</li>
-          <li><strong>2 politiques SLA identiques</strong> pour Armand Thiery et Printemps — 1 seule suffit</li>
-          <li><strong>917 articles HC sans aucun label</strong> — Copilot et AI Agent aveugles</li>
+          <li><strong>2 politiques SLA identiques</strong> pour Armand Thiery et Printemps, une seule suffit</li>
+          <li><strong>917 articles HC sans aucun label</strong> : Copilot et AI Agent aveugles</li>
           <li>Certains articles Help Center contiennent principalement des images, sans texte exploitable par l'IA</li>
           <li>Trigger "<strong>Affectation rapide</strong>" en doublon</li>
           <li>SPF warning sur le connecteur Gmail</li>
-          <li>Rapport Explore "Top 10 sous-catégories" cassé — aucun résultat</li>
+          <li>Rapport Explore "Top 10 sous-catégories" cassé, aucun résultat</li>
           <li>Champs de test dans la config organisations (à supprimer)</li>
         </ul>
         <ul class="check-list warn-list">
-          <li>Compte test <strong>"Lj test"</strong> actif en production + 7 comptes fonctionnels configurés comme agents (Pole Rfid, AT Commerce, At-Stock, Bureautique, Décisionnel, Admin Systèmes...) — à vérifier si ces emails génériques doivent rester en tant qu'agents</li>
+          <li>Compte test <strong>"Lj test"</strong> actif en production + 7 comptes fonctionnels configurés comme agents (Pole Rfid, AT Commerce, At-Stock, Bureautique, Décisionnel, Admin Systèmes...), à vérifier si ces emails génériques doivent rester en tant qu'agents</li>
         </ul>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ══ SLIDE 3 — URGENCES CRITIQUES ══ -->
+<!-- ══ SLIDE 3 : URGENCES CRITIQUES ══ -->
 <div class="slide" id="slide-3">
   <div class="slide-header">
     <h2>🔴 Urgences critiques : points prioritaires identifiés</h2>
@@ -262,7 +262,7 @@
     <div class="alert alert-red">
       <div class="alert-title"><span class="badge badge-red">C1</span> Triggers cassés : actions avec champs personnalisés vides</div>
       <div class="alert-body">
-        Au moins 4 triggers d'escalade mainteneur contiennent des <strong>actions sur des champs de ticket avec des valeurs vides</strong>. Ces triggers s'exécutent mais certaines valeurs pourraient être manquantes ou ne plus être nécessaires — à vérifier pour s'assurer que les escalades fonctionnent comme prévu.
+        Au moins 4 triggers d'escalade mainteneur contiennent des <strong>actions sur des champs de ticket avec des valeurs vides</strong>. Ces triggers s'exécutent mais certaines valeurs pourraient être manquantes ou ne plus être nécessaires, à vérifier pour s'assurer que les escalades fonctionnent comme prévu.
         <br><br>
         <table>
           <thead><tr><th>Trigger cassé</th><th>Problème</th><th>URL</th></tr></thead>
@@ -277,14 +277,14 @@
     </div>
 
     <div class="alert alert-red">
-      <div class="alert-title"><span class="badge badge-red">C2</span> AI Agent non prêt pour la production — messages vides, pas de fallback</div>
+      <div class="alert-title"><span class="badge badge-red">C2</span> AI Agent non prêt pour la production : messages vides, pas de fallback</div>
       <div class="alert-body">
         Le bot IA est <strong>actif sur le widget du centre d'aide</strong> mais présente des erreurs graves de configuration :
         <br><br>
         <table>
           <thead><tr><th>Problème</th><th>Impact</th></tr></thead>
           <tbody>
-            <tr><td>Flux "Technical error reply" vide — message non configuré</td><td><span class="badge badge-red">Erreur silencieuse visible par les utilisateurs</span></td></tr>
+            <tr><td>Flux "Technical error reply" vide, message non configuré</td><td><span class="badge badge-red">Erreur silencieuse visible par les utilisateurs</span></td></tr>
             <tr><td>Aucun message de fallback configuré</td><td><span class="badge badge-red">Si le bot échoue, pas de réponse</span></td></tr>
             <tr><td>Règles de connaissance basées sur des étiquettes non générées</td><td><span class="badge badge-red">Articles jamais suggérés</span></td></tr>
             <tr><td>Paramètres obsolètes dans la configuration</td><td><span class="badge badge-orange">Comportement imprévisible</span></td></tr>
@@ -296,10 +296,10 @@
     </div>
 
     <div class="alert alert-red">
-      <div class="alert-title"><span class="badge badge-red">C3</span> Help Center : 917 articles sans aucun label — Copilot et AI Agent aveugles</div>
+      <div class="alert-title"><span class="badge badge-red">C3</span> Help Center : 917 articles sans aucun label, Copilot et AI Agent aveugles</div>
       <div class="alert-body">
         Aucun des 917 articles du Help Center ne possède de <strong>labels (étiquettes)</strong>. Les labels sont le mécanisme principal par lequel Zendesk Copilot et l'AI Agent retrouvent et suggèrent des articles. Sans labels, <strong>l'IA ne peut pas exploiter la base de connaissances</strong>, même si 90% des tickets ont Copilot activé.
-        <br>De plus, certains articles contiennent <strong>principalement des captures d'écran</strong>, sans texte — l'IA ne peut pas lire les images.
+        <br>De plus, certains articles contiennent <strong>principalement des captures d'écran</strong>, sans texte (l'IA ne peut pas lire les images).
         <br><br>
         <table>
           <thead><tr><th>Problème HC</th><th>Impact IA</th></tr></thead>
@@ -317,7 +317,7 @@
   </div>
 </div>
 
-<!-- ══ SLIDE 4 — POINTS IMPORTANTS ══ -->
+<!-- ══ SLIDE 4 : POINTS IMPORTANTS ══ -->
 <div class="slide" id="slide-4">
   <div class="slide-header">
     <h2>🟠 Points importants : Corrections prioritaires</h2>
@@ -325,7 +325,7 @@
   </div>
   <div class="slide-body">
     <div class="alert alert-orange">
-      <div class="alert-title"><span class="badge badge-orange">C4</span> Automations SLA — workaround à remplacer par les conditions natives
+      <div class="alert-title"><span class="badge badge-orange">C4</span> Automations SLA : workaround à remplacer par les conditions natives
         <a href="https://adeizhelp.zendesk.com/admin/objects-rules/rules/automations/30892688922780" target="_blank" class="zd-link">↗ Automations</a>
       </div>
       <div class="alert-body">
@@ -336,7 +336,7 @@
     </div>
 
     <div class="alert alert-orange">
-      <div class="alert-title"><span class="badge badge-orange">C5</span> 2 politiques SLA identiques — une seule politique générale suffit
+      <div class="alert-title"><span class="badge badge-orange">C5</span> 2 politiques SLA identiques : une seule politique générale suffit
         <a href="https://adeizhelp.zendesk.com/admin/objects-rules/rules/sla" target="_blank" class="zd-link">↗ SLA</a>
       </div>
       <div class="alert-body">
@@ -359,8 +359,8 @@
       </div>
       <div class="alert-body">
         <ul style="padding-left:14px;display:flex;flex-direction:column;gap:4px;">
-          <li>Le trigger "<strong>Affectation rapide</strong>" existe en <strong>deux exemplaires actifs</strong> (IDs 28970987661340 et un autre) — conflit possible dans le routage automatique</li>
-          <li>Le trigger "<strong>Ultimate.ai Email Channel Automation</strong>" est actif mais aucune app Ultimate.ai n'est installée — résidu d'une ancienne intégration</li>
+          <li>Le trigger "<strong>Affectation rapide</strong>" existe en <strong>deux exemplaires actifs</strong> (IDs 28970987661340 et un autre) : conflit possible dans le routage automatique</li>
+          <li>Le trigger "<strong>Ultimate.ai Email Channel Automation</strong>" est actif mais aucune app Ultimate.ai n'est installée : résidu d'une ancienne intégration</li>
         </ul>
         <br><strong>Action :</strong> Identifier et supprimer le doublon. Supprimer le trigger Ultimate.ai.
       </div>
@@ -371,7 +371,7 @@
         <a href="https://adeizhelp.zendesk.com/explore#/new-dashboard-builder/75639692" target="_blank" class="zd-link">↗ Explore</a>
       </div>
       <div class="alert-body">
-        Le rapport "Top 10 sous-catégories" utilise des <strong>attributs personnalisés à reconfigurer</strong> pour exclure les valeurs nulles — cette approche ne fonctionne pas dans Zendesk Explore et le rapport ne retourne aucun résultat. De plus, les rapports natifs Zendesk ne doivent pas être modifiés directement : il faut d'abord créer des <strong>clones (master clones)</strong> avant toute personnalisation.
+        Le rapport "Top 10 sous-catégories" utilise des <strong>attributs personnalisés à reconfigurer</strong> pour exclure les valeurs nulles : cette approche ne fonctionne pas dans Zendesk Explore et le rapport ne retourne aucun résultat. De plus, les rapports natifs Zendesk ne doivent pas être modifiés directement : il faut d'abord créer des <strong>clones (master clones)</strong> avant toute personnalisation.
         <br><strong>Action :</strong> Cloner les rapports natifs. Reconfigurer l'attribut personnalisé de sous-catégorie avec la bonne méthode d'exclusion des nuls.
         <div style="margin-top:8px;"><img src="explore-sous-categories.png" alt="Explore configuration Top 10 sous-catégories" style="width:100%;max-width:420px;border-radius:6px;border:1px solid #FDE68A;"></div>
       </div>
@@ -381,9 +381,9 @@
       <div class="alert-title"><span class="badge badge-yellow">C9</span> Compte test + comptes fonctionnels + champs test organisations</div>
       <div class="alert-body">
         <ul style="padding-left:14px;display:flex;flex-direction:column;gap:4px;">
-          <li>Compte "<strong>Lj test</strong>" actif en production — occupe une licence, pollue les rapports</li>
+          <li>Compte "<strong>Lj test</strong>" actif en production : occupe une licence, pollue les rapports</li>
           <li>7 comptes fonctionnels (Pole Rfid, AT Pole Commerce, At - Stock, <strong>At - Sicles</strong> ⚠ typo Sycles, Pole Bureautique, Pole Décisionnel, Admin Systèmes) utilisés comme agents individuels</li>
-          <li>2 champs de test dans la config organisations : "<strong>Materials test multifield</strong>" et "<strong>test material in org</strong>" — à supprimer</li>
+          <li>2 champs de test dans la config organisations : "<strong>Materials test multifield</strong>" et "<strong>test material in org</strong>" : à supprimer</li>
         </ul>
         <a href="https://adeizhelp.zendesk.com/admin/people/team/members" target="_blank" class="zd-link">↗ Agents</a>
         <a href="https://adeizhelp.zendesk.com/admin/people/configuration/organization_fields" target="_blank" class="zd-link">↗ Champs org</a>
@@ -392,7 +392,7 @@
   </div>
 </div>
 
-<!-- ══ SLIDE 5 — TRIGGERS & AUTOMATIONS ══ -->
+<!-- ══ SLIDE 5 : TRIGGERS & AUTOMATIONS ══ -->
 <div class="slide" id="slide-5">
   <div class="slide-header">
     <h2>⚡ Triggers & Automations</h2>
@@ -501,7 +501,7 @@
   </div>
 </div>
 
-<!-- ══ SLIDE 6 — SLA & HORAIRES ══ -->
+<!-- ══ SLIDE 6 : SLA & HORAIRES ══ -->
 <div class="slide" id="slide-6">
   <div class="slide-header">
     <h2>⏱ SLA & Horaires commerciaux</h2>
@@ -511,7 +511,7 @@
     <div class="grid grid-2" style="gap:14px;margin-bottom:14px;">
       <div>
         <div class="alert alert-green" style="margin-bottom:10px;">
-          <div class="alert-title">✅ SLA Armand Thiery — Très bien configuré</div>
+          <div class="alert-title">✅ SLA Armand Thiery : Très bien configuré</div>
           <div class="alert-body">
             <span class="badge badge-blue" style="margin-bottom:8px;display:inline-block;">Filtre : organisation = Armand Thiery</span>
             <table>
@@ -527,7 +527,7 @@
           </div>
         </div>
         <div class="alert alert-green">
-          <div class="alert-title">✅ SLA Printemps — Identique, bien configuré</div>
+          <div class="alert-title">✅ SLA Printemps : Identique, bien configuré</div>
           <div class="alert-body">
             Même configuration que Armand Thiery. Les deux politiques ont les mêmes niveaux de cibles. Seul le filtre organisation diffère.
           </div>
@@ -536,7 +536,7 @@
 
       <div>
         <div class="alert alert-green" style="margin-bottom:10px;">
-          <div class="alert-title">✅ Horaires "Horaires AT" — Lun-Sam couverts</div>
+          <div class="alert-title">✅ Horaires "Horaires AT" : Lun-Sam couverts</div>
           <div class="alert-body">
             <table>
               <thead><tr><th>Jours</th><th>Plage horaire</th><th>Durée</th></tr></thead>
@@ -551,7 +551,7 @@
         </div>
 
         <div class="alert alert-red">
-          <div class="alert-title">🔴 2 politiques SLA identiques — une seule suffit
+          <div class="alert-title">🔴 2 politiques SLA identiques : une seule suffit
             <a href="https://adeizhelp.zendesk.com/admin/objects-rules/rules/sla" target="_blank" class="zd-link">↗ SLA</a>
           </div>
           <div class="alert-body">
@@ -564,7 +564,7 @@
   </div>
 </div>
 
-<!-- ══ SLIDE 7 — VUES & GROUPES ══ -->
+<!-- ══ SLIDE 7 : VUES & GROUPES ══ -->
 <div class="slide" id="slide-7">
   <div class="slide-header">
     <h2>👁 Vues & Groupes : Organisation multi-niveaux</h2>
@@ -625,7 +625,7 @@
           </table>
           <div style="margin-top:10px;display:flex;align-items:flex-start;gap:8px;">
             <img src="views-counts.png" alt="Vue des tickets en temps réel" style="height:200px;width:auto;border-radius:6px;border:1px solid #E5E7EB;flex-shrink:0;">
-            <p style="font-size:10px;color:#9CA3AF;line-height:1.5;">Snapshot vues en temps réel — Octobre 2026</p>
+            <p style="font-size:10px;color:#9CA3AF;line-height:1.5;">Snapshot vues en temps réel · Octobre 2026</p>
           </div>
         </div>
         <div class="alert alert-yellow" style="margin-top:10px;">
@@ -670,7 +670,7 @@
   </div>
 </div>
 
-<!-- ══ SLIDE 8 — FORMULAIRES & CHAMPS & AGENTS ══ -->
+<!-- ══ SLIDE 8 : FORMULAIRES & CHAMPS & AGENTS ══ -->
 <div class="slide" id="slide-8">
   <div class="slide-header">
     <h2>📋 Formulaires, Champs & Agents</h2>
@@ -709,7 +709,7 @@
         </div>
 
         <div class="alert alert-orange">
-          <div class="alert-title">⚠ Macros (21) — Points à améliorer</div>
+          <div class="alert-title">⚠ Macros (21) : Points à améliorer</div>
           <div class="alert-body">
             La macro <strong>« Résolution confirmée – Clôture du ticket »</strong> a un nom trompeur : il est impossible de fermer un ticket directement via une macro. La bonne approche est d'ajouter un tag spécifique via la macro, puis de déclencher la clôture via une automatisation.
             <br><br>
@@ -754,7 +754,7 @@
         </div>
         <div class="alert alert-yellow" style="margin-bottom:10px;">
           <div class="alert-title">⚠ Faute de frappe agent</div>
-          <div class="alert-body">Agent nommé "<strong>At - Sicles</strong>" — devrait être "<strong>At - Sycles</strong>" pour correspondre au groupe "AT – Sycles" et aux triggers associés. Risque de non-correspondance dans les rapports.</div>
+          <div class="alert-body">Agent nommé "<strong>At - Sicles</strong>" : devrait être "<strong>At - Sycles</strong>" pour correspondre au groupe "AT – Sycles" et aux triggers associés. Risque de non-correspondance dans les rapports.</div>
         </div>
         <div class="alert alert-yellow">
           <div class="alert-title">⚠ Champs de test dans les organisations</div>
@@ -783,7 +783,7 @@
             <span class="tag" style="background:#DCFCE7;border-color:#BBF7D0;color:#166534;">Résolu</span>
           </div>
           <div class="alert alert-yellow" style="margin-top:10px;">
-            <div class="alert-title">⚠ 13 statuts — volume à surveiller</div>
+            <div class="alert-title">⚠ 13 statuts : volume à surveiller</div>
             <div class="alert-body">13 statuts personnalisés, c'est élevé pour un compte de 4 mois. Il est recommandé de vérifier la catégorie Zendesk de chaque statut (Nouveau, Ouvert, <strong>En attente</strong>, En pause, Résolu) : les statuts mappés sur <strong>"En attente"</strong> mettent le SLA en pause. S'assurer que les statuts "Attente magasin", "Relance Mainteneur" etc. sont mappés sur la bonne catégorie.</div>
           </div>
         </div>
@@ -792,7 +792,7 @@
   </div>
 </div>
 
-<!-- ══ SLIDE 9 — HELP CENTER & IA ══ -->
+<!-- ══ SLIDE 9 : HELP CENTER & IA ══ -->
 <div class="slide" id="slide-9">
   <div class="slide-header">
     <h2>📚 Help Center & Intelligence Artificielle</h2>
@@ -821,10 +821,10 @@
           <div class="alert-title">⚠ Problèmes techniques HC</div>
           <div class="alert-body">
             <ul style="padding-left:14px;display:flex;flex-direction:column;gap:4px;">
-              <li><strong>Commentaires actifs sur tous les articles</strong> — risque de contenus non validés de la part des magasins sur des procédures internes</li>
-              <li><strong>Ancien éditeur Zendesk encore utilisé</strong> — limite la compatibilité avec les nouvelles fonctionnalités et la lisibilité pour l'IA (Copilot, AI Agent)</li>
-              <li><strong>Favicon non configuré en PNG</strong> — à corriger pour un HC professionnel</li>
-              <li><strong>HC entièrement privé</strong> — aucune documentation publique, le widget ne peut pas proposer d'articles en self-service aux magasins</li>
+              <li><strong>Commentaires actifs sur tous les articles</strong> : risque de contenus non validés de la part des magasins sur des procédures internes</li>
+              <li><strong>Ancien éditeur Zendesk encore utilisé</strong> : limite la compatibilité avec les nouvelles fonctionnalités et la lisibilité pour l'IA (Copilot, AI Agent)</li>
+              <li><strong>Favicon non configuré en PNG</strong> : à corriger pour un HC professionnel</li>
+              <li><strong>HC entièrement privé</strong> : aucune documentation publique, le widget ne peut pas proposer d'articles en self-service aux magasins</li>
             </ul>
           </div>
         </div>
@@ -833,11 +833,11 @@
           <div class="alert-title">Sections problématiques identifiées</div>
           <div class="alert-body">
             <ul style="padding-left:14px;display:flex;flex-direction:column;gap:4px;">
-              <li>"<strong>Old</strong>" — contenu obsolète, aucune valeur</li>
-              <li>"<strong>old_Fimware</strong>" — faute de frappe + marqué obsolète</li>
-              <li>"<strong>fimware</strong>" — faute de frappe de "firmware"</li>
-              <li>"<strong>Specificités par Service (PAS A JOUR)</strong>" — explicitement non à jour</li>
-              <li>"<strong>Procédures historiques</strong>" — à archiver</li>
+              <li>"<strong>Old</strong>" : contenu obsolète, aucune valeur</li>
+              <li>"<strong>old_Fimware</strong>" : faute de frappe + marqué obsolète</li>
+              <li>"<strong>fimware</strong>" : faute de frappe de "firmware"</li>
+              <li>"<strong>Specificités par Service (PAS A JOUR)</strong>" : explicitement non à jour</li>
+              <li>"<strong>Procédures historiques</strong>" : à archiver</li>
               <li>Plusieurs sections dupliquées : "Outlook" apparaît 2× ; "Firmware Switch SG2428P", "Fichiers pour Conf Switch"… hors catégorie logique</li>
             </ul>
           </div>
@@ -863,7 +863,7 @@
         </div>
 
         <div class="card" style="margin-bottom:10px;">
-          <div class="section-label">Intelligence Artificielle — état réel</div>
+          <div class="section-label">Intelligence Artificielle : état réel</div>
           <table>
             <thead><tr><th>Fonctionnalité</th><th>État</th></tr></thead>
             <tbody>
@@ -881,9 +881,9 @@
         </div>
 
         <div class="card" style="margin-bottom:10px;">
-          <div class="section-label">AI Agent — Flux "Technical error reply" vide</div>
+          <div class="section-label">AI Agent : Flux "Technical error reply" vide</div>
           <img src="ai-agent-empty.png" alt="AI Agent Technical error reply vide" style="width:100%;border-radius:8px;border:1px solid #FECACA;margin-top:6px;">
-          <p style="font-size:10px;color:#9CA3AF;margin-top:4px;">Le flux de fallback est vide — aucun message configuré en cas d'erreur technique. L'utilisateur reçoit une réponse vide.</p>
+          <p style="font-size:10px;color:#9CA3AF;margin-top:4px;">Le flux de fallback est vide, aucun message configuré en cas d'erreur technique. L'utilisateur reçoit une réponse vide.</p>
         </div>
 
         <div class="alert alert-red" style="margin-bottom:10px;">
@@ -897,7 +897,7 @@
         <div class="alert alert-red" style="margin-bottom:10px;">
           <div class="alert-title">🔴 Copilot aveugle malgré 90% d'activation</div>
           <div class="alert-body">
-            Copilot est activé sur 730 tickets mais <strong>ne peut suggérer aucun article</strong> : 0 label sur 917 articles. L'IA retrouve les articles via les labels — sans eux, le HC est invisible pour Copilot et l'AI Agent.
+            Copilot est activé sur 730 tickets mais <strong>ne peut suggérer aucun article</strong> : 0 label sur 917 articles. L'IA retrouve les articles via les labels : sans eux, le HC est invisible pour Copilot et l'AI Agent.
           </div>
         </div>
 
@@ -912,7 +912,7 @@
   </div>
 </div>
 
-<!-- ══ SLIDE 10 — PLAN D'ACTION ══ -->
+<!-- ══ SLIDE 10 : PLAN D'ACTION ══ -->
 <div class="slide" id="slide-10">
   <div class="slide-header">
     <h2>🗓 Plan d'action priorisé</h2>
@@ -922,7 +922,7 @@
     <div class="grid grid-2" style="gap:14px;">
       <div>
         <div class="card" style="margin-bottom:10px;">
-          <div class="section-label" style="color:#EF4444;">🔴 Semaine 1 — Urgences (C1-C2)</div>
+          <div class="section-label" style="color:#EF4444;">🔴 Semaine 1 : Urgences (C1-C2)</div>
           <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C1]</strong> Identifier et corriger les 4+ triggers cassés (actions avec valeur de champ vide : Stackr AT, Diebold AT, relances Orange/Stackr/Nedap)</span></div>
           <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C1]</strong> Tester chaque trigger cassé après correction pour valider le comportement attendu</span></div>
           <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C2]</strong> Finaliser la configuration de l'AI Agent : entraînement sur le HC, tests en staging, déploiement contrôlé</span></div>
@@ -930,7 +930,7 @@
         </div>
 
         <div class="card">
-          <div class="section-label" style="color:#F97316;">🟠 Semaine 2 — Corrections importantes (C3-C5)</div>
+          <div class="section-label" style="color:#F97316;">🟠 Semaine 2 : Corrections importantes (C3-C5)</div>
           <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C3]</strong> Ajouter des labels au HC (par thème : Encaissement, PosCloud, Réseau, Matériel...) et enrichir les articles images-only en texte structuré</span></div>
           <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C3]</strong> Créer 6-8 catégories HC et redistribuer les 124 sections ; supprimer/archiver les sections "Old", "old_Fimware", "fimware", "PAS A JOUR"</span></div>
           <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C4]</strong> Corriger la logique SLA des automations : remplacer le calcul via champ custom par les conditions natives de temps calendaire Zendesk</span></div>
@@ -940,16 +940,16 @@
 
       <div>
         <div class="card" style="margin-bottom:10px;">
-          <div class="section-label" style="color:#EAB308;">🟡 Mois 1 — Améliorations (C6-C8)</div>
+          <div class="section-label" style="color:#EAB308;">🟡 Mois 1 : Améliorations (C6-C8)</div>
           <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C6]</strong> Configurer le SPF/DMARC pour le domaine d'envoi Zendesk (avertissement visible dans les paramètres email)</span></div>
           <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C7]</strong> Supprimer le trigger Ultimate.ai résidu et le trigger doublon "Affectation rapide"</span></div>
           <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C8]</strong> Corriger les permissions Explore ou recréer les rapports manquants (clones maîtres inaccessibles)</span></div>
           <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text">Créer une politique SLA par défaut pour les tickets hors Armand Thiery et Printemps</span></div>
-          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text">Vérifier les champs OFF "Mode de déclenchement" et "Mainteneur" — réactiver ou supprimer</span></div>
+          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text">Vérifier les champs OFF "Mode de déclenchement" et "Mainteneur" : réactiver ou supprimer</span></div>
         </div>
 
         <div class="card">
-          <div class="section-label" style="color:#22C55E;">🟢 Trimestre 1 — Optimisations (C9+)</div>
+          <div class="section-label" style="color:#22C55E;">🟢 Trimestre 1 : Optimisations (C9+)</div>
           <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C9]</strong> Désactiver le compte test "Lj test" + convertir les 7 comptes fonctionnels en Light Agents</span></div>
           <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C9]</strong> Corriger typo "At - Sicles" → "At - Sycles" ; revoir champs de test dans les organisations</span></div>
           <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text">Créer 3-4 formulaires distincts (Incident Matériel, Escalade Mainteneur, Support Réseau, SAV)</span></div>
@@ -961,7 +961,7 @@
   </div>
 </div>
 
-<!-- ══ SLIDE 11 — OPPORTUNITÉS ══ -->
+<!-- ══ SLIDE 11 : OPPORTUNITÉS ══ -->
 <div class="slide" id="slide-11">
   <div class="slide-header">
     <h2>💡 Opportunités & Flux recommandés</h2>
@@ -1011,9 +1011,9 @@
         <div class="alert alert-blue" style="margin-bottom:10px;">
           <div class="alert-title">💡 Apps recommandées</div>
           <div class="alert-body">
-            <strong>Attachment Plus</strong> — gestion avancée des pièces jointes (prévisualisation, téléchargement groupé) utile pour les tickets avec schémas techniques et captures d'écran matériel.
+            <strong>Attachment Plus</strong> : gestion avancée des pièces jointes (prévisualisation, téléchargement groupé) utile pour les tickets avec schémas techniques et captures d'écran matériel.
             <br><br>
-            <strong>Advanced Search</strong> — recherche multi-critères avancée dans les tickets. Très utile pour les N2 qui gèrent des escalades complexes avec filtres combinés (organisation + mainteneur + statut + tag).
+            <strong>Advanced Search</strong> : recherche multi-critères avancée dans les tickets. Très utile pour les N2 qui gèrent des escalades complexes avec filtres combinés (organisation + mainteneur + statut + tag).
           </div>
         </div>
 
@@ -1040,7 +1040,7 @@
   </div>
 </div>
 
-<!-- ══ SLIDE 12 — RÉSUMÉ ══ -->
+<!-- ══ SLIDE 12 : RÉSUMÉ ══ -->
 <div class="slide" id="slide-12">
   <div class="slide-header">
     <h2>✅ Résumé & Checklist de clôture</h2>
@@ -1120,7 +1120,7 @@
   </div>
 </div>
 
-<!-- ══ SLIDE 13 — SYNTHÈSE ══ -->
+<!-- ══ SLIDE 13 : SYNTHÈSE ══ -->
 <div class="slide" id="slide-13">
   <div class="slide-header">
     <h2>📋 Synthèse complète de l'audit</h2>
@@ -1138,11 +1138,11 @@
           <thead><tr style="background:#F3F4F6;"><th style="text-align:left;padding:4px 6px;font-weight:600;color:#374151;">Observation</th><th style="padding:4px 6px;white-space:nowrap;">Priorité</th></tr></thead>
           <tbody>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">SPF/DKIM non configuré pour le domaine Zendesk</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Urgent</span></td></tr>
-            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">AI Agent non prêt pour la production — erreurs de config, aucun message de fallback</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-red">Critique</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">AI Agent non prêt pour la production : erreurs de config, aucun message de fallback</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-red">Critique</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Paramètre "Waiting message" AI Agent déprécié le 31 oct. 2026</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-red">Critique</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Règles de connaissance configurées via labels mais aucun label généré dans les conversations</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Urgent</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Widget messagerie non personnalisé à l'identité visuelle ADEIZ</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-gray">Faible</span></td></tr>
-            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Même emoji ⭕️ sur la majorité des vues — navigation moins intuitive</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-gray">Faible</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Même emoji ⭕️ sur la majorité des vues : navigation moins intuitive</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-gray">Faible</span></td></tr>
             <tr><td style="padding:5px 6px;color:#374151;">Architecture de groupes N1→N2→AT→Mainteneurs en place</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-green">OK</span></td></tr>
           </tbody>
         </table>
@@ -1156,14 +1156,14 @@
         <table style="width:100%;border-collapse:collapse;font-size:10px;">
           <thead><tr style="background:#F3F4F6;"><th style="text-align:left;padding:4px 6px;font-weight:600;color:#374151;">Observation</th><th style="padding:4px 6px;white-space:nowrap;">Priorité</th></tr></thead>
           <tbody>
-            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">4+ triggers cassés — actions avec valeurs de champs vides (Stackr AT, Diebold AT, relances mainteneurs)</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-red">Critique</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">4+ triggers cassés : actions avec valeurs de champs vides (Stackr AT, Diebold AT, relances mainteneurs)</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-red">Critique</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Trigger "Affectation rapide" en doublon (2 actifs simultanément)</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Moyen</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Trigger Ultimate.ai résidu encore actif en production</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Moyen</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Automations SLA : workaround à remplacer par les conditions natives (temps calendaire)</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Urgent</span></td></tr>
-            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">2 politiques SLA identiques pour AT + Printemps — une seule suffit</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Important</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">2 politiques SLA identiques pour AT + Printemps : une seule suffit</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Important</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Macro "Résolution confirmée – Clôture du ticket" ne peut pas fermer un ticket directement via macro</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Moyen</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Macros sans organisation en dossiers ni restriction par groupe</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-gray">Faible</span></td></tr>
-            <tr><td style="padding:5px 6px;color:#374151;">Ordre des triggers et automations à vérifier — l'ordre impacte le comportement</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Moyen</span></td></tr>
+            <tr><td style="padding:5px 6px;color:#374151;">Ordre des triggers et automations à vérifier : l'ordre impacte le comportement</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Moyen</span></td></tr>
           </tbody>
         </table>
       </div>
@@ -1176,16 +1176,16 @@
         <table style="width:100%;border-collapse:collapse;font-size:10px;">
           <thead><tr style="background:#F3F4F6;"><th style="text-align:left;padding:4px 6px;font-weight:600;color:#374151;">Observation</th><th style="padding:4px 6px;white-space:nowrap;">Priorité</th></tr></thead>
           <tbody>
-            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">HC : 1 seule catégorie "Général" pour 917 articles et 124 sections — navigation difficile</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-red">Critique</span></td></tr>
-            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">HC : 0 label sur 917 articles — Copilot et AI Agent ne peuvent suggérer aucun article</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-red">Critique</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">HC : 1 seule catégorie "Général" pour 917 articles et 124 sections : navigation difficile</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-red">Critique</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">HC : 0 label sur 917 articles : Copilot et AI Agent ne peuvent suggérer aucun article</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-red">Critique</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Help Center : certains articles contiennent principalement des images, sans texte exploitable par l'IA</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Urgent</span></td></tr>
-            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Rapport Explore "Top 10 sous-catégories" cassé — attributs personnalisés à reconfigurer, nuls non exclus</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Urgent</span></td></tr>
-            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">HC : commentaires actifs sur tous les articles — risque de contenus non validés</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Moyen</span></td></tr>
-            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">HC : ancien éditeur Zendesk encore utilisé — limite les fonctionnalités IA et la lisibilité</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Moyen</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Rapport Explore "Top 10 sous-catégories" cassé : attributs personnalisés à reconfigurer, nuls non exclus</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Urgent</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">HC : commentaires actifs sur tous les articles : risque de contenus non validés</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Moyen</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">HC : ancien éditeur Zendesk encore utilisé : limite les fonctionnalités IA et la lisibilité</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Moyen</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Compte test "Lj test" actif en production + 7 comptes fonctionnels en tant qu'agents</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Important</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">2 champs de test actifs dans les organisations (materials_test_multifield, test_material_in_org)</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-gray">Faible</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Formulaire de ticket unique pour 17 groupes et multiples types d'incidents</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Important</span></td></tr>
-            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">HC favicon non configuré en PNG — à corriger</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-gray">Faible</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">HC favicon non configuré en PNG : à corriger</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-gray">Faible</span></td></tr>
             <tr><td style="padding:5px 6px;color:#374151;">13 statuts personnalisés : volume élevé, catégories (En attente / En pause) à vérifier. Les automations de relance s'appliquent à tous les tickets En attente, ce qui peut générer des relances non voulues.</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Moyen</span></td></tr>
           </tbody>
         </table>
@@ -1195,10 +1195,10 @@
   </div>
 </div>
 
-<!-- ══ SLIDE 14 — DASHBOARD KPI ══ -->
+<!-- ══ SLIDE 14 : DASHBOARD KPI ══ -->
 <div class="slide" id="slide-14">
   <div class="slide-header">
-    <h2>📊 Dashboard KPI — ADEIZ · Analyse tickets réelle</h2>
+    <h2>📊 Dashboard KPI · ADEIZ · Analyse tickets réelle</h2>
     <span class="sh-badge">1 100 TICKETS · 4 MOIS · DONNÉES API + VUES</span>
   </div>
   <div class="slide-body" style="padding:12px 18px 72px;">
@@ -1280,7 +1280,7 @@
 
       <!-- Catégories & Sous-catégories -->
       <div class="card" style="padding:14px;">
-        <div style="font-size:9px;font-weight:700;color:#8B5CF6;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;">Catégories N1 & sous-catégories N2 — sans nuls (données API)</div>
+        <div style="font-size:9px;font-weight:700;color:#8B5CF6;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;">Catégories N1 & sous-catégories N2 (sans nuls) (données API)</div>
         <div style="display:flex;flex-direction:column;gap:1px;max-height:330px;overflow-y:auto;padding-right:2px;">
 
           <!-- ROW macro: label | bar | count -->
@@ -1483,7 +1483,7 @@
 
       <!-- Priorités donut -->
       <div class="card" style="padding:12px;display:flex;flex-direction:column;align-items:center;">
-        <div style="font-size:9px;font-weight:700;color:#8B5CF6;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;align-self:flex-start;">Priorités — 812 tickets</div>
+        <div style="font-size:9px;font-weight:700;color:#8B5CF6;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;align-self:flex-start;">Priorités · 812 tickets</div>
         <svg viewBox="0 0 120 120" width="110" height="110" style="flex-shrink:0;">
           <circle cx="60" cy="60" r="46" fill="none" stroke="#E5E7EB" stroke-width="16"/>
           <!-- Normal (93.8%) -->
@@ -1561,7 +1561,7 @@
   </div>
 </div>
 
-<!-- ══ SLIDE 15 — MERCI ══ -->
+<!-- ══ SLIDE 15 : MERCI ══ -->
 <div class="slide slide-dark" id="slide-15">
   <div class="cover-centered">
     <div style="font-size:48px;margin-bottom:16px;">🙏</div>
@@ -1646,7 +1646,7 @@
     if (Math.abs(dx) > 50) goTo(current + (dx < 0 ? 1 : -1));
   });
 
-  // Synthèse checkboxes — add check column to slide-13 tables
+  // Synthèse checkboxes : add check column to slide-13 tables
   document.querySelectorAll('#slide-13 table').forEach(table => {
     table.querySelectorAll('thead tr').forEach(tr => {
       const th = document.createElement('th');
