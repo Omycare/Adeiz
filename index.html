@@ -964,17 +964,16 @@
       </div>
 
       <div>
-        <div class="alert alert-green" style="margin-bottom:10px;">
-          <div class="alert-title">✅ Flux mainteneur : déjà bien automatisé</div>
+        <div class="alert alert-yellow" style="margin-bottom:10px;">
+          <div class="alert-title">💡 Flux mainteneur : à revoir avec les outils natifs Zendesk</div>
           <div class="alert-body">
-            Le workflow mainteneur est l'un des points forts du compte. Pour chaque mainteneur (Diebold, Stackr, Nedap, Orange) :
-            <ul style="padding-left:14px;display:flex;flex-direction:column;gap:3px;margin-top:6px;">
-              <li>Trigger d'escalade dédié</li>
-              <li>2 relances automatiques (Relance 1 + Relance 2)</li>
-              <li>Pour Orange : alerte si la Réf. Externe extranet n'est pas renseignée après 1h</li>
-              <li>Statuts dédiés : Déclenchement, Relance, En cours Mainteneur</li>
+            Le flux mainteneur existe et couvre les 4 partenaires (Diebold, Stackr, Nedap, Orange) avec des triggers d'escalade, des relances et des statuts dédiés. Cependant, la logique actuelle est complexe et mérite d'être revisitée.
+            <br><br>Il existe dans Zendesk deux fonctionnalités qui pourraient mieux répondre à cette complexité :
+            <ul style="padding-left:14px;display:flex;flex-direction:column;gap:4px;margin-top:6px;">
+              <li><strong>Workflow Actions</strong> : automatisation native pour des actions conditionnelles sur les tickets, plus simple et plus fiable que des triggers combinés</li>
+              <li><strong>Advanced Workflow Actions</strong> : version étendue, adaptée aux escalades complexes multi-acteurs comme le workflow mainteneur actuel</li>
             </ul>
-            Ce flux est une référence. À documenter pour l'onboarding de nouveaux mainteneurs.
+            <br>Ces outils pourraient simplifier la configuration, réduire les risques de conflits entre triggers et faciliter la maintenance.
           </div>
         </div>
 
@@ -1123,7 +1122,7 @@
           <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text">Activer CSAT et configurer Knowledge Capture pour enrichir le HC depuis les tickets résolus</span></div>
         </div>
       </div>
-
+    </div>
   </div>
   </div>
 </div>
