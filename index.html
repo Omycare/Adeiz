@@ -374,8 +374,8 @@
         <a href="https://adeizhelp.zendesk.com/admin/objects-rules/rules/automations/30892688922780" target="_blank" class="zd-link">↗ Automations</a>
       </div>
       <div class="alert-body">
-        Les 4 automations d'alerte SLA (urgent/high/normal/low) utilisent une condition <strong>"Heures écoulées depuis la création (calendaires) &gt; 0"</strong> au lieu des conditions SLA natives de Zendesk. Ce workaround est fragile.
-        <br><br>Zendesk dispose de conditions natives <strong>"Tickets : Heures depuis la dernière violation SLA"</strong> et <strong>"Tickets : Heures jusqu'à la violation SLA suivante"</strong> qui sont conçues exactement pour cet usage. Ces automations devraient être reconfigurées pour utiliser ces métriques SLA natives.
+        Ce groupe d'automations SLA <strong>mériterait d'être revu</strong>. Les 4 automations (urgent/high/normal/low) utilisent une condition <strong>"Heures écoulées depuis la création (calendaires) &gt; 0"</strong> au lieu des conditions SLA natives de Zendesk. Ce workaround est fragile.
+        <br><br>Il existe des <strong>conditions spécifiques</strong> permettant de déclencher des actions avant ou après le dépassement d'un SLA — c'est justement l'un des objectifs de la configuration native des SLA dans Zendesk. Avec ces automations, une partie du fonctionnement natif des SLA est remplacée alors qu'il serait plus simple et plus efficace de s'appuyer directement sur les fonctionnalités prévues à cet effet.
         <br><br><strong>Action :</strong> Revoir le groupe complet d'automations SLA. Utiliser les conditions SLA natives plutôt qu'un calcul de temps calendaire depuis la création.
       </div>
     </div>
@@ -385,8 +385,8 @@
         <a href="https://adeizhelp.zendesk.com/admin/objects-rules/rules/sla" target="_blank" class="zd-link">↗ SLA</a>
       </div>
       <div class="alert-body">
-        Les politiques SLA "Armand Thiery" et "Printemps" ont des <strong>conditions et des niveaux cibles exactement identiques</strong>. Maintenir deux politiques séparées alourdit la maintenance : toute modification doit être appliquée deux fois, avec un risque de divergence.
-        <br><br><strong>Action :</strong> Créer une seule politique SLA générale couvrant toutes les organisations, avec les niveaux de cibles actuels. Prévoir des exceptions spécifiques uniquement si les SLA diffèrent par organisation.
+        Vous avez configuré des <strong>politiques SLA distinctes pour chaque organisation</strong>, alors que les conditions sont exactement les mêmes pour toutes. Je recommande donc de créer une <strong>politique SLA générale</strong>, applicable à l'ensemble des organisations, puis de prévoir des exceptions spécifiques si nécessaire. Cela permettrait de simplifier la configuration et d'en faciliter la maintenance.
+        <br><br><strong>Action :</strong> Créer une seule politique SLA générale couvrant toutes les organisations. Prévoir des exceptions spécifiques uniquement si les SLA diffèrent par organisation.
       </div>
     </div>
 
@@ -675,7 +675,7 @@
         </div>
         <div class="alert alert-yellow" style="margin-top:10px;">
           <div class="alert-title">⚠ Emojis identiques sur toutes les vues</div>
-          <div class="alert-body">La plupart des vues utilisent le même emoji (⭕️), ce qui rend la navigation moins intuitive au premier coup d'œil. Utiliser des emojis différents par catégorie améliorerait l'ergonomie pour les agents.</div>
+          <div class="alert-body">La plupart des vues utilisent le même emoji (⭕️). Si vous utilisez le même émoji pour toutes les vues, il devient plus difficile de les distinguer au premier coup d'œil. Ce sont des détails que vous pourrez ajuster progressivement, au fur et à mesure de votre utilisation de l'outil.</div>
         </div>
       </div>
 
