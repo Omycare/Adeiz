@@ -238,7 +238,7 @@
           <li><strong>Automations SLA à revoir</strong> : workaround au lieu des conditions natives Zendesk</li>
           <li><strong>2 politiques SLA identiques</strong> pour Armand Thiery et Printemps — 1 seule suffit</li>
           <li><strong>917 articles HC sans aucun label</strong> — Copilot et AI Agent aveugles</li>
-          <li>Artícles HC contenant uniquement des images, sans texte exploitable par l'IA</li>
+          <li>Certains articles Help Center contiennent principalement des images, sans texte exploitable par l'IA</li>
           <li>Trigger "<strong>Affectation rapide</strong>" en doublon</li>
           <li>SPF warning sur le connecteur Gmail</li>
           <li>Rapport Explore "Top 10 sous-catégories" cassé — aucun résultat</li>
@@ -297,13 +297,13 @@
       <div class="alert-title"><span class="badge badge-red">C3</span> Help Center : 917 articles sans aucun label — Copilot et AI Agent aveugles</div>
       <div class="alert-body">
         Aucun des 917 articles du Help Center ne possède de <strong>labels (étiquettes)</strong>. Les labels sont le mécanisme principal par lequel Zendesk Copilot et l'AI Agent retrouvent et suggèrent des articles. Sans labels, <strong>l'IA ne peut pas exploiter la base de connaissances</strong>, même si 90% des tickets ont Copilot activé.
-        <br>De plus, de nombreux articles contiennent <strong>uniquement des captures d'écran</strong>, sans texte — l'IA ne peut pas lire les images.
+        <br>De plus, certains articles contiennent <strong>principalement des captures d'écran</strong>, sans texte — l'IA ne peut pas lire les images.
         <br><br>
         <table>
           <thead><tr><th>Problème HC</th><th>Impact IA</th></tr></thead>
           <tbody>
             <tr><td>0 label sur 917 articles</td><td><span class="badge badge-red">Copilot sans suggestions</span></td></tr>
-            <tr><td>Articles = images uniquement, sans texte</td><td><span class="badge badge-red">Contenu illisible par l'IA</span></td></tr>
+            <tr><td>Certains articles = principalement des images, sans texte</td><td><span class="badge badge-red">Contenu illisible par l'IA</span></td></tr>
             <tr><td>Commentaires activés sur tous les articles</td><td><span class="badge badge-orange">Risque de spam / modération</span></td></tr>
             <tr><td>Ancien éditeur Zendesk utilisé</td><td><span class="badge badge-yellow">Limites de mise en forme</span></td></tr>
           </tbody>
@@ -871,7 +871,7 @@
               <tr><td>Flux "Technical error reply"</td><td><span class="badge badge-red">Vide ⚠</span></td></tr>
               <tr><td>Messages de fallback</td><td><span class="badge badge-red">Absents ⚠</span></td></tr>
               <tr><td>Labels sur articles HC</td><td><span class="badge badge-red">0 / 917 ⚠</span></td></tr>
-              <tr><td>Articles avec texte exploitable</td><td><span class="badge badge-orange">Beaucoup = images uniquement ⚠</span></td></tr>
+              <tr><td>Articles avec texte exploitable</td><td><span class="badge badge-orange">Certains = principalement des images ⚠</span></td></tr>
               <tr><td>Widget personnalisé ADEIZ</td><td><span class="badge badge-yellow">Non personnalisé</span></td></tr>
               <tr><td>Ultimate.ai</td><td><span class="badge badge-orange">Trigger résidu ⚠</span></td></tr>
             </tbody>
@@ -1176,7 +1176,7 @@
           <tbody>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">HC : 1 seule catégorie "Général" pour 917 articles et 124 sections — navigation difficile</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-red">Critique</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">HC : 0 label sur 917 articles — Copilot et AI Agent ne peuvent suggérer aucun article</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-red">Critique</span></td></tr>
-            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">HC : nombreux articles contiennent uniquement des images, sans texte exploitable par l'IA</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Urgent</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Help Center : certains articles contiennent principalement des images, sans texte exploitable par l'IA</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Urgent</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Rapport Explore "Top 10 sous-catégories" cassé — attributs personnalisés à reconfigurer, nuls non exclus</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Urgent</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">HC : commentaires actifs sur tous les articles — risque de contenus non validés</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Moyen</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">HC : ancien éditeur Zendesk encore utilisé — limite les fonctionnalités IA et la lisibilité</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Moyen</span></td></tr>
