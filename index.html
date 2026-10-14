@@ -340,7 +340,7 @@
         <a href="https://adeizhelp.zendesk.com/admin/objects-rules/rules/automations/30892688922780" target="_blank" class="zd-link">↗ Automations</a>
       </div>
       <div class="alert-body">
-        Les 4 automations d'alerte SLA (urgent/high/normal/low) utilisent une condition <strong>"Heures écoulées depuis la création (calendaires) &gt; 0"</strong> au lieu des conditions SLA natives de Zendesk. Ce workaround est fragile, imprécis et peut déclencher des alertes en dehors des horaires business.
+        Les 4 automations d'alerte SLA (urgent/high/normal/low) utilisent une condition <strong>"Heures écoulées depuis la création (calendaires) &gt; 0"</strong> au lieu des conditions SLA natives de Zendesk. Ce workaround est fragile.
         <br><br>Zendesk dispose de conditions natives <strong>"Tickets : Heures depuis la dernière violation SLA"</strong> et <strong>"Tickets : Heures jusqu'à la violation SLA suivante"</strong> qui sont conçues exactement pour cet usage. Ces automations devraient être reconfigurées pour utiliser ces métriques SLA natives.
         <br><br><strong>Action :</strong> Revoir le groupe complet d'automations SLA. Utiliser les conditions SLA natives plutôt qu'un calcul de temps calendaire depuis la création.
       </div>
