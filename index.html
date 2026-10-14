@@ -291,7 +291,18 @@
             <tr><td>Widget non personnalisé aux couleurs ADEIZ</td><td><span class="badge badge-yellow">Identité visuelle absente</span></td></tr>
           </tbody>
         </table>
-        <br><strong>Action :</strong> Désactiver le bot du widget en production jusqu'à sa finalisation. Configurer tous les messages de fallback, tester le flux complet, puis réactiver. <a href="https://adeizhelp.zendesk.com/ai-agents/dashboard" target="_blank" class="zd-link">↗ AI Agent</a>
+        <br>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0;">
+          <div>
+            <p style="font-size:10px;font-weight:600;color:#9CA3AF;margin-bottom:4px;">Flux &quot;Technical error reply&quot; vide</p>
+            <img src="ai-agent-empty.png" alt="AI Agent Technical error reply vide" style="width:100%;border-radius:6px;border:1px solid #FECACA;">
+          </div>
+          <div>
+            <p style="font-size:10px;font-weight:600;color:#9CA3AF;margin-bottom:4px;">Param&egrave;tre d&eacute;pr&eacute;ci&eacute; au 31 oct. 2026</p>
+            <img src="ai-agent-params.png" alt="AI Agent param&egrave;tres avanc&eacute;s" style="width:100%;border-radius:6px;border:1px solid #FECACA;">
+          </div>
+        </div>
+        <br><strong>Action :</strong> D&eacute;sactiver le bot du widget en production jusqu'&agrave; sa finalisation. Configurer tous les messages de fallback, tester le flux complet, puis réactiver. <a href="https://adeizhelp.zendesk.com/ai-agents/dashboard" target="_blank" class="zd-link">↗ AI Agent</a>
       </div>
     </div>
 
@@ -878,20 +889,6 @@
               <tr><td>Ultimate.ai</td><td><span class="badge badge-orange">Trigger résidu ⚠</span></td></tr>
             </tbody>
           </table>
-        </div>
-
-        <div class="card" style="margin-bottom:10px;">
-          <div class="section-label">AI Agent : Flux "Technical error reply" vide</div>
-          <img src="ai-agent-empty.png" alt="AI Agent Technical error reply vide" style="width:100%;border-radius:8px;border:1px solid #FECACA;margin-top:6px;">
-          <p style="font-size:10px;color:#9CA3AF;margin-top:4px;">Le flux de fallback est vide, aucun message configuré en cas d'erreur technique. L'utilisateur reçoit une réponse vide.</p>
-        </div>
-
-        <div class="alert alert-red" style="margin-bottom:10px;">
-          <div class="alert-title">🔴 Paramètre AI Agent déprécié au 31 oct. 2026</div>
-          <div class="alert-body">
-            Le paramètre <strong>"Waiting message"</strong> (Paramètres avancés) sera supprimé le 31 octobre 2026. Zendesk recommande de l'intégrer dans le flux "Knowledge reply" avant cette date, sinon le comportement actuel sera perdu.
-            <div style="margin-top:8px;"><img src="ai-agent-params.png" alt="AI Agent paramètres avancés - avertissement" style="width:100%;border-radius:6px;border:1px solid #FECACA;"></div>
-          </div>
         </div>
 
         <div class="alert alert-red" style="margin-bottom:10px;">
