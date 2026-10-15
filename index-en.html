@@ -1,0 +1,1627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zendesk Audit: ADEIZ</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --purple: #8B5CF6;
+    --purple-deep: #7C3AED;
+    --header-bg: #200B3E;
+    --body-bg: #F5F3FF;
+    --card-bg: #fff;
+    --text: #1E1B4B;
+    --text-mid: #4B5563;
+    --text-light: #9CA3AF;
+    --border: #E5E7EB;
+    --red: #EF4444;
+    --orange: #F97316;
+    --yellow: #EAB308;
+    --green: #22C55E;
+    --blue: #3B82F6;
+    --teal: #14B8A6;
+  }
+  html, body { height: 100%; overflow: hidden; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: #0F0A1E; }
+
+  .logo-fixed { position: fixed; top: 18px; left: 22px; z-index: 200; height: 32px; pointer-events: none; }
+
+  .deck { width: 100%; height: 100vh; position: relative; }
+
+  .slide { position: absolute; inset: 0; display: none; flex-direction: column; animation: fadeIn .3s ease; }
+  .slide.active { display: flex; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+
+  .slide-dark {
+    background: linear-gradient(135deg, #0F0A1E 0%, #200B3E 50%, #3D1B6E 100%);
+    overflow-y: auto; padding-bottom: 68px; color: #fff;
+  }
+
+  .slide-header {
+    height: 56px; flex-shrink: 0;
+    background: var(--header-bg);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 22px 0 168px;
+    border-bottom: 1px solid rgba(139,92,246,.25);
+  }
+  .slide-header h2 { font-size: 15px; font-weight: 700; color: #fff; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .sh-badge {
+    background: rgba(139,92,246,.25); border: 1px solid rgba(139,92,246,.4);
+    color: #C4B5FD; font-size: 10px; font-weight: 700;
+    letter-spacing: 1px; padding: 4px 12px; border-radius: 99px;
+    text-transform: uppercase; white-space: nowrap; flex-shrink: 0; margin-left: 12px;
+  }
+
+  .slide-body {
+    flex: 1; overflow-y: auto; overflow-x: hidden;
+    background: var(--body-bg);
+    padding: 20px 28px 72px;
+    color: var(--text);
+  }
+
+  .slide-body h3 { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+  .section-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--purple); margin-bottom: 8px; }
+  p { font-size: 12px; line-height: 1.6; }
+
+  .grid { display: grid; gap: 14px; }
+  .grid-2 { grid-template-columns: repeat(2, 1fr); }
+  .grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+  .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,.05); }
+  .stat { text-align: center; }
+  .stat-num { font-size: clamp(24px,3.2vw,40px); font-weight: 800; color: var(--purple); line-height: 1; }
+  .stat-label { font-size: 10px; color: var(--text-light); margin-top: 4px; text-transform: uppercase; letter-spacing: 1px; }
+  .stat-sub { font-size: 11px; color: var(--text-mid); margin-top: 4px; }
+
+  .badge { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 99px; font-size: 10px; font-weight: 700; }
+  .badge-red    { background: #FEE2E2; color: #991B1B; }
+  .badge-orange { background: #FFEDD5; color: #9A3412; }
+  .badge-yellow { background: #FEF3C7; color: #92400E; }
+  .badge-green  { background: #DCFCE7; color: #166534; }
+  .badge-blue   { background: #DBEAFE; color: #1E40AF; }
+  .badge-purple { background: #EDE9FE; color: #5B21B6; }
+  .badge-gray   { background: #F3F4F6; color: #374151; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  th { background: #F3F4F6; color: #374151; font-weight: 700; padding: 8px 11px; text-align: left; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; border-bottom: 2px solid var(--border); }
+  td { padding: 7px 11px; border-bottom: 1px solid var(--border); color: var(--text); }
+  tr:hover td { background: #FAFAFA; }
+  .tcat td { background: #EDE9FE !important; font-size: 10px; font-weight: 700; color: #5B21B6; padding: 4px 11px; }
+
+  .alert { border-radius: 10px; padding: 12px 15px; margin-bottom: 10px; border-left: 4px solid; }
+  .alert-red    { background: #FEF2F2; border-color: var(--red); }
+  .alert-orange { background: #FFF7ED; border-color: var(--orange); }
+  .alert-yellow { background: #FEFCE8; border-color: var(--yellow); }
+  .alert-green  { background: #F0FDF4; border-color: var(--green); }
+  .alert-blue   { background: #EFF6FF; border-color: var(--blue); }
+  .alert-indigo { background: #EDE9FE; border-color: var(--purple); }
+  .alert-title  { font-weight: 700; font-size: 12px; display: flex; align-items: center; gap: 6px; margin-bottom: 5px; color: var(--text); }
+  .alert-body   { font-size: 11px; color: var(--text-mid); line-height: 1.6; }
+
+  .progress-bar { background: #E5E7EB; border-radius: 99px; height: 7px; overflow: hidden; }
+  .progress-fill { height: 100%; border-radius: 99px; }
+
+  .tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 6px; }
+  .tag { background: #EDE9FE; border: 1px solid #DDD6FE; color: #5B21B6; padding: 2px 9px; border-radius: 99px; font-size: 11px; }
+
+  .check-list { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+  .check-list li { display: flex; align-items: flex-start; gap: 6px; font-size: 12px; line-height: 1.5; color: var(--text); }
+  .check-list li::before { content: '✓'; color: var(--green); font-weight: 700; flex-shrink: 0; }
+  .cross-list li::before { content: '✗'; color: var(--red); }
+  .warn-list li::before  { content: '⚠'; color: var(--yellow); }
+  .synth-check { width:14px;height:14px;cursor:pointer;accent-color:#8B5CF6; }
+  .synth-done td { opacity:.45;text-decoration:line-through; }
+
+  .cover-centered { display: flex; flex-direction: column; align-items: center; justify-content: center; flex: 1; text-align: center; padding: 56px 20px 20px; }
+  .cover-pill-new { display: inline-flex; align-items: center; gap: 8px; background: rgba(139,92,246,.18); border: 1px solid rgba(139,92,246,.4); border-radius: 99px; padding: 9px 22px; font-size: 11px; font-weight: 700; color: #C4B5FD; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 28px; }
+  .cstat-row { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; margin-top: 44px; }
+  .cstat-item { display: flex; flex-direction: column; align-items: center; padding: 0 28px; }
+  .cstat-item + .cstat-item { border-left: 1px solid rgba(255,255,255,.12); }
+  .cstat-item .cn { font-size: clamp(26px,3.8vw,48px); font-weight: 800; color: #C4B5FD; line-height: 1; }
+  .cstat-item .cl { font-size: 10px; color: rgba(255,255,255,.38); text-transform: uppercase; letter-spacing: 1.5px; margin-top: 6px; }
+
+  .merci-info { display: flex; align-items: stretch; border: 1px solid rgba(255,255,255,.1); border-radius: 14px; overflow: hidden; margin-top: 32px; }
+  .merci-info-col { padding: 18px 36px; text-align: center; }
+  .merci-info-col + .merci-info-col { border-left: 1px solid rgba(255,255,255,.1); }
+  .merci-info-col .mi-label { font-size: 9px; font-weight: 700; letter-spacing: 2px; color: rgba(255,255,255,.3); text-transform: uppercase; margin-bottom: 6px; }
+  .merci-info-col .mi-val { font-size: 14px; font-weight: 700; color: #fff; }
+
+  .nav {
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(32,11,62,.95); backdrop-filter: blur(12px);
+    border-top: 1px solid rgba(139,92,246,.3);
+    display: flex; align-items: center; justify-content: center;
+    gap: 16px; padding: 10px 24px; height: 54px;
+  }
+  .nav button { background: rgba(139,92,246,.18); border: 1px solid rgba(139,92,246,.35); color: #fff; border-radius: 8px; padding: 6px 14px; cursor: pointer; font-size: 13px; font-weight: 600; transition: all .2s; }
+  .nav button:hover { background: var(--purple); }
+  .dots { display: flex; gap: 6px; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(139,92,246,.3); cursor: pointer; transition: all .2s; }
+  .dot.active { background: var(--purple); transform: scale(1.3); }
+  .slide-counter { font-size: 12px; color: rgba(255,255,255,.5); min-width: 44px; text-align: center; }
+
+  .zd-link { display:inline-flex; align-items:center; gap:2px; color:#8B5CF6; text-decoration:none; font-size:10px; font-weight:600; opacity:.7; margin-left:5px; white-space:nowrap; border:1px solid rgba(139,92,246,.3); border-radius:4px; padding:1px 5px; }
+  .zd-link:hover { opacity:1; background:rgba(139,92,246,.08); }
+
+  .check-row { display:flex; align-items:flex-start; gap:9px; padding:6px 14px; border-bottom:1px solid #F3F4F6; font-size:11.5px; color:#374151; line-height:1.5; cursor:pointer; user-select:none; transition:background .15s; }
+  .check-row:hover { background:#F9FAFB; }
+  .check-row:last-child { border-bottom:none; }
+  .task-cb { appearance:none; -webkit-appearance:none; width:14px; height:14px; border:2px solid #D1D5DB; border-radius:3px; flex-shrink:0; margin-top:2px; cursor:pointer; transition:all .2s; background:#fff; }
+  .task-cb:checked { background:#22C55E; border-color:#22C55E; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2 6L5 9L10 3' stroke='white' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); background-size:10px; background-repeat:no-repeat; background-position:center; }
+  .check-row:has(.task-cb:checked) .cb-text { text-decoration:line-through; color:#9CA3AF; }
+  .check-row:has(.task-cb:checked) .cb-text strong { color:#9CA3AF; font-weight:500; }
+
+  @media (max-width: 768px) {
+    .slide-header { padding-left: 140px; }
+    .slide-header h2 { font-size: 13px; }
+    .slide-body { padding: 14px 14px 72px; }
+    .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+    th.hide-m, td.hide-m { display: none; }
+    .cstat-row { gap: 10px; } .cstat-item { border: none !important; padding: 0 12px; }
+    .merci-info { flex-direction: column; } .merci-info-col + .merci-info-col { border-left: none; border-top: 1px solid rgba(255,255,255,.1); }
+  }
+</style>
+</head>
+<body>
+<a href="https://omycare.fr/" target="_blank" rel="noopener"><img src="omycarelogo.png" alt="OmyCare" class="logo-fixed"></a>
+<div class="deck" id="deck">
+
+<!-- ══ SLIDE 1 : COVER ══ -->
+<div class="slide slide-dark active" id="slide-1">
+  <div class="cover-centered">
+    <div class="cover-pill-new">🔍 Full Audit · October 2026</div>
+    <h1 style="font-size:clamp(36px,5vw,62px);font-weight:800;line-height:1.05;margin-bottom:6px;color:#fff;">Zendesk Audit</h1>
+    <img src="adeizlogo.png" alt="ADEIZ" style="height:54px;filter:brightness(0) invert(1);opacity:.9;margin-bottom:14px;margin-top:4px;">
+    <p style="font-size:15px;color:rgba(255,255,255,.38);letter-spacing:.5px;">adeizhelp.zendesk.com</p>
+    <div class="cstat-row">
+      <div class="cstat-item"><div class="cn">808</div><div class="cl">Tickets</div></div>
+      <div class="cstat-item"><div class="cn">37</div><div class="cl">Agents</div></div>
+      <div class="cstat-item"><div class="cn">39</div><div class="cl">Triggers</div></div>
+      <div class="cstat-item"><div class="cn">17</div><div class="cl">Groups</div></div>
+      <div class="cstat-item"><div class="cn">917</div><div class="cl">HC Articles</div></div>
+      <div class="cstat-item"><div class="cn">2</div><div class="cl">SLA Policies</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SLIDE 2 : OVERVIEW ══ -->
+<div class="slide" id="slide-2">
+  <div class="slide-header">
+    <h2>📊 ADEIZ Account Diagnosis</h2>
+    <span class="sh-badge">1,100 TICKETS · 4 MONTHS · 15 AT-RISK SLAS</span>
+  </div>
+  <div class="slide-body">
+    <div class="grid grid-4" style="margin-bottom:16px;">
+      <div class="card stat">
+        <div class="stat-num">1,100</div>
+        <div class="stat-label">Total Tickets</div>
+        <div class="stat-sub">105 currently open</div>
+      </div>
+      <div class="card stat">
+        <div class="stat-num" style="color:#EF4444;">15</div>
+        <div class="stat-label">At-Risk SLAs</div>
+        <div class="stat-sub">47 tickets blocked (central)</div>
+      </div>
+      <div class="card stat">
+        <div class="stat-num" style="color:#EF4444;">4+</div>
+        <div class="stat-label">Broken Triggers</div>
+        <div class="stat-sub">Actions with empty fields</div>
+      </div>
+      <div class="card stat">
+        <div class="stat-num" style="color:#EF4444;">917</div>
+        <div class="stat-label">Articles HC</div>
+        <div class="stat-sub">0 labels · AI not optimal</div>
+      </div>
+    </div>
+    <div class="grid grid-2">
+      <div class="card">
+        <div class="section-label">✓ Strengths</div>
+        <ul class="check-list">
+          <li>Exemplary group structure: N1, N2, 5 maintainer groups (Diebold, Stackr, Nedap, Orange, TMA)</li>
+          <li>Business hours Mon-Sat 09:00-20:30 (6 days/week, suited for retail)</li>
+          <li>Views organized with a dedicated view per escalation group</li>
+          <li>Useful apps in place: JIRA, Aircall, Time Tracking, ATDESK</li>
+          <li>Copilot enabled on 90.4% of tickets (excellent adoption)</li>
+          <li>Active customer follow-up automations (24h, 5 days)</li>
+        </ul>
+        <ul class="check-list warn-list">
+          <li><strong>13 custom statuses</strong>: high volume, Zendesk categories (Pending, On-hold) should be checked to avoid SLA side effects. Follow-up automations apply to all Pending tickets, which may generate unwanted follow-ups.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="section-label">✗ Issues Detected</div>
+        <ul class="check-list cross-list">
+          <li><strong>4+ broken triggers</strong>: actions with empty custom fields (Stackr, Diebold, Orange…)</li>
+          <li><strong>AI Agent not ready for production</strong>: empty messages, no fallback</li>
+          <li><strong>SLA Automations to review</strong>: workaround instead of native Zendesk conditions</li>
+          <li><strong>2 identical SLA policies</strong> for Armand Thiery and Printemps, one is enough</li>
+          <li><strong>917 HC articles with no labels</strong>: Copilot and AI Agent blind</li>
+          <li>Some Help Center articles contain mainly images, with no text usable by AI</li>
+          <li>Duplicate "<strong>Quick Assignment</strong>" trigger</li>
+          <li>SPF warning on the Gmail connector</li>
+          <li>Explore "Top 10 sub-categories" report broken, no results</li>
+          <li>Test fields in organization configuration (to remove)</li>
+        </ul>
+        <ul class="check-list warn-list">
+          <li>Test account <strong>"Lj test"</strong> active in production + 7 functional accounts configured as agents (Pole Rfid, AT Commerce, At-Stock, Bureautique, Décisionnel, Admin Systèmes...), to verify if these generic emails should remain as agents</li>
+        </ul>
+
+        <div class="card" style="margin-top:14px;">
+          <div class="section-label">Overall Account Score</div>
+          <div style="display:flex;flex-direction:column;gap:10px;margin-top:6px;">
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px;"><span>Structure &amp; Groups</span><span style="font-weight:700;color:#166534;">90%</span></div>
+              <div class="progress-bar"><div class="progress-fill" style="width:90%;background:#22C55E;"></div></div>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px;"><span>Triggers &amp; Automations</span><span style="font-weight:700;color:#92400E;">58%</span></div>
+              <div class="progress-bar"><div class="progress-fill" style="width:58%;background:#EAB308;"></div></div>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px;"><span>SLA &amp; Hours</span><span style="font-weight:700;color:#92400E;">60%</span></div>
+              <div class="progress-bar"><div class="progress-fill" style="width:60%;background:#F97316;"></div></div>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px;"><span>Forms &amp; Fields</span><span style="font-weight:700;color:#92400E;">55%</span></div>
+              <div class="progress-bar"><div class="progress-fill" style="width:55%;background:#EAB308;"></div></div>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px;"><span>Help Center</span><span style="font-weight:700;color:#991B1B;">28%</span></div>
+              <div class="progress-bar"><div class="progress-fill" style="width:28%;background:#EF4444;"></div></div>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px;"><span>Account Hygiene</span><span style="font-weight:700;color:#92400E;">60%</span></div>
+              <div class="progress-bar"><div class="progress-fill" style="width:60%;background:#EAB308;"></div></div>
+            </div>
+            <div style="margin-top:4px;">
+              <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px;"><span style="font-weight:700;">Overall Score</span><span style="font-weight:800;color:#7C3AED;">59%</span></div>
+              <div class="progress-bar" style="height:10px;"><div class="progress-fill" style="width:59%;background:linear-gradient(90deg,#8B5CF6,#7C3AED);"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SLIDE 3 : CRITICAL ISSUES ══ -->
+<div class="slide" id="slide-3">
+  <div class="slide-header">
+    <h2>🔴 Critical Issues: Priority Points Identified</h2>
+    <span class="sh-badge">3 CRITICAL ISSUES · MAX PRIORITY</span>
+  </div>
+  <div class="slide-body">
+    <div class="alert alert-red">
+      <div class="alert-title"><span class="badge badge-red">C1</span> Broken Triggers: actions with empty custom field values</div>
+      <div class="alert-body">
+        At least 4 maintainer escalation triggers contain <strong>actions on ticket fields with empty values</strong>. These triggers execute but some values may be missing or no longer needed — review to ensure escalations work as expected.
+        <br><br>
+        <table>
+          <thead><tr><th>Broken Trigger</th><th>Issue</th><th>URL</th></tr></thead>
+          <tbody>
+            <tr><td>Maintainer Escalation – Stackr AT</td><td><span class="badge badge-red">2 empty fields: custom_fields_30321397535516, custom_fields_30321375371932</span></td><td><a href="https://adeizhelp.zendesk.com/admin/objects-rules/rules/triggers/30318143713308" target="_blank" class="zd-link">↗</a></td></tr>
+            <tr><td>Maintainer Escalation – Diebold AT</td><td><span class="badge badge-red">Broken actions (missing fields)</span></td><td><a href="https://adeizhelp.zendesk.com/admin/objects-rules/rules/triggers/28113556671644" target="_blank" class="zd-link">↗</a></td></tr>
+            <tr><td>Maintainer Follow-up – Orange / Stackr / Nedap</td><td><span class="badge badge-red">Broken actions (missing fields)</span></td><td><a href="https://adeizhelp.zendesk.com/admin/objects-rules/rules/triggers/30318357727900" target="_blank" class="zd-link">↗</a></td></tr>
+          </tbody>
+        </table>
+        <br><strong>Immediate Action:</strong> Audit all maintainer triggers, identify missing custom fields (IDs 30321397535516 and 30321375371932), recreate them or remove orphaned actions.
+      </div>
+    </div>
+
+    <div class="alert alert-red">
+      <div class="alert-title"><span class="badge badge-red">C2</span> AI Agent Not Ready for Production: empty messages, no fallback</div>
+      <div class="alert-body">
+        The messaging widget is active on the Help Center (FAQ), with <strong>Advanced AI</strong>, but it has not been customized to match the brand's visual identity. The AI bot also has configuration errors:
+        <br><br>
+        <table>
+          <thead><tr><th>Issue</th><th>Impact</th></tr></thead>
+          <tbody>
+            <tr><td>"Technical error reply" flow empty, message not configured</td><td><span class="badge badge-red">Silent error visible to users</span></td></tr>
+            <tr><td>No fallback message configured</td><td><span class="badge badge-red">If bot fails, no response</span></td></tr>
+            <tr><td>Knowledge rules based on labels not being generated</td><td><span class="badge badge-red">Articles never suggested</span></td></tr>
+            <tr><td>Deprecated parameters in configuration</td><td><span class="badge badge-orange">Unpredictable behavior</span></td></tr>
+            <tr><td>Widget not customized to ADEIZ colors</td><td><span class="badge badge-yellow">No visual identity</span></td></tr>
+          </tbody>
+        </table>
+        <br>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0;">
+          <div>
+            <p style="font-size:10px;font-weight:600;color:#9CA3AF;margin-bottom:4px;">"Technical error reply" flow empty</p>
+            <img src="ai-agent-empty.png" alt="AI Agent Technical error reply empty" style="width:100%;border-radius:6px;border:1px solid #FECACA;">
+          </div>
+          <div>
+            <p style="font-size:10px;font-weight:600;color:#9CA3AF;margin-bottom:4px;">Parameter deprecated Oct 31, 2026</p>
+            <img src="ai-agent-params.png" alt="AI Agent param&egrave;tres avanc&eacute;s" style="width:100%;border-radius:6px;border:1px solid #FECACA;">
+          </div>
+        </div>
+        <br><strong>Action:</strong> Disable the widget bot in production until it is finalized. Configure all fallback messages, test the complete flow, then reactivate. <a href="https://adeizhelp.zendesk.com/ai-agents/dashboard" target="_blank" class="zd-link">↗ AI Agent</a>
+      </div>
+    </div>
+
+    <div class="alert alert-red">
+      <div class="alert-title"><span class="badge badge-red">C3</span> Help Center: 917 articles with no labels, Copilot and AI Agent blind</div>
+      <div class="alert-body">
+        None of the 917 Help Center articles have <strong>labels</strong>. Labels are the primary mechanism by which Zendesk Copilot and AI Agent find and suggest articles. Without labels, <strong>the AI cannot use the knowledge base</strong>, even though 90% of tickets have Copilot enabled.
+        <br>Additionally, some articles contain <strong>mainly screenshots</strong> with no text (AI cannot read images).
+        <br><br>
+        <table>
+          <thead><tr><th>HC Issue</th><th>AI Impact</th></tr></thead>
+          <tbody>
+            <tr><td>0 labels on 917 articles</td><td><span class="badge badge-red">Copilot with no suggestions</span></td></tr>
+            <tr><td>Some articles = mainly images, no text</td><td><span class="badge badge-red">Content unreadable by AI</span></td></tr>
+            <tr><td>Comments enabled on all articles</td><td><span class="badge badge-orange">Spam / moderation risk</span></td></tr>
+            <tr><td>Legacy Zendesk editor in use</td><td><span class="badge badge-yellow">Formatting limitations</span></td></tr>
+          </tbody>
+        </table>
+        <br><strong>Action:</strong> Add thematic labels to the most-viewed articles first. Complete image-only articles with descriptive text. Disable comments by default.
+        <a href="https://adeizhelp.zendesk.com/admin/knowledge-base" target="_blank" class="zd-link">↗ Help Center Admin</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SLIDE 4 : IMPORTANT POINTS ══ -->
+<div class="slide" id="slide-4">
+  <div class="slide-header">
+    <h2>🟠 Important Points: Priority Fixes</h2>
+    <span class="sh-badge">6 POINTS · WEEK 1-2</span>
+  </div>
+  <div class="slide-body">
+    <div class="alert alert-orange">
+      <div class="alert-title"><span class="badge badge-orange">C4</span> SLA Automations: workaround to replace with native conditions
+        <a href="https://adeizhelp.zendesk.com/admin/objects-rules/rules/automations/30892688922780" target="_blank" class="zd-link">↗ Automations</a>
+      </div>
+      <div class="alert-body">
+        This group of SLA automations <strong>deserves to be reviewed</strong>. The 4 automations (urgent/high/normal/low) use a condition <strong>"Hours elapsed since creation (calendar) &gt; 0"</strong> instead of Zendesk's native SLA conditions. This workaround is fragile.
+        <br><br>There are <strong>specific conditions</strong> for triggering actions before or after an SLA breach — this is precisely one of the objectives of Zendesk's native SLA configuration. With these automations, part of the native SLA behavior is replaced when it would be simpler and more effective to rely directly on the built-in features designed for this.
+        <br><br><strong>Action:</strong> Review the full SLA automation group. Use native SLA conditions rather than a calendar time calculation from creation.
+      </div>
+    </div>
+
+    <div class="alert alert-orange">
+      <div class="alert-title"><span class="badge badge-orange">C5</span> 2 Identical SLA Policies: one general policy is enough
+        <a href="https://adeizhelp.zendesk.com/admin/objects-rules/rules/sla" target="_blank" class="zd-link">↗ SLA</a>
+      </div>
+      <div class="alert-body">
+        You have configured <strong>distinct SLA policies for each organization</strong>, when the conditions are exactly the same for all. I therefore recommend creating a <strong>general SLA policy</strong> applicable to all organizations, then adding specific exceptions if needed. This would simplify the configuration and make it easier to maintain.
+        <br><br><strong>Action:</strong> Create a single general SLA policy covering all organizations. Add specific exceptions only if SLAs differ by organization.
+      </div>
+    </div>
+
+    <div class="alert alert-orange">
+      <div class="alert-title"><span class="badge badge-orange">C6</span> SPF warning on the Gmail connector + sécurité email</div>
+      <div class="alert-body">
+        An <strong>SPF alert</strong> is present on the ADEIZ Gmail connector. Without properly configured SPF, emails sent from Zendesk may be marked as spam by recipients, impacting the deliverability of notifications and follow-ups.
+        <br><strong>Action:</strong> Configure the SPF record to include Zendesk servers (add <code>include:mail.zendesk.com</code> to DNS). Also verify DKIM and DMARC.
+      </div>
+    </div>
+
+    <div class="alert alert-yellow">
+      <div class="alert-title"><span class="badge badge-yellow">C7</span> Duplicate "Quick Assignment" Trigger + Ultimate.ai Residual
+        <a href="https://adeizhelp.zendesk.com/admin/objects-rules/rules/triggers" target="_blank" class="zd-link">↗ Triggers</a>
+      </div>
+      <div class="alert-body">
+        <ul style="padding-left:14px;display:flex;flex-direction:column;gap:4px;">
+          <li>The "<strong>Quick Assignment</strong>" trigger exists as <strong>two active copies</strong> (IDs 28970987661340 and another): possible conflict in automatic routing</li>
+        </ul>
+        <br><strong>Action:</strong> Identify and remove the duplicate.
+      </div>
+    </div>
+
+    <div class="alert alert-yellow">
+      <div class="alert-title"><span class="badge badge-yellow">C8</span> Explore "Top 10 Sub-categories" Report Broken
+        <a href="https://adeizhelp.zendesk.com/explore#/new-dashboard-builder/75639692" target="_blank" class="zd-link">↗ Explore</a>
+      </div>
+      <div class="alert-body">
+        The "Top 10 sub-categories" report uses <strong>custom attributes that need to be reconfigured</strong> to exclude null values: this approach does not work in Zendesk Explore and the report returns no results. Additionally, native Zendesk reports cannot be modified directly. To work with them, it is recommended to create <strong>clones (master clones)</strong> on which to apply customizations.
+        <br><strong>Action:</strong> Clone the native reports. Reconfigure the sub-category custom attribute with the correct null-exclusion method.
+        <div style="margin-top:8px;"><img src="explore-sous-categories.png" alt="Explore configuration Top 10 sub-categories" style="width:100%;max-width:420px;border-radius:6px;border:1px solid #FDE68A;"></div>
+      </div>
+    </div>
+
+    <div class="alert alert-yellow">
+      <div class="alert-title"><span class="badge badge-yellow">C9</span> Test Account + Functional Accounts + Organization Test Fields</div>
+      <div class="alert-body">
+        <ul style="padding-left:14px;display:flex;flex-direction:column;gap:4px;">
+          <li>Account "<strong>Lj test</strong>" active in production </li>
+          <li>7 functional accounts (Pole Rfid, AT Pole Commerce, At - Stock, <strong>At - Sicles</strong> ⚠ typo Sycles, Pole Bureautique, Pole Décisionnel, Admin Systèmes) used as individual agents</li>
+          <li>2 test fields in organization configuration: "<strong>Materials test multifield</strong>" and "<strong>test material in org</strong>": to remove</li>
+        </ul>
+        <a href="https://adeizhelp.zendesk.com/admin/people/team/members" target="_blank" class="zd-link">↗ Agents</a>
+        <a href="https://adeizhelp.zendesk.com/admin/people/configuration/organization_fields" target="_blank" class="zd-link">↗ Org fields</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SLIDE 5 : TRIGGERS & AUTOMATIONS ══ -->
+<div class="slide" id="slide-5">
+  <div class="slide-header">
+    <h2>⚡ Triggers & Automations</h2>
+    <span class="sh-badge">39 TRIGGERS · 10 AUTOMATIONS · ALL ACTIVE</span>
+  </div>
+  <div class="slide-body">
+    <div class="grid grid-2" style="gap:14px;">
+      <div>
+        <div class="card" style="margin-bottom:10px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+            <div class="section-label" style="margin:0;">Triggers: 39 total</div>
+            <div style="display:flex;gap:5px;"><span class="badge badge-green">39 ON</span><span class="badge badge-gray">0 OFF</span></div>
+          </div>
+          <div style="overflow-y:auto;max-height:calc(100vh - 220px);">
+            <table>
+              <thead><tr><th>Status</th><th>Trigger</th></tr></thead>
+              <tbody>
+                <tr class="tcat"><td colspan="2">CUSTOMER NOTIFICATIONS</td></tr>
+                <tr><td><span class="badge badge-green">ON</span></td><td>Notify requester + CC on receipt</td></tr>
+                <tr><td><span class="badge badge-green">ON</span></td><td>Notify requester of proactive ticket</td></tr>
+                <tr><td><span class="badge badge-green">ON</span></td><td>Notify requester + CC on update</td></tr>
+                <tr><td><span class="badge badge-green">ON</span></td><td>Request CSAT (messaging)</td></tr>
+                <tr class="tcat"><td colspan="2">ROUTAGE & AFFECTATION</td></tr>
+                <tr><td><span class="badge badge-green">ON</span></td><td>Auto-assign to first responding agent</td></tr>
+                <tr><td><span class="badge badge-green">ON</span></td><td>Quick Assignment</td></tr>
+                <tr><td><span class="badge badge-green">ON</span></td><td>Return to unassigned Level 1</td></tr>
+                <tr><td><span class="badge badge-green">ON</span></td><td>Set tickets without priority to normal</td></tr>
+                <tr><td><span class="badge badge-green">ON</span></td><td>Set type to Incident by default</td></tr>
+                <tr><td><span class="badge badge-green">ON</span></td><td>Unanswered voicemail → Level 1 Group</td></tr>
+                <tr><td><span class="badge badge-green">ON</span></td><td>TMA Adeiz – Group and status assignment</td></tr>
+                <tr class="tcat"><td colspan="2">BUSINESS ESCALATIONS</td></tr>
+                <tr><td><span class="badge badge-green">ON</span></td><td>Escalation AT – Admin Systems</td></tr>
+                <tr><td><span class="badge badge-green">ON</span></td><td>Escalation AT – Office IT</td></tr>
+                <tr><td><span class="badge badge-green">ON</span></td><td>Escalation AT – Commerce Dept.</td></tr>
+                <tr><td><span class="badge badge-green">ON</span></td><td>Escalation AT – Analytics Dept.</td></tr>
+                <tr><td><span class="badge badge-green">ON</span></td><td>Escalation AT – GDM</td></tr>
+                <tr><td><span class="badge badge-green">ON</span></td><td>Escalation AT – RFID / Sycles / Stock</td></tr>
+                <tr class="tcat"><td colspan="2">MAINTAINERS (⚠ broken triggers)</td></tr>
+                <tr><td><span class="badge badge-red">BROKEN</span></td><td>Maintainer Escalation – Diebold AT <small>(empty fields)</small> <a href="https://adeizhelp.zendesk.com/admin/objects-rules/rules/triggers/28113556671644" target="_blank" class="zd-link">↗</a></td></tr>
+                <tr><td><span class="badge badge-red">BROKEN</span></td><td>Maintainer Escalation – Stackr AT <small>(empty custom_fields)</small> <a href="https://adeizhelp.zendesk.com/admin/objects-rules/rules/triggers/30318143713308" target="_blank" class="zd-link">↗</a>
+                  <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:6px;">
+                    <img src="trigger-broken-stackr.png" alt="Broken Stackr trigger" style="width:100%;border-radius:6px;border:1px solid #FECACA;">
+                    <img src="trigger-broken-2.png" alt="Broken Stackr trigger detail" style="width:100%;border-radius:6px;border:1px solid #FECACA;">
+                  </div>
+                </td></tr>
+                <tr><td><span class="badge badge-red">BROKEN</span></td><td>Maintainer Follow-up – Orange/Stackr/Nedap <small>(missing fields)</small> <a href="https://adeizhelp.zendesk.com/admin/objects-rules/rules/triggers/30318357727900" target="_blank" class="zd-link">↗</a></td></tr>
+                <tr><td><span class="badge badge-green">ON</span></td><td>Maintainer Escalation – Nedap AT</td></tr>
+                <tr><td><span class="badge badge-green">ON</span></td><td>Maintainer Escalation – Orange AT (Extranet)</td></tr>
+                <tr><td><span class="badge badge-green">ON</span></td><td>Orange AT – Missing External Ref. Alert</td></tr>
+                <tr><td><span class="badge badge-green">ON</span></td><td>Maintainer Trigger – Hardware without contract</td></tr>
+                <tr><td><span class="badge badge-green">ON</span></td><td>Relance Mainteneur 1 & 2 – Diebold / Stackr / Nedap</td></tr>
+                <tr><td><span class="badge badge-green">ON</span></td><td>Maintainer Follow-up – N2 / Orange Alert</td></tr>
+                <tr class="tcat"><td colspan="2">IA & COPILOT</td></tr>
+                <tr><td><span class="badge badge-green">ON</span></td><td>Enable Auto Assist (Copilot) on new tickets</td></tr>
+                <tr><td><span class="badge badge-orange">ON ⚠</span></td><td>Ultimate.ai Email Channel Automation <small>(external AI residual to remove)</small></td></tr>
+                <tr class="tcat"><td colspan="2">BACKLOG & ROUTAGE</td></tr>
+                <tr><td><span class="badge badge-green">ON</span></td><td>Backlog alert – remove relance_48h tag</td></tr>
+                <tr><td><span class="badge badge-orange">DUPLICATE</span></td><td>Affectation rapide <small>(2 triggers actifs en même temps)</small> <a href="https://adeizhelp.zendesk.com/admin/objects-rules/rules/triggers/28970987661340" target="_blank" class="zd-link">↗</a></td></tr>
+                <tr><td><span class="badge badge-green">ON</span></td><td>Notify assigned agent + group on assignment</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="card" style="margin-bottom:10px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+            <div class="section-label" style="margin:0;">Automations: 10 total</div>
+            <div style="display:flex;gap:5px;"><span class="badge badge-green">10 ON</span><span class="badge badge-gray">0 OFF</span></div>
+          </div>
+          <table>
+            <thead><tr><th>Status</th><th>Automation</th></tr></thead>
+            <tbody>
+              <tr><td><span class="badge badge-green">ON</span></td><td>Close ticket 3 days after Resolved</td></tr>
+              <tr><td><span class="badge badge-green">ON</span></td><td>Pending notification 24h</td></tr>
+              <tr><td><span class="badge badge-green">ON</span></td><td>Pending notification 5 days</td></tr>
+              <tr><td><span class="badge badge-green">ON</span></td><td>Request CSAT (system automation)</td></tr>
+              <tr><td><span class="badge badge-green">ON</span></td><td>Orange follow-up – Missing External Ref. after 1h</td></tr>
+              <tr><td><span class="badge badge-green">ON</span></td><td>Backlog alert – assigned ticket with no update 48h</td></tr>
+              <tr><td><span class="badge badge-green">ON</span></td><td>SLA Alert – first reply urgent (8 min)</td></tr>
+              <tr><td><span class="badge badge-green">ON</span></td><td>SLA Alert – first reply high (15 min)</td></tr>
+              <tr><td><span class="badge badge-green">ON</span></td><td>SLA Alert – first reply normal (30 min)</td></tr>
+              <tr><td><span class="badge badge-green">ON</span></td><td>SLA Alert – first reply low (1h)</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="alert alert-orange" style="margin-top:8px;">
+          <div class="alert-title">⚠ SLA Automations: logic to optimize</div>
+          <div class="alert-body">
+            The 4 SLA alert automations use <strong>"Hours elapsed since creation (calendar) &gt; 0"</strong> instead of native SLA conditions. This workaround is imprecise and may alert outside business hours. Zendesk offers dedicated conditions: <strong>"Hours since last SLA breach"</strong> and <strong>"Hours until next SLA breach"</strong> which should be used instead.
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;">
+              <div>
+                <p style="font-size:10px;color:#92400E;font-weight:700;margin-bottom:4px;">⚠ Current condition (to replace)</p>
+                <img src="automation-sla-wrong.png" alt="SLA automation to fix" style="width:100%;border-radius:6px;border:1px solid #FED7AA;">
+              </div>
+              <div>
+                <p style="font-size:10px;color:#166534;font-weight:700;margin-bottom:4px;">✅ Native conditions available</p>
+                <img src="sla-native-conditions.png" alt="Native SLA conditions" style="width:100%;border-radius:6px;border:1px solid #BBF7D0;">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SLIDE 6 : SLA & HORAIRES ══ -->
+<div class="slide" id="slide-6">
+  <div class="slide-header">
+    <h2>⏱ SLA & Horaires commerciaux</h2>
+    <span class="sh-badge">2 SLA POLICIES · ARMAND THIERY + PRINTEMPS</span>
+  </div>
+  <div class="slide-body">
+    <div class="grid grid-2" style="gap:14px;margin-bottom:14px;">
+      <div>
+        <div class="alert alert-yellow" style="margin-bottom:10px;">
+          <div class="alert-title">⚠ Armand Thiery SLA: duplicate with Printemps, identical conditions</div>
+          <div class="alert-body">
+            <span class="badge badge-blue" style="margin-bottom:8px;display:inline-block;">Filter: organization = Armand Thiery</span>
+            <table>
+              <thead><tr><th>Priority</th><th>1st Response</th><th>Agent Work</th><th>Next Reply</th><th>Resolution</th></tr></thead>
+              <tbody>
+                <tr><td><span class="badge badge-red">Urgent</span></td><td style="color:#166534;font-weight:600;">10 min</td><td>30 min</td><td>30 min</td><td>2h</td></tr>
+                <tr><td><span class="badge badge-orange">High</span></td><td style="color:#166534;font-weight:600;">20 min</td><td>1h</td><td>1h</td><td>8h</td></tr>
+                <tr><td><span class="badge badge-yellow">Normal</span></td><td style="color:#166534;font-weight:600;">45 min</td><td>3h</td><td>2h</td><td>24h</td></tr>
+                <tr><td><span class="badge badge-gray">Low</span></td><td style="color:#166534;font-weight:600;">2h</td><td>8h</td><td>4h</td><td>48h</td></tr>
+              </tbody>
+            </table>
+            <br>All metrics use business hours. ✓
+          </div>
+        </div>
+        <div class="alert alert-yellow">
+          <div class="alert-title">⚠ Printemps SLA: duplicate with Armand Thiery, identical conditions</div>
+          <div class="alert-body">
+            Same configuration as Armand Thiery. Both policies have the same target levels. Only the organization filter differs.
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="alert alert-green" style="margin-bottom:10px;">
+          <div class="alert-title">✅ Business Hours "AT Hours": Mon-Sat covered</div>
+          <div class="alert-body">
+            <table>
+              <thead><tr><th>Days</th><th>Hours</th><th>Duration</th></tr></thead>
+              <tbody>
+                <tr><td>Monday – Saturday</td><td style="color:#166534;font-weight:600;">09:00 – 20:30</td><td style="color:#166534;font-weight:600;">11h30 ✓</td></tr>
+                <tr><td>Sunday</td><td colspan="2" style="color:#9CA3AF;">Closed</td></tr>
+                <tr><td><strong>Total/week</strong></td><td colspan="2" style="color:#166534;font-weight:700;">69h ✓</td></tr>
+              </tbody>
+            </table>
+            <br>Broad hours suited for retail (stores open on Saturdays).
+          </div>
+        </div>
+
+        <div class="alert alert-red">
+          <div class="alert-title">🔴 2 Identical SLA Policies: one is enough
+            <a href="https://adeizhelp.zendesk.com/admin/objects-rules/rules/sla" target="_blank" class="zd-link">↗ SLA</a>
+          </div>
+          <div class="alert-body">
+            The "Armand Thiery" and "Printemps" policies have <strong>exactly identical conditions and targets</strong>. This duplication complicates maintenance: each change must be applied twice, with a risk of divergence.
+            <br><br><strong>Action:</strong> Merge into a single general policy. Add exceptions only if SLAs differ by organization. This also resolves the absence of SLA for other stores.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SLIDE 7 : VUES & GROUPES ══ -->
+<div class="slide" id="slide-7">
+  <div class="slide-header">
+    <h2>👁 Vues & Groupes : Organisation multi-niveaux</h2>
+    <span class="sh-badge">48 VIEWS · 17 GROUPS</span>
+  </div>
+  <div class="slide-body">
+    <div class="grid grid-2" style="gap:14px;">
+      <div>
+        <div class="card" style="margin-bottom:10px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+            <div class="section-label" style="margin:0;">Views: 48 total <a href="https://adeizhelp.zendesk.com/admin/workspaces/agent-workspace/views" target="_blank" class="zd-link">↗ Views</a></div>
+            <div style="display:flex;gap:5px;"><span class="badge badge-green">35 ON</span><span class="badge badge-gray">13 OFF</span></div>
+          </div>
+          <table>
+            <thead><tr><th>Active View</th><th>Type</th><th>#</th></tr></thead>
+            <tbody>
+              <tr class="tcat"><td colspan="3">GLOBAL SUPERVISION</td></tr>
+              <tr><td>🌎 All tickets (open and resolved)</td><td><span class="badge badge-blue">Supervision</span></td><td style="font-weight:700;color:#8B5CF6;">1,1k</td></tr>
+              <tr><td>🌎 All resolved tickets</td><td><span class="badge badge-gray">Archive</span></td><td>978</td></tr>
+              <tr><td>🌎 All open tickets</td><td><span class="badge badge-blue">Supervision</span></td><td style="font-weight:700;">105</td></tr>
+              <tr><td>⭕️ Unassigned N1</td><td><span class="badge badge-red">Alert</span></td><td style="font-weight:700;color:#EF4444;">4</td></tr>
+              <tr><td>⭕️ Backlog >48h</td><td><span class="badge badge-orange">Backlog</span></td><td style="font-weight:700;color:#F97316;">8</td></tr>
+              <tr><td>⭕️ Awaiting store</td><td><span class="badge badge-orange">Pending</span></td><td style="font-weight:700;">36</td></tr>
+              <tr><td>⭕️ TMA Adeiz in progress</td><td><span class="badge badge-blue">TMA</span></td><td>0</td></tr>
+              <tr><td>⭕️ Open tickets</td><td><span class="badge badge-blue">Open</span></td><td>13</td></tr>
+              <tr><td>⭕️ Central tickets in progress</td><td><span class="badge badge-orange">Central</span></td><td style="font-weight:700;color:#F97316;">47</td></tr>
+              <tr><td>⭕️ Maintainer tickets in progress</td><td><span class="badge badge-red">Maintainer</span></td><td>6</td></tr>
+              <tr><td>⚡️ Urgent priority</td><td><span class="badge badge-red">Urgent</span></td><td>0</td></tr>
+              <tr><td>🛑 SLA at risk</td><td><span class="badge badge-red">SLA</span></td><td style="font-weight:700;color:#EF4444;">15</td></tr>
+              <tr class="tcat"><td colspan="3">PERSONAL AGENT</td></tr>
+              <tr><td>📬 My open tickets</td><td><span class="badge badge-blue">Agent</span></td><td>10</td></tr>
+              <tr><td>My resolved tickets</td><td><span class="badge badge-gray">Agent</span></td><td>0</td></tr>
+              <tr><td>✅ Assigned tickets</td><td><span class="badge badge-blue">Agent</span></td><td></td></tr>
+              <tr><td>My assigned tickets</td><td><span class="badge badge-blue">Agent</span></td><td></td></tr>
+              <tr><td>New tickets</td><td><span class="badge badge-blue">Agent</span></td><td></td></tr>
+              <tr class="tcat"><td colspan="3">BY CHANNEL</td></tr>
+              <tr><td>Channels::💌 Email</td><td><span class="badge badge-purple">Canal</span></td><td></td></tr>
+              <tr><td>Channels::💬 Messaging</td><td><span class="badge badge-purple">Canal</span></td><td></td></tr>
+              <tr class="tcat"><td colspan="3">ESCALATIONS BY GROUP</td></tr>
+              <tr><td>Escalated::🌐 Global</td><td><span class="badge badge-orange">Escalation</span></td><td></td></tr>
+              <tr><td>Escalated::🌐 Global AT</td><td><span class="badge badge-orange">Escalation</span></td><td></td></tr>
+              <tr><td>Escalated::🔧 Diebold AT</td><td><span class="badge badge-orange">Maintainer</span></td><td></td></tr>
+              <tr><td>Escalated::🖥️ Admin Systems</td><td><span class="badge badge-orange">AT</span></td><td></td></tr>
+              <tr><td>Escalated::🧾 Office IT</td><td><span class="badge badge-orange">AT</span></td><td></td></tr>
+              <tr><td>Escalated::💰 Commerce Dept.</td><td><span class="badge badge-orange">AT</span></td><td></td></tr>
+              <tr><td>Escalated::📈 Analytics Dept.</td><td><span class="badge badge-orange">AT</span></td><td></td></tr>
+              <tr><td>Escalated::📊 GDM</td><td><span class="badge badge-orange">AT</span></td><td></td></tr>
+              <tr><td>Escalated::📡 RFID</td><td><span class="badge badge-orange">AT</span></td><td></td></tr>
+              <tr><td>Escalated::📦 Stock</td><td><span class="badge badge-orange">AT</span></td><td></td></tr>
+              <tr><td>Escalated::🔄 Sycles</td><td><span class="badge badge-orange">AT</span></td><td></td></tr>
+              <tr class="tcat"><td colspan="3">SUIVI & HISTORIQUE</td></tr>
+              <tr><td>👁️‍🗨️ On hold</td><td><span class="badge badge-gray">On Hold</span></td><td></td></tr>
+              <tr><td>Recently updated tickets</td><td><span class="badge badge-gray">Tracking</span></td><td></td></tr>
+              <tr><td>Recently resolved tickets</td><td><span class="badge badge-gray">Tracking</span></td><td></td></tr>
+              <tr><td>Armand Thiery Tickets</td><td><span class="badge badge-green">Client</span></td><td></td></tr>
+              <tr><td>Tickets rated last 7 days</td><td><span class="badge badge-green">CSAT</span></td><td></td></tr>
+            </tbody>
+          </table>
+          <div style="margin-top:10px;display:flex;align-items:flex-start;gap:8px;">
+            <img src="views-counts.png" alt="Real-time ticket views" style="height:200px;width:auto;border-radius:6px;border:1px solid #E5E7EB;flex-shrink:0;">
+            <p style="font-size:10px;color:#9CA3AF;line-height:1.5;">Real-time views snapshot · October 2026</p>
+          </div>
+        </div>
+        <div class="alert alert-yellow" style="margin-top:10px;">
+          <div class="alert-title">⚠ Identical emojis on all views</div>
+          <div class="alert-body">Most views use the same emoji (⭕️). Using the same emoji on all views makes it harder to tell them apart at a glance. These are details you can adjust progressively as you use the tool.</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="card">
+          <div class="section-label">Groups (17): Very Mature Structure <a href="https://adeizhelp.zendesk.com/admin/people/groups" target="_blank" class="zd-link">↗ Groups</a></div>
+          <table>
+            <thead><tr><th>Group</th><th>Level</th></tr></thead>
+            <tbody>
+              <tr class="tcat"><td colspan="2">INTERNAL SUPPORT</td></tr>
+              <tr><td>Support Group Level 1</td><td><span class="badge badge-blue">N1</span></td></tr>
+              <tr><td>Support Group Level 2</td><td><span class="badge badge-orange">N2</span></td></tr>
+              <tr><td>Adeiz</td><td><span class="badge badge-gray">Global</span></td></tr>
+              <tr><td>Administrator</td><td><span class="badge badge-purple">Admin</span></td></tr>
+              <tr><td>Light Agents</td><td><span class="badge badge-gray">Read-only</span></td></tr>
+              <tr><td>Tma Adeiz</td><td><span class="badge badge-blue">TMA</span></td></tr>
+              <tr class="tcat"><td colspan="2">BUSINESS UNITS</td></tr>
+              <tr><td>AT – Admin Systems</td><td><span class="badge badge-orange">AT</span></td></tr>
+              <tr><td>AT – GDM</td><td><span class="badge badge-orange">AT</span></td></tr>
+              <tr><td>AT – Office IT</td><td><span class="badge badge-orange">AT</span></td></tr>
+              <tr><td>AT – Commerce Dept.</td><td><span class="badge badge-orange">AT</span></td></tr>
+              <tr><td>AT – Analytics Dept.</td><td><span class="badge badge-orange">AT</span></td></tr>
+              <tr><td>AT – RFID / Stock / Sycles</td><td><span class="badge badge-orange">AT</span></td></tr>
+              <tr class="tcat"><td colspan="2">EXTERNAL MAINTAINERS</td></tr>
+              <tr><td>Diebold AT</td><td><span class="badge badge-red">Maintainer</span></td></tr>
+              <tr><td>Stackr AT</td><td><span class="badge badge-red">Maintainer</span></td></tr>
+              <tr><td>Nedap AT</td><td><span class="badge badge-red">Maintainer</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="alert alert-blue" style="margin-top:10px;">
+          <div class="alert-title">Group Architecture</div>
+          <div class="alert-body">The N1 → N2 → Business Units → Maintainers hierarchy is in place with a dedicated view per group. To be refined over time.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SLIDE 8 : FORMULAIRES & CHAMPS & AGENTS ══ -->
+<div class="slide" id="slide-8">
+  <div class="slide-header">
+    <h2>📋 Formulaires, Champs & Agents</h2>
+    <span class="sh-badge">1 FORM · 51 FIELDS · 37 AGENTS</span>
+  </div>
+  <div class="slide-body">
+    <div class="grid grid-3" style="gap:14px;">
+      <div>
+        <div class="card" style="margin-bottom:10px;">
+          <div class="section-label">Forms <a href="https://adeizhelp.zendesk.com/admin/objects-rules/tickets/ticket-forms" target="_blank" class="zd-link">↗</a></div>
+          <div style="font-size:12px;color:#6B7280;padding:6px 0;">1 active form only: "Default Ticket Form".</div>
+        </div>
+
+        <div class="card" style="margin-bottom:10px;">
+          <div class="section-label">Disabled Fields <a href="https://adeizhelp.zendesk.com/admin/objects-rules/tickets/ticket-fields" target="_blank" class="zd-link">↗</a></div>
+          <table>
+            <thead><tr><th>Disabled Field</th><th>Note</th></tr></thead>
+            <tbody>
+              <tr><td>Trigger Mode</td><td><span class="badge badge-yellow">Related to maintainers?</span></td></tr>
+              <tr><td>Maintainer</td><td><span class="badge badge-yellow">Reactivate or remove</span></td></tr>
+            </tbody>
+          </table>
+          <p style="margin-top:8px;font-size:11px;color:#6B7280;">49 active fields out of 51 total. The "Maintainer" field being OFF is surprising given the complexity of maintainer workflows.</p>
+        </div>
+
+        <div class="alert alert-orange">
+          <div class="alert-title">⚠ Macros (21): Points to Improve</div>
+          <div class="alert-body">
+            The macro <strong>"Confirmed Resolution – Ticket Closure"</strong> has a misleading name: it is not possible to close a ticket directly via a macro. The correct approach is to add a specific tag via the macro, then trigger the closure via an automation.
+            <br><br>
+            Furthermore, the 21 macros are not organized into folders and are visible to all agents. Recommended: create theme-based folders and restrict visibility by group.
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="card">
+          <div class="section-label">Active Custom Fields (selection)</div>
+          <table>
+            <thead><tr><th>Field</th><th>Usage</th></tr></thead>
+            <tbody>
+              <tr><td>Maintenance Contract</td><td><span class="badge badge-blue">Maintainer</span></td></tr>
+              <tr><td>Hardware</td><td><span class="badge badge-blue">Incident</span></td></tr>
+              <tr><td>Catégorie / Sous-Catégories (x8)</td><td><span class="badge badge-blue">Classification</span></td></tr>
+              <tr><td>Register Code</td><td><span class="badge badge-blue">Business</span></td></tr>
+              <tr><td>External Ref.</td><td><span class="badge badge-orange">Orange Extranet</span></td></tr>
+              <tr><td>Request Type</td><td><span class="badge badge-blue">Routage</span></td></tr>
+              <tr><td>Aircall Call ID / SMS ID</td><td><span class="badge badge-purple">Telephony</span></td></tr>
+              <tr><td>Time Tracking (total / last update)</td><td><span class="badge badge-green">Performance</span></td></tr>
+              <tr><td>Intent / Sentiment (AI)</td><td><span class="badge badge-purple">Zendesk AI</span></td></tr>
+              <tr><td>Summary (AI)</td><td><span class="badge badge-purple">Zendesk AI</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div>
+        <div class="card" style="margin-bottom:10px;">
+          <div class="section-label">Agents (37) <a href="https://adeizhelp.zendesk.com/admin/people/team/members" target="_blank" class="zd-link">↗</a></div>
+          <table>
+            <thead><tr><th>Type</th><th>Count</th></tr></thead>
+            <tbody>
+              <tr><td>Human Agents</td><td><span class="badge badge-green">~27</span></td></tr>
+              <tr><td>Functional Accounts (depts.)</td><td><span class="badge badge-orange">7</span></td></tr>
+              <tr><td>AI Agent</td><td><span class="badge badge-purple">1</span></td></tr>
+              <tr><td>Test Account "Lj test"</td><td><span class="badge badge-red">1 ⚠</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="alert alert-yellow" style="margin-bottom:10px;">
+          <div class="alert-title">⚠ Agent Typo</div>
+          <div class="alert-body">Agent named "<strong>At - Sicles</strong>": should be "<strong>At - Sycles</strong>" to match the "AT – Sycles" group and associated triggers. Risk of mismatch in reports.</div>
+        </div>
+        <div class="alert alert-yellow">
+          <div class="alert-title">⚠ Test Fields in Organizations</div>
+          <div class="alert-body">
+            2 test fields still active in organization configuration:
+            <br>• <strong>materials_test_multifield</strong> (choix multiples)
+            <br>• <strong>test_material_in_org</strong> (recherche)
+            <br><br>To be removed if unused to keep a clean configuration.
+          </div>
+        </div>
+        <div class="card" style="margin-top:10px;">
+          <div class="section-label">Custom Statuses (13)</div>
+          <div class="tags">
+            <span class="tag" style="background:#FEF9C3;border-color:#FDE047;color:#854D0E;">🆕 New</span>
+            <span class="tag" style="background:#FEE2E2;border-color:#FECACA;color:#991B1B;">Open</span>
+            <span class="tag" style="background:#FEE2E2;border-color:#FECACA;color:#991B1B;">In Progress</span>
+            <span class="tag" style="background:#FEE2E2;border-color:#FECACA;color:#991B1B;">Maintainer Trigger</span>
+            <span class="tag" style="background:#FEE2E2;border-color:#FECACA;color:#991B1B;">Central Escalation</span>
+            <span class="tag" style="background:#F3F4F6;color:#6B7280;text-decoration:line-through;">Central Follow-up ⚠ OFF</span>
+            <span class="tag" style="background:#FEE2E2;border-color:#FECACA;color:#991B1B;">Maintainer Follow-up</span>
+            <span class="tag" style="background:#DBEAFE;border-color:#93C5FD;color:#1E40AF;">Awaiting Store</span>
+            <span class="tag" style="background:#DBEAFE;border-color:#93C5FD;color:#1E40AF;">In Progress (Maintainer)</span>
+            <span class="tag" style="background:#DBEAFE;border-color:#93C5FD;color:#1E40AF;">In Progress (Central)</span>
+            <span class="tag" style="background:#DBEAFE;border-color:#93C5FD;color:#1E40AF;">Awaiting TMA Adeiz</span>
+            <span class="tag" style="background:#1F2937;border-color:#374151;color:#F9FAFB;">On Hold</span>
+            <span class="tag" style="background:#F3F4F6;border-color:#D1D5DB;color:#6B7280;">Resolved</span>
+          </div>
+          <div style="margin-top:8px;">
+            <img src="statuts-dropdown.png" alt="Zendesk statuses by category" style="height:220px;border-radius:6px;border:1px solid #E5E7EB;">
+          </div>
+          <div class="alert alert-yellow" style="margin-top:10px;">
+            <div class="alert-title">⚠ 13 Statuses: volume to monitor</div>
+            <div class="alert-body">13 custom statuses is high for a 4-month-old account. It is recommended to verify the Zendesk category of each status (New, Open, <strong>Pending</strong>, On-hold, Solved): statuses mapped to <strong>"Pending"</strong> pause the SLA. Ensure statuses like "Awaiting Store", "Maintainer Follow-up" etc. are mapped to the correct category.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SLIDE 9 : HELP CENTER & IA ══ -->
+<div class="slide" id="slide-9">
+  <div class="slide-header">
+    <h2>📚 Help Center & Intelligence Artificielle</h2>
+    <span class="sh-badge">917 ARTICLES · 124 SECTIONS · AI AGENT ACTIVE</span>
+  </div>
+  <div class="slide-body">
+    <div class="grid grid-2" style="gap:14px;">
+      <div>
+        <div class="alert alert-red" style="margin-bottom:10px;">
+          <div class="alert-title">🔴 Help Center: Unstructured Knowledge Base</div>
+          <div class="alert-body">
+            <table>
+              <thead><tr><th>Indicator</th><th>Value</th><th>Assessment</th></tr></thead>
+              <tbody>
+                <tr><td>Total Articles</td><td>917</td><td><span class="badge badge-orange">High Volume</span></td></tr>
+                <tr><td>Categories</td><td>1 ("General")</td><td><span class="badge badge-red">Critical</span></td></tr>
+                <tr><td>Sections</td><td>124</td><td><span class="badge badge-red">Non-hierarchical</span></td></tr>
+                <tr><td>Access</td><td>Segment</td><td><span class="badge badge-blue">Visible by specific organization</span></td></tr>
+              </tbody>
+            </table>
+            <br>The HC is accessible by segment (specific organization). 124 sections under 1 single category make navigation difficult, both for agents and for users with access.
+          </div>
+        </div>
+
+        <div class="alert alert-orange" style="margin-bottom:10px;">
+          <div class="alert alert-yellow" style="margin-bottom:10px;">
+            <div class="alert-title">⚠ Help Center Design: Readability Needs Improvement</div>
+            <div class="alert-body">
+              In my view, the Help Center design could be improved, as the overall layout lacks readability. The homepage displays sections as cards without color or visual hierarchy, and the absence of customization (colors, logo, theme) results in a generic appearance.
+              <div style="margin-top:8px;"><img src="hc-layout.png" alt="ADEIZ Help Center layout" style="width:100%;border-radius:6px;border:1px solid #FDE68A;"></div>
+            </div>
+          </div>
+          <div class="alert-title">⚠ HC Technical Issues</div>
+          <div class="alert-body">
+            <ul style="padding-left:14px;display:flex;flex-direction:column;gap:4px;">
+              <li><strong>Comments enabled in articles</strong>: not enabled globally, but active in individual articles. To be disabled for consistency and cleanliness</li>
+              <li><strong>Legacy Zendesk editor still in use</strong>: limits compatibility with new features and AI readability (Copilot, AI Agent)</li>
+              <li><strong>Favicon not configured as PNG</strong>: to fix for a professional HC</li>
+              <li><strong>HC restricted to segment access</strong>: users outside the configured organization cannot access articles</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="alert alert-orange">
+          <div class="alert-title">Problematic Sections Identified</div>
+          <div class="alert-body">
+            <ul style="padding-left:14px;display:flex;flex-direction:column;gap:4px;">
+              <li>"<strong>Old</strong>": obsolete content, no value</li>
+              <li>"<strong>old_Fimware</strong>": typo + marked obsolete</li>
+              <li>"<strong>fimware</strong>": typo for "firmware"</li>
+              <li>"<strong>Specificités par Service (PAS A JOUR)</strong>": explicitly out of date</li>
+              <li>"<strong>Procédures historiques</strong>": to archive</li>
+              <li><strong>Several duplicate sections</strong>: "Outlook" appears 2×; "Firmware Switch SG2428P", "Fichiers pour Conf Switch"… outside logical category</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="card" style="margin-bottom:10px;">
+          <div class="section-label">Examples of well-named sections (to keep)</div>
+          <div class="tags">
+            <span class="tag">Magasin – Ouverture</span>
+            <span class="tag">Magasin – Gestion</span>
+            <span class="tag">Magasin – SAV</span>
+            <span class="tag">RFID</span>
+            <span class="tag">TPE</span>
+            <span class="tag">Formation Interne</span>
+            <span class="tag">Schémas techniques</span>
+            <span class="tag">Procédures Réseau</span>
+            <span class="tag">Procédures Sécurité</span>
+            <span class="tag">ESET</span>
+          </div>
+          <p style="margin-top:10px;font-size:11px;color:#6B7280;">These sections have clear business logic and can serve as a foundation for reorganization.</p>
+        </div>
+
+        <div class="card" style="margin-bottom:10px;">
+          <div class="section-label">Artificial Intelligence: Actual State</div>
+          <table>
+            <thead><tr><th>Feature</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td>Copilot (Auto Assist)</td><td><span class="badge badge-green">90% tickets ✓</span></td></tr>
+              <tr><td>Intent / Sentiment / Summary</td><td><span class="badge badge-green">Active ✓</span></td></tr>
+              <tr><td>AI Agent (bot widget)</td><td><span class="badge badge-red">Not ready ⚠</span></td></tr>
+              <tr><td>"Technical error reply" flow</td><td><span class="badge badge-red">Empty ⚠</span></td></tr>
+              <tr><td>Fallback messages</td><td><span class="badge badge-red">Absent ⚠</span></td></tr>
+              <tr><td>Labels on HC articles</td><td><span class="badge badge-red">0 / 917 ⚠</span></td></tr>
+              <tr><td>Articles with usable text</td><td><span class="badge badge-orange">Some = mainly images ⚠</span></td></tr>
+              <tr><td>Copilot Recommendations</td><td><span class="badge badge-orange"><a href="https://adeizhelp.zendesk.com/admin/ai/admin-copilot/recommendations" target="_blank" style="color:inherit;">7 en attente ↗</a></span></td></tr>
+              <tr><td>Customized ADEIZ widget</td><td><span class="badge badge-yellow">Not customized</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="alert alert-yellow" style="margin-bottom:10px;">
+          <div class="alert-title">⚠ Copilot active on 90% of tickets: works better with labels</div>
+          <div class="alert-body">
+            Copilot is enabled on 730 tickets. However, none of the 917 HC articles have labels. The AI uses labels to find and suggest relevant articles: by adding them, Copilot and AI Agent suggestions will be significantly improved. <br><br><a href="https://adeizhelp.zendesk.com/admin/ai/admin-copilot/recommendations" target="_blank" style="display:inline-block;margin-top:4px;padding:6px 12px;background:#8B5CF6;color:#fff;border-radius:6px;font-size:11px;font-weight:700;text-decoration:none;">↗ 7 pending Copilot recommendations</a>
+          </div>
+        </div>
+
+        <div class="alert alert-blue">
+          <div class="alert-title">💡 Opportunity: Public HC for Stores</div>
+          <div class="alert-body">
+            Create a public section with common procedures (store opening, common troubleshooting, maintainer extranet access) to reduce N1 volume by 15-25%.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="slide" id="slide-10">
+  <div class="slide-header">
+    <h2>💡 Opportunités & Flux recommandés</h2>
+    <span class="sh-badge">QUICK WINS + LONG TERM</span>
+  </div>
+  <div class="slide-body">
+    <div class="grid grid-2" style="gap:14px;">
+      <div>
+        <div class="alert alert-blue" style="margin-bottom:10px;">
+          <div class="alert-title">💡 Public Help Center for Stores</div>
+          <div class="alert-body">
+            <strong>Why this opportunity exists</strong><br>
+            The volume of tickets on recurring and documentable topics is high: Checkout (318 tickets), PosCloud, extranet access, startup procedures. These requests come mainly by phone, the usual channel for stores with ADEIZ. The opportunity is not to change the channel, but to allow store teams to find answers themselves for the simplest cases, before needing to call.<br><br>
+            <strong>The content is already there</strong><br>
+            ADEIZ has 917 articles covering common store issues: register troubleshooting (Checkout: 318 tickets identified), PosCloud, extranet access, opening procedures. These articles exist but are only accessible to internal agents. Opening a selection as self-service does not require creating content: it is about making what already exists visible, structuring it and securing it by segment (Armand Thiery, Printemps organizations, etc.).<br><br>
+            <strong>Expected Impact</strong><br>
+            Making the HC accessible as self-service on recurring and documentable topics (Checkout, basic network, PosCloud, startup procedures) allows store teams to resolve issues themselves before calling. According to industry benchmarks, a well-structured self-service HC can deflect <strong>15 to 25% of N1 volume</strong>. For ADEIZ, this represents approximately 120 to 200 fewer tickets/year on problems whose answers already exist in writing.<br><br>
+            <strong>Recommendation</strong><br>
+            Identify the 20 to 30 articles most consulted by agents on recurring tickets and open them with restricted public access by organization. Structure a "Store Help" category distinct from the internal category.
+          </div>
+        </div>
+
+        <div class="alert alert-blue" style="margin-bottom:10px;">
+          <div class="alert-title">💡 Automatic Escalation for Near-Breached SLAs</div>
+          <div class="alert-body">
+            SLA alert automations are well configured (8/15/30/60 min by priority) but only alert the assigned agent. Adding an automatic escalation to the N2 group if the SLA is still at risk 5 minutes after the alert would prevent breaches.
+          </div>
+        </div>
+
+        <div class="alert alert-indigo" style="margin-bottom:10px;">
+          <div class="alert-title">💡 Dedicated Maintainer Explore Dashboard</div>
+          <div class="alert-body">
+            With 4 active maintainers (Diebold, Stackr, Nedap, Orange) and differentiated escalation workflows, a dedicated Explore report (response time by maintainer, resolution rate, missing external refs) would provide essential visibility for contract negotiations.
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="alert alert-yellow" style="margin-bottom:10px;">
+          <div class="alert-title">💡 Maintainer Flow: To Revise with Native Zendesk Tools</div>
+          <div class="alert-body">
+            The maintainer flow exists and covers the 4 partners (Diebold, Stackr, Nedap, Orange) with escalation triggers, follow-ups and dedicated statuses. However, the current logic is complex and deserves to be revisited.
+            <br><br>There are two Zendesk features that could better address this complexity:
+            <div style="display:flex;flex-direction:column;gap:8px;margin-top:10px;">
+              <div style="background:rgba(109,40,217,0.08);border:1px solid rgba(109,40,217,0.25);border-radius:8px;padding:10px 12px;">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+                  <span style="font-weight:700;color:#5B21B6;font-size:12px;">Workflow Actions</span>
+                  <span style="font-size:9px;font-weight:700;background:#EDE9FE;color:#6D28D9;padding:2px 6px;border-radius:4px;text-transform:uppercase;letter-spacing:.04em;">Native Feature</span>
+                </div>
+                <div style="font-size:12px;color:#374151;">Native automation for conditional actions on tickets. Simpler and more reliable than combined triggers.</div>
+              </div>
+              <div style="background:rgba(109,40,217,0.12);border:1px solid rgba(109,40,217,0.35);border-radius:8px;padding:10px 12px;">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+                  <span style="font-weight:700;color:#5B21B6;font-size:12px;">Advanced Workflow Actions</span>
+                  <span style="font-size:9px;font-weight:700;background:#EDE9FE;color:#6D28D9;padding:2px 6px;border-radius:4px;text-transform:uppercase;letter-spacing:.04em;">Native Feature</span>
+                </div>
+                <div style="font-size:12px;color:#374151;">Extended version, suited for complex multi-actor escalations like the current maintainer workflow (Diebold, Stackr, Nedap, Orange).</div>
+              </div>
+            </div>
+            <br>These tools would simplify configuration, reduce the risk of trigger conflicts and facilitate maintenance.
+          </div>
+        </div>
+
+        <div class="alert alert-blue" style="margin-bottom:10px;">
+          <div class="alert-title">💡 Recommended Apps</div>
+          <div class="alert-body">
+            <strong>Attachment Plus</strong>: advanced attachment management (preview, bulk download) useful for tickets with technical diagrams and hardware screenshots.
+            <br><br>
+            <strong>Advanced Search</strong>: advanced multi-criteria search in tickets. Very useful for N2 agents managing complex escalations with combined filters (organization + maintainer + status + tag).
+          </div>
+        </div>
+
+        <div class="alert alert-green" style="margin-bottom:10px;">
+          <div class="alert-title">✅ Apps: Complete Ecosystem</div>
+          <div class="alert-body">
+            <table>
+              <thead><tr><th>App</th><th>State</th><th>Usage</th></tr></thead>
+              <tbody>
+                <tr><td>JIRA</td><td><span class="badge badge-green">ON</span></td><td>IT Project Management</td></tr>
+                <tr><td>Aircall Hotline</td><td><span class="badge badge-green">ON</span></td><td>Integrated Telephony</td></tr>
+                <tr><td>Time Tracking</td><td><span class="badge badge-green">ON</span></td><td>Agent Time Tracking</td></tr>
+                <tr><td>ATDESK</td><td><span class="badge badge-green">ON</span></td><td>ADEIZ Internal App</td></tr>
+                <tr><td>Conditional Fields Lite</td><td><span class="badge badge-green">ON</span></td><td>Dynamic Form</td></tr>
+                <tr><td>Zendesk Chat</td><td><span class="badge badge-green">ON</span></td><td>Messaging</td></tr>
+                <tr><td>TeamViewer</td><td><span class="badge badge-gray">OFF</span></td><td>Reactivate or remove</td></tr>
+                <tr><td>Gestion Catégories</td><td><span class="badge badge-gray">OFF</span></td><td>Check vs Conditional Fields</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══ SLIDE 12 : SYNTHÈSE ══ -->
+<div class="slide" id="slide-11">
+  <div class="slide-header">
+    <h2>📋 Full Audit Summary</h2>
+    <span class="sh-badge">3 DOMAINS ANALYZED</span>
+  </div>
+  <div class="slide-body" style="padding:10px 16px 72px;">
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;">
+
+      <!-- COL 1 : Structure & Sécurité -->
+      <div>
+        <div style="background:linear-gradient(135deg,#7C3AED,#A855F7);border-radius:10px;padding:8px 12px;margin-bottom:8px;">
+          <span style="font-size:11px;font-weight:700;color:#fff;letter-spacing:.5px;">Structure &amp; Security</span>
+        </div>
+        <table style="width:100%;border-collapse:collapse;font-size:10px;">
+          <thead><tr style="background:#F3F4F6;"><th style="text-align:left;padding:4px 6px;font-weight:600;color:#374151;">Observation</th><th style="padding:4px 6px;white-space:nowrap;">Priority</th></tr></thead>
+          <tbody>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">SPF/DKIM not configured for the Zendesk domain</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Urgent</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">AI Agent not ready for production: configuration errors, no fallback message</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-red">Critical</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">"Waiting message" AI Agent parameter deprecated Oct 31, 2026</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-red">Critical</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Knowledge rules configured via labels but no labels generated in conversations</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Urgent</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Messaging widget not customized to ADEIZ visual identity</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-gray">Low</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Same emoji ⭕️ on most views: less intuitive navigation</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-gray">Low</span></td></tr>
+            <tr><td style="padding:5px 6px;color:#374151;">Group Architecture N1→N2→AT→Mainteneurs en place</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-green">OK</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- COL 2 : Processus & Automation -->
+      <div>
+        <div style="background:linear-gradient(135deg,#DB2777,#F97316);border-radius:10px;padding:8px 12px;margin-bottom:8px;">
+          <span style="font-size:11px;font-weight:700;color:#fff;letter-spacing:.5px;">Process &amp; Automation</span>
+        </div>
+        <table style="width:100%;border-collapse:collapse;font-size:10px;">
+          <thead><tr style="background:#F3F4F6;"><th style="text-align:left;padding:4px 6px;font-weight:600;color:#374151;">Observation</th><th style="padding:4px 6px;white-space:nowrap;">Priority</th></tr></thead>
+          <tbody>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">4+ broken triggers: actions with empty field values (Stackr AT, Diebold AT, maintainer follow-ups)</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-red">Critical</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Duplicate "Quick Assignment" trigger (2 active simultaneously)</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Medium</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Residual Ultimate.ai trigger still active in production</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Medium</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">SLA Automations: workaround to replace with native conditions (calendar time)</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Urgent</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">2 identical SLA policies for AT + Printemps: one is enough</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Important</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Macro "Confirmed Resolution – Ticket Closure" cannot close a ticket directly via macro</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Medium</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Macros with no folder organization or group restrictions</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-gray">Low</span></td></tr>
+            <tr><td style="padding:5px 6px;color:#374151;">Trigger and automation order to verify: order impacts behavior</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Medium</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- COL 3 : Management & Qualité opérationnelle -->
+      <div>
+        <div style="background:linear-gradient(135deg,#D97706,#F59E0B);border-radius:10px;padding:8px 12px;margin-bottom:8px;">
+          <span style="font-size:11px;font-weight:700;color:#fff;letter-spacing:.5px;">Management &amp; Operational Quality</span>
+        </div>
+        <table style="width:100%;border-collapse:collapse;font-size:10px;">
+          <thead><tr style="background:#F3F4F6;"><th style="text-align:left;padding:4px 6px;font-weight:600;color:#374151;">Observation</th><th style="padding:4px 6px;white-space:nowrap;">Priority</th></tr></thead>
+          <tbody>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">HC: 1 single "General" category for 917 articles and 124 sections: difficult navigation</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-red">Critical</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">HC: 0 labels on 917 articles: Copilot and AI Agent cannot suggest any articles</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-red">Critical</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Help Center: some articles contain mainly images, with no text usable by AI</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Urgent</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Explore "Top 10 sub-categories" report broken: custom attributes to reconfigure, nulls not excluded</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Urgent</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">HC: comments enabled in articles (individual config): to be disabled for consistency</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Medium</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">HC: legacy Zendesk editor still in use: limits AI features and readability</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Medium</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Test account "Lj test" active in production + 7 functional accounts as agents</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Important</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">2 test fields active in organizations (materials_test_multifield, test_material_in_org)</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-gray">Low</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Single ticket form for 17 groups and multiple incident types</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Important</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">HC favicon not configured as PNG: to fix</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-gray">Low</span></td></tr>
+            <tr><td style="padding:5px 6px;color:#374151;">13 custom statuses: high volume, categories (Pending / On-hold) to verify. Follow-up automations apply to all Pending tickets, which may generate unwanted follow-ups.</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Medium</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  <div style="margin-top:16px;padding:0 2px;">
+    <div style="font-size:11px;font-weight:700;color:#6B7280;text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px;">🗓 Prioritized Action Plan</div>
+    <div class="grid grid-2" style="gap:14px;">
+      <div>
+        <div class="card" style="margin-bottom:10px;">
+          <div class="section-label" style="color:#EF4444;">🔴 Critical Issues (C1-C2)</div>
+          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C1]</strong> Identify and fix the 4+ broken triggers (actions with empty field values: Stackr AT, Diebold AT, Orange/Stackr/Nedap follow-ups)</span></div>
+          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C1]</strong> Test each broken trigger after correction to validate expected behavior</span></div>
+          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C2]</strong> Finalize AI Agent configuration: HC training, staging tests, controlled deployment</span></div>
+          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C2]</strong> Define AI Agent scope: which ticket categories, which fallback group</span></div>
+        </div>
+
+        <div class="card">
+          <div class="section-label" style="color:#F97316;">🟠 Important Fixes (C3-C5)</div>
+          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C3]</strong> Add labels to HC articles (by theme: Checkout, PosCloud, Network, Hardware...) and enrich image-only articles with structured text</span></div>
+          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C3]</strong> Create 6-8 HC categories and redistribute the 124 sections; remove/archive "Old", "old_Fimware", "fimware", "PAS A JOUR" sections</span></div>
+          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C4]</strong> Fix SLA automation logic: replace the custom field calculation with Zendesk's native calendar time conditions</span></div>
+          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C5]</strong> Merge the 2 identical SLA policies (Armand Thiery + Printemps) into a single unified policy</span></div>
+        </div>
+      </div>
+
+      <div>
+        <div class="card" style="margin-bottom:10px;">
+          <div class="section-label" style="color:#EAB308;">🟡 Improvements (C6-C8)</div>
+          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C6]</strong> Configure SPF/DMARC for the Zendesk sending domain (warning visible in email settings)</span></div>
+          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C7]</strong> Remove the duplicate "Quick Assignment" trigger</span></div>
+          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C8]</strong> Fix Explore permissions or recreate missing reports (inaccessible master clones)</span></div>
+
+          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text">Check disabled fields "Trigger Mode" and "Maintainer": reactivate or remove</span></div>
+        </div>
+
+        <div class="card">
+          <div class="section-label" style="color:#22C55E;">🟢 Optimizations (C9+)</div>
+          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C9]</strong> Deactivate test account "Lj test" + convert the 7 functional accounts to Light Agents</span></div>
+          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C9]</strong> Fix typo "At - Sicles" → "At - Sycles"; review test fields in organizations</span></div>
+          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text">Evaluate the relevance of creating 3-4 distinct forms (Hardware Incident, Maintainer Escalation, Network Support, After-Sales): only if required fields vary by request type. If the current form covers all cases without friction, there is no need to split it.</span></div>
+          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text">Create a public Help Center for stores (emergency procedures, extranet, common hardware)</span></div>
+          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text">Configure Knowledge Capture to enrich the HC from resolved tickets</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+<!-- ══ SLIDE 12 : DASHBOARD KPI ══ -->
+<div class="slide" id="slide-12">
+  <div class="slide-header">
+    <h2>📊 KPI Dashboard · ADEIZ · Real Ticket Analysis</h2>
+    <span class="sh-badge">1,100 TICKETS · 4 MONTHS · API DATA + VIEWS</span>
+  </div>
+  <div class="slide-body" style="padding:12px 18px 72px;">
+
+    <!-- ROW 1 : KPI cards -->
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:12px;">
+
+      <div class="card stat" style="padding:11px 8px;">
+        <div style="font-size:9px;font-weight:700;color:#8B5CF6;text-transform:uppercase;letter-spacing:.08em;margin-bottom:2px;">Total Tickets</div>
+        <div style="font-size:28px;font-weight:800;color:#1E1B4B;line-height:1.1;">1,100</div>
+        <div style="font-size:10px;color:#9CA3AF;margin-top:2px;">in 4 months · ~9.2/day</div>
+      </div>
+
+      <div class="card stat" style="padding:11px 8px;border-top:3px solid #8B5CF6;">
+        <div style="font-size:9px;font-weight:700;color:#8B5CF6;text-transform:uppercase;letter-spacing:.08em;margin-bottom:2px;">Voice Channel</div>
+        <div style="font-size:28px;font-weight:800;color:#8B5CF6;line-height:1.1;">91.9%</div>
+        <div style="font-size:10px;color:#9CA3AF;margin-top:2px;">743 Aircall tickets</div>
+      </div>
+
+      <div class="card stat" style="padding:11px 8px;border-top:3px solid #22C55E;">
+        <div style="font-size:9px;font-weight:700;color:#166534;text-transform:uppercase;letter-spacing:.08em;margin-bottom:2px;">Resolved / Closed</div>
+        <div style="font-size:28px;font-weight:800;color:#22C55E;line-height:1.1;">731</div>
+        <div style="font-size:10px;color:#9CA3AF;margin-top:2px;">90.5% of total volume</div>
+      </div>
+
+      <div class="card stat" style="padding:11px 8px;border-top:3px solid #F97316;">
+        <div style="font-size:9px;font-weight:700;color:#9A3412;text-transform:uppercase;letter-spacing:.08em;margin-bottom:2px;">Copilot Enabled</div>
+        <div style="font-size:28px;font-weight:800;color:#F97316;line-height:1.1;">90.4%</div>
+        <div style="font-size:10px;color:#9CA3AF;margin-top:2px;">730 tickets with AI</div>
+      </div>
+
+      <div class="card stat" style="padding:11px 8px;border-top:3px solid #EAB308;">
+        <div style="font-size:9px;font-weight:700;color:#92400E;text-transform:uppercase;letter-spacing:.08em;margin-bottom:2px;">Normal Priority</div>
+        <div style="font-size:28px;font-weight:800;color:#EAB308;line-height:1.1;">93.8%</div>
+        <div style="font-size:10px;color:#9CA3AF;margin-top:2px;">762 / 812 tickets</div>
+      </div>
+
+    </div>
+
+    <!-- ROW 2 : Canal donut + Top catégories -->
+    <div style="display:grid;grid-template-columns:200px 1fr;gap:12px;margin-bottom:12px;">
+
+      <!-- Canal donut -->
+      <div class="card" style="padding:14px;display:flex;flex-direction:column;align-items:center;">
+        <div style="font-size:9px;font-weight:700;color:#8B5CF6;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;align-self:flex-start;">Channel · 1,100 tickets</div>
+        <svg viewBox="0 0 120 120" width="130" height="130" style="flex-shrink:0;">
+          <!-- Gray base -->
+          <circle cx="60" cy="60" r="46" fill="none" stroke="#E5E7EB" stroke-width="16"/>
+          <!-- Web (6.8%) petite tranche verte - part de la fin de voix -->
+          <circle cx="60" cy="60" r="46" fill="none" stroke="#22C55E" stroke-width="16"
+            stroke-dasharray="19.65 269.38" stroke-dashoffset="-265.67"
+            transform="rotate(-90 60 60)"/>
+          <!-- Voice (91.9%) gros arc purple -->
+          <circle cx="60" cy="60" r="46" fill="none" stroke="#8B5CF6" stroke-width="16"
+            stroke-dasharray="265.67 23.36"
+            transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="30" fill="#fff"/>
+          <text x="60" y="56" text-anchor="middle" font-size="15" font-weight="800" fill="#8B5CF6">91.9%</text>
+          <text x="60" y="69" text-anchor="middle" font-size="8" fill="#9CA3AF">voice</text>
+        </svg>
+        <div style="display:flex;flex-direction:column;gap:5px;margin-top:8px;width:100%;">
+          <div style="display:flex;align-items:center;gap:6px;font-size:10px;">
+            <div style="width:8px;height:8px;border-radius:50%;background:#8B5CF6;flex-shrink:0;"></div>
+            <span style="color:#374151;flex:1;">Voice (Aircall)</span>
+            <span style="font-weight:700;">743</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:6px;font-size:10px;">
+            <div style="width:8px;height:8px;border-radius:50%;background:#22C55E;flex-shrink:0;"></div>
+            <span style="color:#374151;flex:1;">Web / Email</span>
+            <span style="font-weight:700;">55</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:6px;font-size:10px;">
+            <div style="width:8px;height:8px;border-radius:50%;background:#E5E7EB;flex-shrink:0;"></div>
+            <span style="color:#9CA3AF;flex:1;">Chat</span>
+            <span style="font-weight:700;color:#9CA3AF;">0</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Catégories & Sous-catégories -->
+      <div class="card" style="padding:14px;">
+        <div style="font-size:9px;font-weight:700;color:#8B5CF6;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;">Catégories N1 & sous-catégories N2 (sans nuls)</div>
+        <div style="display:flex;flex-direction:column;gap:1px;max-height:330px;overflow-y:auto;padding-right:2px;">
+
+          <!-- ROW macro: label | bar | count -->
+          <!-- N1 = Encaissement 318 -->
+          <div style="display:flex;align-items:center;gap:5px;padding:2px 0;">
+            <span style="font-size:10px;font-weight:700;color:#1E1B4B;min-width:148px;">💰 Checkout</span>
+            <div style="flex:1;height:9px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:100%;background:linear-gradient(90deg,#7C3AED,#A78BFA);border-radius:99px;"></div></div>
+            <span style="font-size:10px;font-weight:800;color:#7C3AED;min-width:28px;text-align:right;">318</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:5px;padding:1px 0 1px 12px;">
+            <span style="font-size:9px;color:#6B7280;min-width:136px;">↳ Cancellation / Return</span>
+            <div style="flex:1;height:6px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:29.9%;background:#C4B5FD;border-radius:99px;"></div></div>
+            <span style="font-size:9px;color:#6B7280;min-width:28px;text-align:right;">95</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:5px;padding:1px 0 1px 12px;">
+            <span style="font-size:9px;color:#6B7280;min-width:136px;">↳ Cash Opening / Closing</span>
+            <div style="flex:1;height:6px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:4.1%;background:#C4B5FD;border-radius:99px;"></div></div>
+            <span style="font-size:9px;color:#6B7280;min-width:28px;text-align:right;">13</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:5px;padding:1px 0 1px 12px;">
+            <span style="font-size:9px;color:#6B7280;min-width:136px;">↳ Promotions / Offers</span>
+            <div style="flex:1;height:6px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:3.8%;background:#C4B5FD;border-radius:99px;"></div></div>
+            <span style="font-size:9px;color:#6B7280;min-width:28px;text-align:right;">12</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:5px;padding:1px 0 4px 12px;">
+            <span style="font-size:9px;color:#6B7280;min-width:136px;">↳ Item / Referencing</span>
+            <div style="flex:1;height:6px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:3.5%;background:#C4B5FD;border-radius:99px;"></div></div>
+            <span style="font-size:9px;color:#6B7280;min-width:28px;text-align:right;">11</span>
+          </div>
+
+          <!-- N1 = PosCloud 153 -->
+          <div style="display:flex;align-items:center;gap:5px;padding:2px 0;">
+            <span style="font-size:10px;font-weight:700;color:#1E1B4B;min-width:148px;">☁️ PosCloud</span>
+            <div style="flex:1;height:9px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:48.1%;background:linear-gradient(90deg,#2563EB,#60A5FA);border-radius:99px;"></div></div>
+            <span style="font-size:10px;font-weight:800;color:#2563EB;min-width:28px;text-align:right;">153</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:5px;padding:1px 0 1px 12px;">
+            <span style="font-size:9px;color:#6B7280;min-width:136px;">↳ Frozen Screen / Blocked Interface</span>
+            <div style="flex:1;height:6px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:10.4%;background:#93C5FD;border-radius:99px;"></div></div>
+            <span style="font-size:9px;color:#6B7280;min-width:28px;text-align:right;">33</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:5px;padding:1px 0 1px 12px;">
+            <span style="font-size:9px;color:#6B7280;min-width:136px;">↳ Register↔Back-office Sync</span>
+            <div style="flex:1;height:6px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:10.1%;background:#93C5FD;border-radius:99px;"></div></div>
+            <span style="font-size:9px;color:#6B7280;min-width:28px;text-align:right;">32</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:5px;padding:1px 0 1px 12px;">
+            <span style="font-size:9px;color:#6B7280;min-width:136px;">↳ Passwords</span>
+            <div style="flex:1;height:6px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:6.9%;background:#93C5FD;border-radius:99px;"></div></div>
+            <span style="font-size:9px;color:#6B7280;min-width:28px;text-align:right;">22</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:5px;padding:1px 0 4px 12px;">
+            <span style="font-size:9px;color:#6B7280;min-width:136px;">↳ Launch</span>
+            <div style="flex:1;height:6px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:3.8%;background:#93C5FD;border-radius:99px;"></div></div>
+            <span style="font-size:9px;color:#6B7280;min-width:28px;text-align:right;">12</span>
+          </div>
+
+          <!-- N1 = Logiciels Métiers 144 -->
+          <div style="display:flex;align-items:center;gap:5px;padding:2px 0;">
+            <span style="font-size:10px;font-weight:700;color:#1E1B4B;min-width:148px;">🖥️ Business Software</span>
+            <div style="flex:1;height:9px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:45.3%;background:linear-gradient(90deg,#0D9488,#2DD4BF);border-radius:99px;"></div></div>
+            <span style="font-size:10px;font-weight:800;color:#0D9488;min-width:28px;text-align:right;">144</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:5px;padding:1px 0 1px 12px;">
+            <span style="font-size:9px;color:#6B7280;min-width:136px;">↳ Mercure</span>
+            <div style="flex:1;height:6px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:12.9%;background:#99F6E4;border-radius:99px;"></div></div>
+            <span style="font-size:9px;color:#6B7280;min-width:28px;text-align:right;">41</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:5px;padding:1px 0 1px 12px;">
+            <span style="font-size:9px;color:#6B7280;min-width:136px;">↳ Retail Web</span>
+            <div style="flex:1;height:6px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:4.7%;background:#99F6E4;border-radius:99px;"></div></div>
+            <span style="font-size:9px;color:#6B7280;min-width:28px;text-align:right;">15</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:5px;padding:1px 0 1px 12px;">
+            <span style="font-size:9px;color:#6B7280;min-width:136px;">↳ Sicles</span>
+            <div style="flex:1;height:6px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:3.8%;background:#99F6E4;border-radius:99px;"></div></div>
+            <span style="font-size:9px;color:#6B7280;min-width:28px;text-align:right;">12</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:5px;padding:1px 0 1px 12px;">
+            <span style="font-size:9px;color:#6B7280;min-width:136px;">↳ GDM</span>
+            <div style="flex:1;height:6px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:2.8%;background:#99F6E4;border-radius:99px;"></div></div>
+            <span style="font-size:9px;color:#6B7280;min-width:28px;text-align:right;">9</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:5px;padding:1px 0 4px 12px;">
+            <span style="font-size:9px;color:#6B7280;min-width:136px;">↳ Docuware</span>
+            <div style="flex:1;height:6px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:2.8%;background:#99F6E4;border-radius:99px;"></div></div>
+            <span style="font-size:9px;color:#6B7280;min-width:28px;text-align:right;">9</span>
+          </div>
+
+          <!-- N1 = Matériel Caisse 132 -->
+          <div style="display:flex;align-items:center;gap:5px;padding:2px 0;">
+            <span style="font-size:10px;font-weight:700;color:#1E1B4B;min-width:148px;">🖨️ POS Hardware</span>
+            <div style="flex:1;height:9px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:41.5%;background:linear-gradient(90deg,#EA580C,#FB923C);border-radius:99px;"></div></div>
+            <span style="font-size:10px;font-weight:800;color:#EA580C;min-width:28px;text-align:right;">132</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:5px;padding:1px 0 1px 12px;">
+            <span style="font-size:9px;color:#6B7280;min-width:136px;">↳ TPV Central Unit</span>
+            <div style="flex:1;height:6px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:17.6%;background:#FED7AA;border-radius:99px;"></div></div>
+            <span style="font-size:9px;color:#6B7280;min-width:28px;text-align:right;">56</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:5px;padding:1px 0 1px 12px;">
+            <span style="font-size:9px;color:#6B7280;min-width:136px;">↳ Screen</span>
+            <div style="flex:1;height:6px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:4.7%;background:#FED7AA;border-radius:99px;"></div></div>
+            <span style="font-size:9px;color:#6B7280;min-width:28px;text-align:right;">15</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:5px;padding:1px 0 1px 12px;">
+            <span style="font-size:9px;color:#6B7280;min-width:136px;">↳ Back-office Workstation</span>
+            <div style="flex:1;height:6px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:3.1%;background:#FED7AA;border-radius:99px;"></div></div>
+            <span style="font-size:9px;color:#6B7280;min-width:28px;text-align:right;">10</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:5px;padding:1px 0 4px 12px;">
+            <span style="font-size:9px;color:#6B7280;min-width:136px;">↳ Cash Drawer</span>
+            <div style="flex:1;height:6px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:2.8%;background:#FED7AA;border-radius:99px;"></div></div>
+            <span style="font-size:9px;color:#6B7280;min-width:28px;text-align:right;">9</span>
+          </div>
+
+          <!-- N1 = Matériel Mobilité 69 -->
+          <div style="display:flex;align-items:center;gap:5px;padding:2px 0;">
+            <span style="font-size:10px;font-weight:700;color:#1E1B4B;min-width:148px;">📱 Mobility</span>
+            <div style="flex:1;height:9px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:21.7%;background:linear-gradient(90deg,#D97706,#FDE047);border-radius:99px;"></div></div>
+            <span style="font-size:10px;font-weight:800;color:#D97706;min-width:28px;text-align:right;">69</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:5px;padding:1px 0 1px 12px;">
+            <span style="font-size:9px;color:#6B7280;min-width:136px;">↳ PDA</span>
+            <div style="flex:1;height:6px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:15.7%;background:#FDE68A;border-radius:99px;"></div></div>
+            <span style="font-size:9px;color:#6B7280;min-width:28px;text-align:right;">50</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:5px;padding:1px 0 1px 12px;">
+            <span style="font-size:9px;color:#6B7280;min-width:136px;">↳ RFID Reader</span>
+            <div style="flex:1;height:6px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:6.3%;background:#FDE68A;border-radius:99px;"></div></div>
+            <span style="font-size:9px;color:#6B7280;min-width:28px;text-align:right;">20</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:5px;padding:1px 0 4px 12px;">
+            <span style="font-size:9px;color:#6B7280;min-width:136px;">↳ RFID Security Gate</span>
+            <div style="flex:1;height:6px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:1.9%;background:#FDE68A;border-radius:99px;"></div></div>
+            <span style="font-size:9px;color:#6B7280;min-width:28px;text-align:right;">6</span>
+          </div>
+
+          <!-- N1 = Matériel Réseau 36 -->
+          <div style="display:flex;align-items:center;gap:5px;padding:2px 0;">
+            <span style="font-size:10px;font-weight:700;color:#1E1B4B;min-width:148px;">🌐 Network Hardware</span>
+            <div style="flex:1;height:9px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:11.3%;background:linear-gradient(90deg,#DC2626,#F87171);border-radius:99px;"></div></div>
+            <span style="font-size:10px;font-weight:800;color:#DC2626;min-width:28px;text-align:right;">36</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:5px;padding:1px 0 1px 12px;">
+            <span style="font-size:9px;color:#6B7280;min-width:136px;">↳ Router</span>
+            <div style="flex:1;height:6px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:8.5%;background:#FECACA;border-radius:99px;"></div></div>
+            <span style="font-size:9px;color:#6B7280;min-width:28px;text-align:right;">27</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:5px;padding:1px 0 4px 12px;">
+            <span style="font-size:9px;color:#6B7280;min-width:136px;">↳ Switch</span>
+            <div style="flex:1;height:6px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:1.6%;background:#FECACA;border-radius:99px;"></div></div>
+            <span style="font-size:9px;color:#6B7280;min-width:28px;text-align:right;">5</span>
+          </div>
+
+          <!-- N1 = Monétique 34 -->
+          <div style="display:flex;align-items:center;gap:5px;padding:2px 0;">
+            <span style="font-size:10px;font-weight:700;color:#1E1B4B;min-width:148px;">💳 Card Payments</span>
+            <div style="flex:1;height:9px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:10.7%;background:linear-gradient(90deg,#7C3AED,#C4B5FD);border-radius:99px;"></div></div>
+            <span style="font-size:10px;font-weight:800;color:#7C3AED;min-width:28px;text-align:right;">34</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:5px;padding:1px 0 4px 12px;">
+            <span style="font-size:9px;color:#6B7280;min-width:136px;">↳ Transaction Block</span>
+            <div style="flex:1;height:6px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:8.5%;background:#DDD6FE;border-radius:99px;"></div></div>
+            <span style="font-size:9px;color:#6B7280;min-width:28px;text-align:right;">27</span>
+          </div>
+
+          <!-- N1 = Système d'Exploitation 25 -->
+          <div style="display:flex;align-items:center;gap:5px;padding:2px 0;">
+            <span style="font-size:10px;font-weight:700;color:#1E1B4B;min-width:148px;">💻 Operating System</span>
+            <div style="flex:1;height:9px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:7.9%;background:linear-gradient(90deg,#0891B2,#67E8F9);border-radius:99px;"></div></div>
+            <span style="font-size:10px;font-weight:800;color:#0891B2;min-width:28px;text-align:right;">25</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:5px;padding:1px 0 4px 12px;">
+            <span style="font-size:9px;color:#6B7280;min-width:136px;">↳ Login</span>
+            <div style="flex:1;height:6px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:1.9%;background:#A5F3FC;border-radius:99px;"></div></div>
+            <span style="font-size:9px;color:#6B7280;min-width:28px;text-align:right;">6</span>
+          </div>
+
+          <!-- N1 = Matériel Comptage 8 -->
+          <div style="display:flex;align-items:center;gap:5px;padding:2px 0;">
+            <span style="font-size:10px;font-weight:700;color:#1E1B4B;min-width:148px;">🔢 Counting Hardware</span>
+            <div style="flex:1;height:9px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:2.5%;background:linear-gradient(90deg,#6B7280,#9CA3AF);border-radius:99px;"></div></div>
+            <span style="font-size:10px;font-weight:800;color:#6B7280;min-width:28px;text-align:right;">8</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:5px;padding:1px 0 4px 12px;">
+            <span style="font-size:9px;color:#6B7280;min-width:136px;">↳ Counting Data</span>
+            <div style="flex:1;height:6px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:1.9%;background:#D1D5DB;border-radius:99px;"></div></div>
+            <span style="font-size:9px;color:#6B7280;min-width:28px;text-align:right;">6</span>
+          </div>
+
+        </div>
+        <p style="font-size:9px;color:#9CA3AF;margin-top:6px;border-top:1px solid #F3F4F6;padding-top:4px;">Based on custom field tags. Tickets without category excluded.</p>
+      </div>
+
+    </div>
+
+    <!-- ROW 3 : Priorités + Statuts + Insights -->
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;">
+
+      <!-- Priorités donut -->
+      <div class="card" style="padding:12px;display:flex;flex-direction:column;align-items:center;">
+        <div style="font-size:9px;font-weight:700;color:#8B5CF6;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;align-self:flex-start;">Priorities · 812 tickets</div>
+        <svg viewBox="0 0 120 120" width="110" height="110" style="flex-shrink:0;">
+          <circle cx="60" cy="60" r="46" fill="none" stroke="#E5E7EB" stroke-width="16"/>
+          <!-- Normal (93.8%) -->
+          <circle cx="60" cy="60" r="46" fill="none" stroke="#EAB308" stroke-width="16"
+            stroke-dasharray="271.3 17.73" transform="rotate(-90 60 60)"/>
+          <!-- High (3%) -->
+          <circle cx="60" cy="60" r="46" fill="none" stroke="#F97316" stroke-width="16"
+            stroke-dasharray="8.67 280.36" stroke-dashoffset="-271.3" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="30" fill="#fff"/>
+          <text x="60" y="56" text-anchor="middle" font-size="14" font-weight="800" fill="#EAB308">93.8%</text>
+          <text x="60" y="68" text-anchor="middle" font-size="7.5" fill="#9CA3AF">normal</text>
+        </svg>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:8px;width:100%;">
+          <div style="font-size:10px;display:flex;align-items:center;gap:4px;"><div style="width:8px;height:8px;border-radius:50%;background:#EF4444;flex-shrink:0;"></div> Urgent <strong style="margin-left:auto;">2</strong></div>
+          <div style="font-size:10px;display:flex;align-items:center;gap:4px;"><div style="width:8px;height:8px;border-radius:50%;background:#F97316;flex-shrink:0;"></div> High <strong style="margin-left:auto;">24</strong></div>
+          <div style="font-size:10px;display:flex;align-items:center;gap:4px;"><div style="width:8px;height:8px;border-radius:50%;background:#EAB308;flex-shrink:0;"></div> Normal <strong style="margin-left:auto;">762</strong></div>
+          <div style="font-size:10px;display:flex;align-items:center;gap:4px;"><div style="width:8px;height:8px;border-radius:50%;background:#E5E7EB;flex-shrink:0;"></div> Low <strong style="margin-left:auto;">24</strong></div>
+        </div>
+      </div>
+
+      <!-- Statuts actuels -->
+      <div class="card" style="padding:12px;">
+        <div style="font-size:9px;font-weight:700;color:#8B5CF6;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;">Current Statuses (snapshot)</div>
+        <div style="display:flex;flex-direction:column;gap:7px;">
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:2px;"><span style="color:#374151;">Closed</span><span style="font-weight:700;color:#6B7280;">526 (64.6%)</span></div>
+            <div style="height:8px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:64.6%;background:#9CA3AF;border-radius:99px;"></div></div>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:2px;"><span style="color:#374151;">Resolved</span><span style="font-weight:700;color:#166534;">205 (25.2%)</span></div>
+            <div style="height:8px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:25.2%;background:#22C55E;border-radius:99px;"></div></div>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:2px;"><span style="color:#374151;">Pending</span><span style="font-weight:700;color:#92400E;">75 (9,2%)</span></div>
+            <div style="height:8px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:9.2%;background:#F97316;border-radius:99px;"></div></div>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:2px;"><span style="color:#374151;">Open</span><span style="font-weight:700;color:#1E40AF;">7 (0,9%)</span></div>
+            <div style="height:8px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:0.9%;background:#3B82F6;border-radius:99px;"></div></div>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:2px;"><span style="color:#374151;">New</span><span style="font-weight:700;color:#5B21B6;">1 (0,1%)</span></div>
+            <div style="height:8px;border-radius:99px;background:#E5E7EB;overflow:hidden;"><div style="height:100%;width:0.1%;background:#8B5CF6;border-radius:99px;"></div></div>
+          </div>
+        </div>
+        <div style="font-size:10px;color:#9CA3AF;margin-top:8px;border-top:1px solid #F3F4F6;padding-top:6px;">
+          🟢 Excellent resolution: 90.5% of tickets closed/resolved
+        </div>
+      </div>
+
+      <!-- Key Insights -->
+      <div class="card" style="padding:12px;">
+        <div style="font-size:9px;font-weight:700;color:#22C55E;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;">Key Insights</div>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <div style="background:#EDE9FE;border-radius:8px;padding:8px 10px;">
+            <div style="font-size:10px;font-weight:700;color:#5B21B6;margin-bottom:2px;">📞 100% Phone Support</div>
+            <div style="font-size:10px;color:#6B7280;">91.9% of tickets come from Aircall. Web and email are marginal (6.8%).</div>
+          </div>
+          <div style="background:#FEF3C7;border-radius:8px;padding:8px 10px;">
+            <div style="font-size:10px;font-weight:700;color:#92400E;margin-bottom:2px;">⚠ Priority Almost Absent</div>
+            <div style="font-size:10px;color:#6B7280;">93.8% of tickets have "normal" priority. Urgent SLAs (10 min) are almost never triggered (2 tickets).</div>
+          </div>
+          <div style="background:#FEF2F2;border-radius:8px;padding:8px 10px;">
+            <div style="font-size:10px;font-weight:700;color:#991B1B;margin-bottom:2px;">🚨 15 SLA At-Risk Tickets</div>
+            <div style="font-size:10px;color:#6B7280;">"SLA at risk" view: 15 active tickets. 47 in progress at AT/Printemps. 8 in backlog +48h. Poorly calibrated priorities.</div>
+          </div>
+          <div style="background:#FEF2F2;border-radius:8px;padding:8px 10px;">
+            <div style="font-size:10px;font-weight:700;color:#991B1B;margin-bottom:2px;">🔴 Checkout = #1 Issue</div>
+            <div style="font-size:10px;color:#6B7280;">34% of categorized tickets relate to checkout/PosCloud. Priority HC lever. AI Agent to be completed.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══ SLIDE 13 : THANK YOU ══ -->
+<div class="slide slide-dark" id="slide-13">
+  <div class="cover-centered">
+    <div style="font-size:48px;margin-bottom:16px;">🙏</div>
+    <h1 style="font-size:clamp(26px,3.8vw,46px);font-weight:800;color:#fff;white-space:nowrap;margin-bottom:12px;">
+      Thank you <span style="color:#C4B5FD;">for your trust</span>
+    </h1>
+    <div style="display:flex;align-items:center;gap:32px;margin:24px 0;">
+      <a href="https://omycare.fr/" target="_blank" rel="noopener">
+        <img src="omycarelogo.png" alt="OmyCare" style="height:30px;opacity:.9;">
+      </a>
+      <div style="width:1px;height:30px;background:rgba(255,255,255,.2);"></div>
+      <img src="adeizlogo.png" alt="ADEIZ" style="height:28px;filter:brightness(0) invert(1);opacity:.9;">
+    </div>
+    <p style="max-width:700px;font-size:15px;line-height:2;color:rgba(255,255,255,.6);margin-bottom:0;">
+      This report is the working foundation for optimizing your Zendesk account.<br>
+      We remain available for any questions or for implementation.
+    </p>
+    <div class="merci-info">
+      <div class="merci-info-col">
+        <div class="mi-label">Auditor</div>
+        <div class="mi-val">Stephanie · OmyCare</div>
+      </div>
+      <div class="merci-info-col">
+        <div class="mi-label">Contact</div>
+        <div class="mi-val">guillaume.garcia@omycare.fr</div>
+      </div>
+      <div class="merci-info-col">
+        <div class="mi-label">Date</div>
+        <div class="mi-val">October 2026</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /deck -->
+
+<!-- NAVIGATION -->
+<nav class="nav">
+  <button onclick="goTo(current-1)">←</button>
+  <div class="dots" id="dots"></div>
+  <button onclick="goTo(current+1)">→</button>
+  <span class="slide-counter" id="counter">1 / 15</span>
+</nav>
+
+<script>
+  const total = 13;
+  let current = 1;
+  const logo = document.querySelector('.logo-fixed');
+
+  function buildDots() {
+    const c = document.getElementById('dots');
+    c.innerHTML = '';
+    for (let i = 1; i <= total; i++) {
+      const d = document.createElement('div');
+      d.className = 'dot' + (i === current ? ' active' : '');
+      d.onclick = () => goTo(i);
+      c.appendChild(d);
+    }
+  }
+
+  function goTo(n) {
+    if (n < 1 || n > total) return;
+    document.getElementById('slide-' + current).classList.remove('active');
+    current = n;
+    document.getElementById('slide-' + current).classList.add('active');
+    document.getElementById('counter').textContent = current + ' / ' + total;
+    buildDots();
+    if (logo) logo.style.display = (current === 13) ? 'none' : '';
+  }
+
+  buildDots();
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') goTo(current + 1);
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   goTo(current - 1);
+  });
+
+  let tx = 0;
+  document.addEventListener('touchstart', e => { tx = e.touches[0].clientX; });
+  document.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - tx;
+    if (Math.abs(dx) > 50) goTo(current + (dx < 0 ? 1 : -1));
+  });
+
+  // Synthèse checkboxes : add check column to slide-13 tables
+  document.querySelectorAll('#slide-11 table').forEach(table => {
+    table.querySelectorAll('thead tr').forEach(tr => {
+      const th = document.createElement('th');
+      th.style.cssText = 'padding:4px 6px;width:24px;text-align:center;';
+      th.textContent = '✓';
+      tr.appendChild(th);
+    });
+    table.querySelectorAll('tbody tr').forEach(tr => {
+      const td = document.createElement('td');
+      td.style.cssText = 'padding:5px 6px;text-align:center;';
+      const cb = document.createElement('input');
+      cb.type = 'checkbox';
+      cb.className = 'synth-check';
+      cb.addEventListener('change', () => tr.classList.toggle('synth-done', cb.checked));
+      td.appendChild(cb);
+      tr.appendChild(td);
+    });
+  });
+</script>
+</body>
+</html>
