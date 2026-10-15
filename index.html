@@ -982,11 +982,17 @@
           <div class="alert-body">
             Le flux mainteneur existe et couvre les 4 partenaires (Diebold, Stackr, Nedap, Orange) avec des triggers d'escalade, des relances et des statuts dédiés. Cependant, la logique actuelle est complexe et mérite d'être revisitée.
             <br><br>Il existe dans Zendesk deux fonctionnalités qui pourraient mieux répondre à cette complexité :
-            <ul style="padding-left:14px;display:flex;flex-direction:column;gap:4px;margin-top:6px;">
-              <li><strong>Workflow Actions</strong> : automatisation native pour des actions conditionnelles sur les tickets, plus simple et plus fiable que des triggers combinés</li>
-              <li><strong>Advanced Workflow Actions</strong> : version étendue, adaptée aux escalades complexes multi-acteurs comme le workflow mainteneur actuel</li>
-            </ul>
-            <br>Ces outils pourraient simplifier la configuration, réduire les risques de conflits entre triggers et faciliter la maintenance.
+            <div style="display:flex;flex-direction:column;gap:8px;margin-top:10px;">
+              <div style="background:rgba(139,92,246,0.12);border:1px solid rgba(139,92,246,0.35);border-radius:8px;padding:10px 12px;">
+                <div style="font-weight:700;color:#C4B5FD;font-size:12px;margin-bottom:4px;">Workflow Actions</div>
+                <div style="font-size:12px;color:#e0d7ff;">Automatisation native pour des actions conditionnelles sur les tickets. Plus simple et plus fiable que des triggers combinés.</div>
+              </div>
+              <div style="background:rgba(139,92,246,0.18);border:1px solid rgba(139,92,246,0.5);border-radius:8px;padding:10px 12px;">
+                <div style="font-weight:700;color:#C4B5FD;font-size:12px;margin-bottom:4px;">Advanced Workflow Actions</div>
+                <div style="font-size:12px;color:#e0d7ff;">Version étendue, adaptée aux escalades complexes multi-acteurs comme le workflow mainteneur actuel (Diebold, Stackr, Nedap, Orange).</div>
+              </div>
+            </div>
+            <br>Ces outils simplifieraient la configuration, réduiraient les risques de conflits entre triggers et faciliteraient la maintenance.
           </div>
         </div>
 
